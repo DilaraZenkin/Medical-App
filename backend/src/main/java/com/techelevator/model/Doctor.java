@@ -4,30 +4,29 @@ import java.time.LocalDate;
 
 public class Doctor {
 
-    private Long userId;
+    private Long doctorId;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
     private String clinicAddress;
 
-    public Doctor(Long userId) {
-        this.userId = userId;
+    public Doctor() {
     }
 
-    public Doctor(Long userId, String firstName, String lastName, LocalDate dateOfBirth, String clinicAddress) {
-        this.userId = userId;
+    public Doctor(Long doctorId, String firstName, String lastName, LocalDate dateOfBirth, String clinicAddress) {
+        this.doctorId = doctorId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.clinicAddress = clinicAddress;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public String getFirstName() {
