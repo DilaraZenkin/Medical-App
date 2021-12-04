@@ -3,30 +3,29 @@ import java.time.LocalDate;
 
 public class Patient {
 
-    private Long userId;
+    private Long patientId;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
     private String patientAddress;
 
-    public Patient(Long userId) {
-        this.userId = userId;
+    public Patient() {
     }
 
-    public Patient(Long userId, String firstName, String lastName, LocalDate dateOfBirth, String patientAddress) {
-        this.userId = userId;
+    public Patient(Long patientId, String firstName, String lastName, LocalDate dateOfBirth, String patientAddress) {
+        this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.patientAddress = patientAddress;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setPatientId(Long userId) {
+        this.patientId = userId;
     }
 
     public String getFirstName() {

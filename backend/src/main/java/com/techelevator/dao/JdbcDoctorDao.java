@@ -48,12 +48,19 @@ public class JdbcDoctorDao implements DoctorDAO{
 
     @Override
     public Doctor findDoctorByFullName(String firstName, String lastName) {
-        return null;
+        for (Doctor doctor : this.findAllDoctors()) {
+            if (doctor.getFirstName().toLowerCase().equals(firstName.toLowerCase()) &&
+            doctor.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
+                return doctor;
+            }
+        }
+        throw new RuntimeException("Doctor " + firstName + " " + lastName + " was not found.");
     }
 
     @Override
     public Long findDoctorIdByFullName(String firstName, String lastName) {
-        return null;
+        String sql = "SELECT * FROM doctors where first_name = ? and last_name = ?;";
+        return jdbcTemplate.queryForObject(sql, Long.class, firstName, lastName);
     }
 
     @Override
@@ -68,5 +75,6 @@ public class JdbcDoctorDao implements DoctorDAO{
         doctor.setLastName(rs.getString("last_name"));
         doctor.setDateOfBirth((LocalDate) rs.getObject("date_of_birth"));
         doctor.setClinicAddress(rs.getString("clinic_address"));
+        return doctor;
     }
 }

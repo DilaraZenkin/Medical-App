@@ -16,7 +16,5 @@ public interface DoctorDAO {
 
     Long findDoctorIdByFullName(String firstName, String lastName);
 
-
-
     boolean register (Long userId, Long doctorId);
 }
