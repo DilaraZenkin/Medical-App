@@ -4,11 +4,13 @@ import com.techelevator.model.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcPatientDao implements PatientDAO{
 
     private JdbcTemplate jdbcTemplate;
