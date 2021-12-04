@@ -2,7 +2,11 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Patient;
 
+import java.util.List;
+
 public interface PatientDAO {
+
+    List<Patient> findAllPatients();
 
     Patient getPatientByUserId(String userId);
 

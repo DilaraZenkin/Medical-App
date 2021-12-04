@@ -6,6 +6,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JdbcPatientDao implements PatientDAO{
 
@@ -16,23 +18,49 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
+    public List<Patient> findAllPatients() {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "select * from patients";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Patient patient = mapRowToPatient(results);
+            patients.add(patient);
+        }
+        return patients;
+    }
+
+    @Override
     public Patient getPatientByUserId(String userId) {
         return null;
     }
 
     @Override
     public Patient getPatientByPatientId(String patientId) {
-        return null;
+        String sql = "SELECT * FROM patients WHERE patient_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
+        if (results.next()) {
+            return mapRowToPatient(results);
+        } else {
+            throw new RuntimeException("PatientId " + patientId + " was not found.");
+        }
     }
 
     @Override
     public Patient findPatientByFullName(String firstName, String lastName) {
-        return null;
+        for (Patient patient : this.findAllPatients()) {
+            if (patient.getFirstName().toLowerCase().equals(firstName.toLowerCase()) &&
+                    patient.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
+                return patient;
+            }
+        }
+        throw new RuntimeException("Patient " + firstName + " " + lastName + " was not found.");
     }
 
     @Override
     public Long findPatientIdByFullName(String firstName, String lastName) {
-        return null;
+        String sql = "SELECT * FROM patients where first_name = ? and last_name = ?;";
+        return jdbcTemplate.queryForObject(sql, Long.class, firstName, lastName);
     }
 
     @Override
