@@ -8,17 +8,17 @@ public class Doctor {
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
-    private String clinicAddress;
+    private String officeAddress;
 
     public Doctor() {
     }
 
-    public Doctor(Long doctorId, String firstName, String lastName, LocalDate dateOfBirth, String clinicAddress) {
+    public Doctor(Long doctorId, String firstName, String lastName, LocalDate dateOfBirth, String officeAddress) {
         this.doctorId = doctorId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.clinicAddress = clinicAddress;
+        this.officeAddress = officeAddress;
     }
 
     public Long getDoctorId() {
@@ -53,11 +53,11 @@ public class Doctor {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getClinicAddress() {
-        return clinicAddress;
+    public String getOfficeAddress() {
+        return officeAddress;
     }
 
-    public void setClinicAddress(String clinicAddress) {
-        this.clinicAddress = clinicAddress;
+    public void setOfficeAddress(String officeAddress) {
+        this.officeAddress = officeAddress;
     }
 }
