@@ -74,7 +74,7 @@ public class JdbcPatientDao implements PatientDAO{
         patient.setPatientId(rs.getLong("patient_id"));
         patient.setFirstName(rs.getString("first_name"));
         patient.setLastName(rs.getString("last_name"));
-        patient.setDateOfBirth((LocalDate) rs.getObject("date_of_birth"));
+        patient.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
         patient.setPatientAddress(rs.getString("address"));
         return patient;
     }
