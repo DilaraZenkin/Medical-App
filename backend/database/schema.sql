@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS offices;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS doctors;
 DROP TABLE IF EXISTS patients;
@@ -28,8 +29,12 @@ CREATE TABLE doctors (
         first_name varchar(50) NOT NULL,
         last_name varchar(100) NOT NULL,
         date_of_birth DATE,
-        office_address varchar(500)
+        office_id int
+        CONSTRAINT FK
 );
+
+INSERT INTO doctors (doctor_id, first_name, last_name, date_of_birth, office_address)
+VALUES (1, 'Doc', 'Scapel', '09/04/1970', '543 Sout Avenue Pittsburgh PA 11245');
 
 CREATE TABLE patients (
         patient_id serial PRIMARY KEY,
@@ -39,5 +44,15 @@ CREATE TABLE patients (
         address varchar (500)
 );
 
+INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address)
+VALUES (1, 'tim', 'ziegler', '12/12/1990', '123 Main St. Pittsburgh PA 11223');
+
+CREATE TABLE offices (
+        office_id serial PRIMARY KEY,
+        office_address varchar(500),
+        phone_number varchar(15),
+        office_hours,
+        hourly_cost int
+);
 
 COMMIT TRANSACTION;

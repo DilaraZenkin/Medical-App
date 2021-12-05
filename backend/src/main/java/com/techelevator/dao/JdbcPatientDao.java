@@ -33,12 +33,12 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
-    public Patient getPatientByUserId(String userId) {
+    public Patient getPatientByUserId(Long userId) {
         return null;
     }
 
     @Override
-    public Patient getPatientByPatientId(String patientId) {
+    public Patient getPatientByPatientId(Long patientId) {
         String sql = "SELECT * FROM patients WHERE patient_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
         if (results.next()) {

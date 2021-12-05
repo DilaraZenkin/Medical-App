@@ -3,10 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.PatientDAO;
 import com.techelevator.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,4 +22,14 @@ public class PatientController {
     public List<Patient> findAllPatients() {
         return patientDao.findAllPatients();
     }
+
+    @RequestMapping(path = "/patient/{patientId}", method = RequestMethod.GET)
+    public Patient getPatientByPatientId(@PathVariable Long patientId) {
+        return patientDao.getPatientByPatientId(patientId);
+    }
+//  failed to convert String to Long for input string: \"search"\"" --??
+//    @RequestMapping(path = "/patient/search?q={firstName}+{lastName}", method = RequestMethod.GET)
+//    public Patient findPatientByFullName(@PathVariable String firstName, String lastName) {
+//        return patientDao.findPatientByFullName(firstName, lastName);
+//    }
 }
