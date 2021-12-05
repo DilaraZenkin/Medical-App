@@ -8,9 +8,9 @@ public interface PatientDAO {
 
     List<Patient> findAllPatients();
 
-    Patient getPatientByUserId(String userId);
+    Patient getPatientByUserId(Long userId);
 
-    Patient getPatientByPatientId(String patientId);
+    Patient getPatientByPatientId(Long patientId);
 
     Patient findPatientByFullName(String firstName, String lastName);
 

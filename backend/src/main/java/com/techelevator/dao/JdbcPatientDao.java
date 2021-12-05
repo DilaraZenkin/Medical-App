@@ -4,11 +4,13 @@ import com.techelevator.model.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcPatientDao implements PatientDAO{
 
     private JdbcTemplate jdbcTemplate;
@@ -31,12 +33,12 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
-    public Patient getPatientByUserId(String userId) {
+    public Patient getPatientByUserId(Long userId) {
         return null;
     }
 
     @Override
-    public Patient getPatientByPatientId(String patientId) {
+    public Patient getPatientByPatientId(Long patientId) {
         String sql = "SELECT * FROM patients WHERE patient_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
         if (results.next()) {
@@ -72,7 +74,7 @@ public class JdbcPatientDao implements PatientDAO{
         patient.setPatientId(rs.getLong("patient_id"));
         patient.setFirstName(rs.getString("first_name"));
         patient.setLastName(rs.getString("last_name"));
-        patient.setDateOfBirth((LocalDate) rs.getObject("date_of_birth"));
+        patient.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
         patient.setPatientAddress(rs.getString("address"));
         return patient;
     }
