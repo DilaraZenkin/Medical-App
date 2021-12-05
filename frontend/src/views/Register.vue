@@ -1,45 +1,68 @@
 <template>
-  <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-        {{ registrationErrorMsg }}
-      </div>
-      <label for="username" class="sr-only">Username</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      <input
-        type="password"
-        id="confirmPassword"
-        class="form-control"
-        placeholder="Confirm Password"
-        v-model="user.confirmPassword"
-        required
-      />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create Account
-      </button>
-    </form>
-  </div>
-</template>
 
+<v-app id="inspire">
+      <v-content class="main">
+         <v-container fluid>
+            <v-layout justify-center align-center>
+               <v-flex xs12 sm8 md4>
+                  <v-card>
+                     <v-toolbar dark color="primary">
+                        <v-toolbar-title>Create Account</v-toolbar-title>
+                     </v-toolbar>
+                     <v-card-text>
+                        <v-form @submit.prevent="register">
+                           <v-text-field
+                              prepend-icon="person"
+                              id="username"
+                              class="form-control"
+                              label="Username"
+                              v-model="user.username"
+                              required
+                              outlined
+                              autofocus
+                           ></v-text-field>
+                           <v-text-field
+                              id="password"
+                              prepend-icon="lock"
+                              type="password"
+                              class="form-control"
+                              label="Password"
+                              v-model="user.password"
+                              required
+                              outlined
+                           ></v-text-field>
+                           <v-text-field
+                              id="confirmPassword"
+                              prepend-icon="enhanced_encryption"
+                              type="password"
+                              class="form-control"
+                              label="Confirm Password"
+                              v-model="user.confirmPassword"
+                              required
+                              outlined
+                           ></v-text-field>
+                           <v-select
+                              prepend-icon="people"
+                              :items="roles"
+                              label="Role"
+                              placeholder="Role"
+                              required
+                              outlined
+                            ></v-select>
+                           <v-card-actions>
+                              <router-link :to="{ name: 'login' }">Have an account?</router-link>
+                              <v-spacer></v-spacer>
+                              <v-btn color="primary" type="submit">Create Account</v-btn>
+                          </v-card-actions>
+                        </v-form>
+                     </v-card-text>
+                  </v-card>
+               </v-flex>
+            </v-layout>
+         </v-container>
+      </v-content>
+   </v-app>
+</template>
 <script>
 import authService from '../services/AuthService';
 
@@ -55,6 +78,7 @@ export default {
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
+      roles: ['DOCTOR', 'PATIENT']
     };
   },
   methods: {
@@ -90,4 +114,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+  .main {
+    padding-top: 8px !important;
+  }
+</style>
