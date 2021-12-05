@@ -75,7 +75,7 @@ public class JdbcDoctorDao implements DoctorDAO{
         doctor.setFirstName(rs.getString("first_name"));
         doctor.setLastName(rs.getString("last_name"));
         doctor.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
-        doctor.setOfficeAddress(rs.getString("office_address"));
+        doctor.setOfficeId(rs.getLong("office_id"));
         return doctor;
     }
 }
