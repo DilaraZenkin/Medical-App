@@ -48,22 +48,6 @@ public class JdbcPatientDao implements PatientDAO{
         }
     }
 
-    @Override
-    public Patient findPatientByFullName(String firstName, String lastName) {
-        for (Patient patient : this.findAllPatients()) {
-            if (patient.getFirstName().toLowerCase().equals(firstName.toLowerCase()) &&
-                    patient.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
-                return patient;
-            }
-        }
-        throw new RuntimeException("Patient " + firstName + " " + lastName + " was not found.");
-    }
-
-    @Override
-    public Long findPatientIdByFullName(String firstName, String lastName) {
-        String sql = "SELECT * FROM patients where first_name = ? and last_name = ?;";
-        return jdbcTemplate.queryForObject(sql, Long.class, firstName, lastName);
-    }
 
     @Override
     public boolean register(Long userId, Long patientId) {

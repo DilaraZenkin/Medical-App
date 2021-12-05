@@ -48,20 +48,16 @@ public class JdbcDoctorDao implements DoctorDAO{
     }
 
     @Override
-    public Doctor findDoctorByFullName(String firstName, String lastName) {
-        for (Doctor doctor : this.findAllDoctors()) {
-            if (doctor.getFirstName().toLowerCase().equals(firstName.toLowerCase()) &&
-            doctor.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
-                return doctor;
-            }
-        }
-        throw new RuntimeException("Doctor " + firstName + " " + lastName + " was not found.");
-    }
+    public List<Doctor> getAllDoctorsAtOffice(Long officeId) {
+        List<Doctor> doctors = new ArrayList<>();
+        String sql = "select * from doctors WHERE office_id = ?;";
 
-    @Override
-    public Long findDoctorIdByFullName(String firstName, String lastName) {
-        String sql = "SELECT * FROM doctors where first_name = ? and last_name = ?;";
-        return jdbcTemplate.queryForObject(sql, Long.class, firstName, lastName);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, officeId);
+        while(results.next()) {
+            Doctor doctor = mapRowToDoctor(results);
+            doctors.add(doctor);
+        }
+        return doctors;
     }
 
     @Override
