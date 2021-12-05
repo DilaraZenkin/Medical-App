@@ -3,11 +3,13 @@ package com.techelevator.dao;
 import com.techelevator.model.Doctor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcDoctorDao implements DoctorDAO{
 
     private JdbcTemplate jdbcTemplate;
@@ -72,8 +74,8 @@ public class JdbcDoctorDao implements DoctorDAO{
         doctor.setDoctorId(rs.getLong("doctor_id"));
         doctor.setFirstName(rs.getString("first_name"));
         doctor.setLastName(rs.getString("last_name"));
-        doctor.setDateOfBirth((LocalDate) rs.getObject("date_of_birth"));
-        doctor.setOfficeAddress(rs.getString("office_address"));
+        doctor.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
+        doctor.setOfficeId(rs.getLong("office_id"));
         return doctor;
     }
 }
