@@ -1,40 +1,44 @@
 <template>
-  <div id="login" class="text-center">
-    <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-      <div
-        class="alert alert-danger"
-        role="alert"
-        v-if="invalidCredentials"
-      >Invalid username and password!</div>
-      <div
-        class="alert alert-success"
-        role="alert"
-        v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit">Sign in</button>
-    </form>
-  </div>
+  <v-app id="inspire">
+      <v-content class="main">
+         <v-container fluid>
+            <v-layout justify-center align-center>
+               <v-flex xs12 sm8 md4>
+                  <v-card>
+                     <v-toolbar dark color="primary">
+                        <v-toolbar-title>Login User</v-toolbar-title>
+                     </v-toolbar>
+                     <v-card-text>
+                        <v-form @submit.prevent="login">
+                           <v-text-field
+                              prepend-icon="person"
+                              placeholder="Username"
+                              v-model="user.username"
+                              required
+                              autofocus
+                           ></v-text-field>
+                           <v-text-field
+                              id="password"
+                              prepend-icon="lock"
+                              type="password"
+                              class="form-control"
+                              placeholder="Password"
+                              v-model="user.password"
+                              required
+                           ></v-text-field>
+                           <v-card-actions>
+                              <router-link :to="{ name: 'register' }">Need an account?</router-link>
+                              <v-spacer></v-spacer>
+                              <v-btn color="primary" type="submit">Login</v-btn>
+                          </v-card-actions>
+                        </v-form>
+                     </v-card-text>
+                  </v-card>
+               </v-flex>
+            </v-layout>
+         </v-container>
+      </v-content>
+   </v-app>
 </template>
 
 <script>
@@ -47,9 +51,9 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
       },
-      invalidCredentials: false
+      invalidCredentials: false,
     };
   },
   methods: {
@@ -74,3 +78,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .main {
+    padding-top: 8px !important;
+  }
+</style>
