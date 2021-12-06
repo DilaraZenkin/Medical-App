@@ -1,46 +1,55 @@
 <template>
   <v-app>
-    <v-system-bar app>
-      <v-spacer></v-spacer>
-      <v-icon>mdi-square</v-icon>
-      <v-icon>mdi-circle</v-icon>
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-        <v-divider
-        class="mx-4"
-        vertical
-      ></v-divider>
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      </v-toolbar-title>
-    </v-app-bar>
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      temporary
+    <v-app-bar
+      app
+      color="primary"
+      dark
     >
-      <!--  -->
-    </v-navigation-drawer>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-    <v-main  class="main grey lighten-2">
-      <v-container>
-        <router-view />
-      </v-container>
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data: () => ({ drawer: null }),
-  }
-</script>
 
-<style scoped>
-  .main {
-    padding-top: 8px;
-  }
-</style>
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+};
+</script>
