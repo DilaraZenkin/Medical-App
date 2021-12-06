@@ -27,9 +27,5 @@ public class PatientController {
     public Patient getPatientByPatientId(@PathVariable Long patientId) {
         return patientDao.getPatientByPatientId(patientId);
     }
-//  failed to convert String to Long for input string: \"search"\"" --??
-//    @RequestMapping(path = "/patient/search?q={firstName}+{lastName}", method = RequestMethod.GET)
-//    public Patient findPatientByFullName(@PathVariable String firstName, String lastName) {
-//        return patientDao.findPatientByFullName(firstName, lastName);
-//    }
 }
+

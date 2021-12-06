@@ -5,6 +5,10 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import DoctorList from '../views/DoctorList.vue'
+import DoctorHome from '../views/DoctorHome.vue'
+import PatientHome from '../views/PatientHome.vue'
+import PatientList from '../views/PatientList.vue'
 
 Vue.use(Router)
 
@@ -53,6 +57,38 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/doctors",
+      name: "doctor-list",
+      component: DoctorList,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/doctor/:doctorId",
+      name: "doctor-home",
+      component: DoctorHome,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/patient/:patientId",
+      name: "patient-home",
+      component: PatientHome,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/patients",
+      name: "patient-list",
+      component: PatientList,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 

@@ -12,9 +12,7 @@ public interface DoctorDAO {
 
     Doctor getDoctorByDoctorId(Long doctorId);
 
-    Doctor findDoctorByFullName(String firstName, String lastName);
-
-    Long findDoctorIdByFullName(String firstName, String lastName);
+    List<Doctor> getAllDoctorsAtOffice(Long officeId);
 
     boolean register (Long userId, Long doctorId);
 }
