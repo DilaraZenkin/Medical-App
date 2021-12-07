@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -50,8 +51,11 @@ public class JdbcPatientDao implements PatientDAO{
 
 
     @Override
-    public boolean register(Long userId, Long patientId) {
-        return false;
+    public Patient register(Patient patient) {
+        String sql = "INSERT INTO patient (patient_id, first_name, last_name, date_of_birth, address) " +
+                     "VALUES (?, ?, ?, ?, ?) RETURNING patient_id;";
+        jdbcTemplate.update(sql, patient.getPatientId(), patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress());
+        return patient;
     }
     public Patient mapRowToPatient(SqlRowSet rs) {
         Patient patient = new Patient();
