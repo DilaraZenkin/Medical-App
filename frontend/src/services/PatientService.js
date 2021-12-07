@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export default {
 
-
     getPatients() {
         return axios.get(`/patients`);
     },
