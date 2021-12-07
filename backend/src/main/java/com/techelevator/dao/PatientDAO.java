@@ -12,5 +12,5 @@ public interface PatientDAO {
 
     Patient getPatientByPatientId(Long patientId);
 
-    boolean register (Long userId, Long patientId);
+    Patient register (Patient patient);
 }
