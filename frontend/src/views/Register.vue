@@ -41,14 +41,46 @@
                               required
                               outlined
                            ></v-text-field>
-                            <v-checkbox
+                            <!--<v-checkbox
                             prepend-icon="people"
                             id="is-doctor"
                             class="form-control"
                             v-model="user.isDoctor"
-                            v-on:click="true"
                             label="Are you a doctor?"
-                            ></v-checkbox>
+                            ></v-checkbox> -->
+                            <v-text-field
+                            id="firstName"
+                            class="personInfo"
+                            label="First Name"
+                            v-model="patient.firstName"
+                            required
+                            outlined
+                            autofocus
+                            ></v-text-field>
+                             <v-text-field
+                            id="lastName"
+                            class="personInfo"
+                            label="Last Name"
+                            v-model="patient.lasttName"
+                            required
+                            outlined
+                            autofocus
+                            ></v-text-field>
+                             <v-date-picker
+                            id="dateOfBirth"
+                            class="personInfo"
+                            v-model="patient.dateOfBirth"
+                            required
+                            ></v-date-picker>
+                             <v-text-field
+                            id="address"
+                            class="personInfo"
+                            label="Address"
+                            v-model="patient.address"
+                            required
+                            outlined
+                            autofocus
+                            ></v-text-field>
                            <v-card-actions>
                               <router-link :to="{ name: 'login' }">Have an account?</router-link>
                               <v-spacer></v-spacer>
@@ -65,6 +97,7 @@
 </template>
 <script>
 import authService from '../services/AuthService';
+import PatientService from '../services/PatientService'
 
 export default {
   name: 'register',
@@ -75,7 +108,14 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
-        isDoctor: false,
+        isDoctor: true,
+      },
+      patient: {
+        patientId: '',
+        firstName: '',
+        lastName: '',
+        dateOfBirth: '',
+        address: ''
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.'
@@ -90,12 +130,16 @@ export default {
         authService
           .register(this.user)
           .then((response) => {
-            if (response.status == 201) {
-              this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
-              });
-            }
+            this.patient.patientId = response.data;
+            PatientService.addPatient(this.patient)
+            .then((patientResponse) => {
+              if (patientResponse.status == 201) {
+                this.$router.push({
+                  path: '/login',
+                  query: { registration: 'success' },
+                });
+              }
+            })
           })
           .catch((error) => {
             const response = error.response;
@@ -111,6 +155,9 @@ export default {
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
   },
+  changeDoctorStatus() {
+    this.user.isDoctor = false;
+  }
 };
 </script>
 

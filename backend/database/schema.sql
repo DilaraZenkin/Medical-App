@@ -1,9 +1,9 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS doctors;
 DROP TABLE IF EXISTS patients;
 DROP TABLE IF EXISTS offices;
+DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_user_id;
 
 CREATE SEQUENCE seq_user_id
@@ -22,8 +22,11 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+SELECT * FROM users;
 INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER',false);
 INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN',false);
+INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('111','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER',false);
+INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('222','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER',false);
 
 CREATE TABLE offices (
         office_id serial PRIMARY KEY,
@@ -54,16 +57,18 @@ insert into doctors (doctor_id, first_name, last_name, date_of_birth, office_id)
 values (2,'Horatio', 'Crunch', '07-04-1958', 2);
 
 CREATE TABLE patients (
-        patient_id serial PRIMARY KEY,
+        patient_id int NOT NULL,
         first_name varchar(50) NOT NULL,
         last_name varchar(100) NOT NULL,
         date_of_birth DATE,
-        address varchar (500)
+        address varchar (500),
+        CONSTRAINT patient FOREIGN KEY (patient_id) REFERENCES users (user_id)
 );
 
+select * from patients;
 INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address)
-VALUES (1, 'Frank', 'Sinatra', '12-12-1915', '556 East Boulevard Westport PA 15339');
+VALUES (3, 'Frank', 'Sinatra', '12-12-1915', '556 East Boulevard Westport PA 15339');
 INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address)
-VALUES (2, 'George', 'Castanza', '07-04-196815', '998 West Road Wexford PA 16884');
+VALUES (4, 'George', 'Castanza', '07-04-196815', '998 West Road Wexford PA 16884');
 
 COMMIT TRANSACTION;
