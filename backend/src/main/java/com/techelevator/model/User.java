@@ -15,14 +15,16 @@ public class User {
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
+   private boolean isDoctor;
 
    public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public User(Long id, String username, String password, String authorities, boolean isDoctor) {
       this.id = id;
       this.username = username;
       this.password = password;
       this.activated = true;
+      this.isDoctor = false;
    }
 
    public Long getId() {
@@ -65,6 +67,14 @@ public class User {
       this.authorities = authorities;
    }
 
+   public boolean isDoctor() {
+      return isDoctor;
+   }
+
+   public void setDoctor(boolean doctor) {
+      isDoctor = doctor;
+   }
+
    public void setAuthorities(String authorities) {
       String[] roles = authorities.split(",");
       for(String role : roles) {
@@ -97,6 +107,7 @@ public class User {
               ", username='" + username + '\'' +
               ", activated=" + activated +
               ", authorities=" + authorities +
+              ", isDoctor=" + isDoctor +
               '}';
    }
 }

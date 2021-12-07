@@ -41,14 +41,14 @@
                               required
                               outlined
                            ></v-text-field>
-                           <v-select
-                              prepend-icon="people"
-                              :items="roles"
-                              label="Role"
-                              placeholder="Role"
-                              required
-                              outlined
-                            ></v-select>
+                            <v-checkbox
+                            prepend-icon="people"
+                            id="is-doctor"
+                            class="form-control"
+                            v-model="user.isDoctor"
+                            v-on:click="true"
+                            label="Are you a doctor?"
+                            ></v-checkbox>
                            <v-card-actions>
                               <router-link :to="{ name: 'login' }">Have an account?</router-link>
                               <v-spacer></v-spacer>
@@ -75,10 +75,10 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
+        isDoctor: false,
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
-      roles: ['DOCTOR', 'PATIENT']
+      registrationErrorMsg: 'There were problems registering this user.'
     };
   },
   methods: {

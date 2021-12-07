@@ -19,24 +19,25 @@
 
 <script>
 // import PatientService from '../services/PatientService';
-// export default {
-//     data() {
-//         return {
-//             patient: {
-//                 patientId: '',
-//                 firstName: '',
-//                 lastName: '',
-//                 dateOfBirth: '',
-//                 patientAddress: '',
-//             }
-//         };
-//     },
-//     created() {
-//         PatientService.getPatient().then(response => {
-//             this.patient = response.data;
-//         })
-//     }
-// }
+export default {
+    name: 'patient-information',
+    data() {
+        return {
+            patient: {
+                patientId: '',
+                firstName: '',
+                lastName: '',
+                dateOfBirth: '',
+                patientAddress: '',
+            }
+        };
+    },
+    // created() {
+    //     PatientService.getPatient(this.$route.params.patientId).then(response => {
+    //         this.patient = response.data;
+    //     })
+    // }
+}
 </script>
 
 <style>
