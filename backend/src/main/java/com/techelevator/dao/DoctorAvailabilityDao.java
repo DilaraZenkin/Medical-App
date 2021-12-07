@@ -2,6 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.model.DoctorAvailability;
 
-public interface DoctorAvailabilityDAO {
+public interface DoctorAvailabilityDao {
     DoctorAvailability getDoctorAvailability(long doctorAvailabilityId);
 }

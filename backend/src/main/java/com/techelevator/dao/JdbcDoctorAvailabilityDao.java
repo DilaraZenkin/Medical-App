@@ -6,12 +6,11 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JdbcDoctorAvailabilityDAO implements DoctorAvailabilityDAO {
+public class JdbcDoctorAvailabilityDao implements DoctorAvailabilityDao {
     private JdbcTemplate jdbcTemplate;
     public void JdbcDoctorAvailabilityDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     @Override
     public DoctorAvailability getDoctorAvailability(long doctorAvailabilityId) {
