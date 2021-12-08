@@ -50,6 +50,7 @@
                             ></v-checkbox> -->
                             <v-text-field
                             id="firstName"
+                            prepend-icon="person"
                             class="patientInfo"
                             label="First Name"
                             v-model="patient.firstName"
@@ -58,6 +59,7 @@
                             ></v-text-field>
                              <v-text-field
                             id="lastName"
+                            prepend-icon="person"
                             class="patientInfo"
                             label="Last Name"
                             v-model="patient.lastName"
@@ -72,6 +74,7 @@
                             ></v-date-picker>
                              <v-text-field
                             id="address"
+                            prepend-icon="map"
                             class="patientInfo"
                             label="Address"
                             v-model="patient.patientAddress"
