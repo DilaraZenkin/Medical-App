@@ -50,6 +50,7 @@
                             ></v-checkbox> -->
                             <v-text-field
                             id="firstName"
+                            prepend-icon="person"
                             class="personInfo"
                             label="First Name"
                             v-model="doctor.firstName"
@@ -59,24 +60,27 @@
                             ></v-text-field>
                              <v-text-field
                             id="lastName"
+                            prepend-icon="person"
                             class="personInfo"
                             label="Last Name"
-                            v-model="doctor.lasttName"
+                            v-model="doctor.lastName"
                             required
                             outlined
                             autofocus
                             ></v-text-field>
                              <v-date-picker
                             id="dateOfBirth"
+                            prepend-icon="calander"
                             class="personInfo"
                             v-model="doctor.dateOfBirth"
                             required
                             ></v-date-picker>
                              <v-text-field
                             id="address"
+                            prepend-icon="map"
                             class="personInfo"
                             label="Address"
-                            v-model="doctor.address"
+                            v-model="doctor.officeId"
                             type="number"
                             min="0"
                             required
@@ -116,7 +120,7 @@ export default {
         firstName: '',
         lastName: '',
         dateOfBirth: '',
-        address: ''
+        officeId: ''
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.'

@@ -50,36 +50,33 @@
                             ></v-checkbox> -->
                             <v-text-field
                             id="firstName"
-                            class="personInfo"
+                            class="patientInfo"
                             label="First Name"
                             v-model="patient.firstName"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
                              <v-text-field
                             id="lastName"
-                            class="personInfo"
+                            class="patientInfo"
                             label="Last Name"
-                            v-model="patient.lasttName"
+                            v-model="patient.lastName"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
                              <v-date-picker
                             id="dateOfBirth"
-                            class="personInfo"
+                            class="patientInfo"
                             v-model="patient.dateOfBirth"
                             required
                             ></v-date-picker>
                              <v-text-field
                             id="address"
-                            class="personInfo"
+                            class="patientInfo"
                             label="Address"
-                            v-model="patient.address"
+                            v-model="patient.patientAddress"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
                            <v-card-actions>
                               <router-link :to="{ name: 'login' }">Have an account?</router-link>
@@ -100,7 +97,7 @@ import authService from '../services/AuthService';
 import PatientService from '../services/PatientService'
 
 export default {
-  name: 'register',
+  name: 'patient-register',
   data() {
     return {
       user: {
@@ -114,7 +111,7 @@ export default {
         firstName: '',
         lastName: '',
         dateOfBirth: '',
-        address: ''
+        patientAddress: ''
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.'
