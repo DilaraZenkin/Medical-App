@@ -4,10 +4,13 @@ import com.techelevator.model.Office;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
+import java.time.LocalTime;
 import java.util.List;
 
+@Component
 public class JdbcOfficeDAO implements OfficeDAO {
     //TODO: method to insert office into office database table
     //TODO: method to update office database table
@@ -36,16 +39,17 @@ public class JdbcOfficeDAO implements OfficeDAO {
     }
 
     @Override
-    public long create(String officeAddress, String officePhonenumber, String officeOpen, String officeClose, long hourlyCost) {
+    public long create(String officeAddress, String officePhoneNumber, String officeOpen, String officeClose, long hourlyCost) {
         boolean officeCreated = false;
         // create office
-        String insertOffice = "insert into offices(address,) values(?,?,?,?,?)";
+        String insertOffice = "insert into offices(office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)" +
+                           "values(?,?,?,?,?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "office_id";
         officeCreated = jdbcTemplate.update(con -> {
                     PreparedStatement ps = con.prepareStatement(insertOffice, new String[]{id_column});
                     ps.setString(1, officeAddress);
-                    ps.setString(2, officePhonenumber);
+                    ps.setString(2, officePhoneNumber);
                     ps.setString(3, officeOpen);
                     ps.setString(4, officeClose);
                     ps.setLong(5, hourlyCost);
@@ -57,33 +61,31 @@ public class JdbcOfficeDAO implements OfficeDAO {
         return newOfficeId;
     }
 
+    @Override
+    public Office addNewOffice(Office office) {
+        String sql = "INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, office.getOfficeId(), office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getHourlyCost());
+        return office;
+    }
 
     @Override
-    public boolean updateOffice(Office office) {
+    public Office updateOffice(Office office) {
 
         String sql = "UPDATE offices SET office_address=?, office_phone_number=?, office_open=?, office_close=? WHERE office_id=?";
-        boolean officeUpdated = jdbcTemplate.update(con -> {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, office.getOfficeAddress());
-            ps.setString(2, office.getOfficePhoneNumber());
-            ps.setString(3, office.getOfficeOpen());
-            ps.setString(3, office.getOfficeClose());
-            ps.setLong(5, office.getOfficeId());
-            return ps;
-        }) == 1;
-
-        return officeUpdated;
+        jdbcTemplate.update(sql, office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getOfficeId());
+        return office;
     }
 
 
     private Office mapRowToOffice(SqlRowSet rs) {
         Office office = new Office();
         office.setOfficeId(rs.getLong("office_id"));
-        office.setOfficeAddress(rs.getString("address"));
-        office.setOfficePhoneNumber(rs.getString("phonenumber"));
-        office.setOfficeOpen(rs.getString("officeOpen"));
-        office.setOfficeClose(rs.getString("officeClose"));
-        office.setHourlyCost(rs.getLong("hourlyCost"));
+        office.setOfficeAddress(rs.getString("office_address"));
+        office.setOfficePhoneNumber(rs.getString("office_phone_number"));
+        office.setOfficeOpen(rs.getTime("office_open").toLocalTime());
+        office.setOfficeClose(rs.getTime("office_close").toLocalTime());
+        office.setHourlyCost(rs.getLong("hourly_cost"));
         // office.setActivated(true);
         return office;
     }

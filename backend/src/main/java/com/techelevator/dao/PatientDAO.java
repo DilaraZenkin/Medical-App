@@ -8,8 +8,6 @@ public interface PatientDAO {
 
     List<Patient> findAllPatients();
 
-    Patient getPatientByUserId(Long userId);
-
     Patient getPatientByPatientId(Long patientId);
 
     Patient register (Patient patient);

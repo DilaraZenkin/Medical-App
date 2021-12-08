@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.DoctorDAO;
 import com.techelevator.model.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,12 @@ public class DoctorController {
 
     public DoctorController(DoctorDAO doctorDao) {
         this.doctorDao = doctorDao;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/doctors/register", method = RequestMethod.POST)
+    public Doctor addDoctor(@RequestBody Doctor doctor) {
+        return doctorDao.register(doctor);
     }
 
     @RequestMapping(path = "/doctors", method = RequestMethod.GET)
