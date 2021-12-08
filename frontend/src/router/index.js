@@ -8,7 +8,8 @@ import store from '../store/index'
 import DoctorList from '../views/DoctorList.vue'
 import DoctorHome from '../views/DoctorHome.vue'
 import PatientHome from '../views/PatientHome.vue'
-import PatientList from '../views/PatientList.vue'
+import PatientRegistration from '../views/PatientRegistration.vue'
+import DoctorRegistration from '../views/DoctorRegistration.vue'
 
 Vue.use(Router)
 
@@ -58,6 +59,22 @@ const router = new Router({
       }
     },
     {
+      path: "/register/doctor",
+      name: "doctor-register",
+      component: DoctorRegistration,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/register/patient",
+      name: "patient-register",
+      component: PatientRegistration,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
       path: "/doctors",
       name: "doctor-list",
       component: DoctorList,
@@ -77,14 +94,6 @@ const router = new Router({
       path: "/patient/:patientId",
       name: "patient-home",
       component: PatientHome,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/patients",
-      name: "patient-list",
-      component: PatientList,
       meta: {
         requiresAuth: true
       }

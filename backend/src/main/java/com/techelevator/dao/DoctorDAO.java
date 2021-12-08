@@ -14,5 +14,5 @@ public interface DoctorDAO {
 
     List<Doctor> getAllDoctorsAtOffice(Long officeId);
 
-    boolean register (Long userId, Long doctorId);
+    Doctor register (Doctor doctor);
 }

@@ -61,8 +61,11 @@ public class JdbcDoctorDao implements DoctorDAO{
     }
 
     @Override
-    public boolean register(Long userId, Long doctorId) {
-        return false;
+    public Doctor register(Doctor doctor) {
+        String sql = "INSERT INTO doctors (doctor_id, first_name, last_name, date_of_birth, office_id) " +
+                "VALUES (?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, doctor.getDoctorId(), doctor.getFirstName(), doctor.getLastName(), doctor.getDateOfBirth(), doctor.getOfficeId());
+        return doctor;
     }
 
     private Doctor mapRowToDoctor(SqlRowSet rs) {

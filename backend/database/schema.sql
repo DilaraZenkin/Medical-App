@@ -18,15 +18,16 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	is_doctor boolean NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
 SELECT * FROM users;
-INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER',false);
-INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN',false);
-INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('111','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER',false);
-INSERT INTO users (username,password_hash,role,is_doctor) VALUES ('222','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER',false);
+INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+INSERT INTO users (username,password_hash,role) VALUES ('pt1','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('pt2','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('dr1','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('dr2','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 
 CREATE TABLE offices (
         office_id serial PRIMARY KEY,
@@ -43,18 +44,20 @@ INSERT INTO offices (office_id, office_address, office_phone_number, office_open
 VALUES (2, '768 East Boulevard Wexford PA 16005', '778-996-4354', '09:00 am', '04:00 pm', 100);
 
 CREATE TABLE doctors (
-        doctor_id serial PRIMARY KEY,
+        doctor_id int PRIMARY KEY,
         first_name varchar(50) NOT NULL,
         last_name varchar(100) NOT NULL,
         date_of_birth DATE,
         office_id int,
-        CONSTRAINT fk_doctors FOREIGN KEY (office_id) REFERENCES offices (office_id)
+        CONSTRAINT fk_doctors FOREIGN KEY (office_id) REFERENCES offices (office_id),
+        CONSTRAINT doctor FOREIGN KEY (doctor_id) REFERENCES users (user_id)
 );
 
+select * from doctors;
 insert into doctors (doctor_id, first_name, last_name, date_of_birth, office_id)
-values (1,'Doc', 'Scalpel', '04-26-1972', 1);
+values (5,'Doc', 'Scalpel', '04-26-1972', 1);
 insert into doctors (doctor_id, first_name, last_name, date_of_birth, office_id)
-values (2,'Horatio', 'Crunch', '07-04-1958', 2);
+values (6,'Horatio', 'Crunch', '07-04-1958', 2);
 
 CREATE TABLE patients (
         patient_id int NOT NULL,
@@ -62,7 +65,7 @@ CREATE TABLE patients (
         last_name varchar(100) NOT NULL,
         date_of_birth DATE,
         address varchar (500),
-        CONSTRAINT patient FOREIGN KEY (patient_id) REFERENCES users (user_id)
+        CONSTRAINT fk_patient FOREIGN KEY (patient_id) REFERENCES users (user_id)
 );
 
 select * from patients;
