@@ -24,7 +24,7 @@ public class PatientController {
         return patientDao.findAllPatients();
     }
 
-    @RequestMapping(path = "/patient/{patientId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/patients/{patientId}", method = RequestMethod.GET)
     public Patient getPatientByPatientId(@PathVariable Long patientId) {
         return patientDao.getPatientByPatientId(patientId);
     }

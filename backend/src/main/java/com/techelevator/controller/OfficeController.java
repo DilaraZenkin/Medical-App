@@ -21,25 +21,22 @@ public class OfficeController {
 
     }
 
-    @RequestMapping(path = "/office/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/offices/{id}", method = RequestMethod.GET)
     public Office get(@PathVariable int id) {
         return officeDao.getOfficeById((long) id);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/office", method = RequestMethod.POST)
-    public Office addOffice(@Valid @RequestBody OfficeDTO officeDTO)
-            throws RuntimeException {
-        long officeId = officeDao.create(officeDTO.getAddress(), officeDTO.getOfficePhoneNumber(), officeDTO.getOfficeOpen(), officeDTO.getOfficeClose(), officeDTO.getHourlyCost());
-        return officeDao.getOfficeById(officeId);
-    }
-
-    @RequestMapping(path = "/office/(id)", method = RequestMethod.PUT)
+    @RequestMapping(path = "/offices/(id)", method = RequestMethod.PUT)
     public Office updateOffice(@Valid @RequestBody OfficeDTO officeDTO,
                                @PathVariable long officeId) {
         Office officeToUpdate = new Office(officeDTO, officeId);
         officeDao.updateOffice(officeToUpdate);
         return officeDao.getOfficeById(officeId);
+    }
+
+    @RequestMapping(path = "/offices/add", method = RequestMethod.POST)
+    public Office addNewOffice(@RequestBody Office office) {
+        return officeDao.addNewOffice(office);
     }
 
 }

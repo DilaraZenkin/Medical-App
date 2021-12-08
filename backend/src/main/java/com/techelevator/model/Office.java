@@ -1,5 +1,6 @@
 package com.techelevator.model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,9 @@ public class Office {
     private long officeId;
     private String officeAddress;
     private String officePhoneNumber;
-    private String officeOpen;
-    private String officeClose;
+    private LocalTime officeOpen;
+    private LocalTime officeClose;
     private long hourlyCost;
-
-    private List<Doctor> doctors = new ArrayList<>();
-
 
     public Office() {
 
@@ -28,22 +26,13 @@ public class Office {
         this.hourlyCost = dto.getHourlyCost();
     }
 
-    public Office(Long officeId, String officeAddress, String officePhoneNumber, String officeOpen, String officeClose, long hourlyCost, List<Doctor> doctors) {
+    public Office(Long officeId, String officeAddress, String officePhoneNumber, LocalTime officeOpen, LocalTime officeClose, long hourlyCost) {
         this.officeId = officeId;
         this.officeAddress = officeAddress;
         this.officePhoneNumber = officePhoneNumber;
         this.officeOpen = officeOpen;
         this.officeClose = officeClose;
         this.hourlyCost = hourlyCost;
-        this.doctors = doctors;
-    }
-
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
     }
 
     public long getOfficeId() {
@@ -70,19 +59,19 @@ public class Office {
         this.officePhoneNumber = officePhoneNumber;
     }
 
-    public String getOfficeOpen() {
+    public LocalTime getOfficeOpen() {
         return officeOpen;
     }
 
-    public void setOfficeOpen(String officeOpen) {
+    public void setOfficeOpen(LocalTime officeOpen) {
         this.officeOpen = officeOpen;
     }
 
-    public String getOfficeClose() {
+    public LocalTime getOfficeClose() {
         return officeClose;
     }
 
-    public void setOfficeClose(String officeClose) {
+    public void setOfficeClose(LocalTime officeClose) {
         this.officeClose = officeClose;
     }
 

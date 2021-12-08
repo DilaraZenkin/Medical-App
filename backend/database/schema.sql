@@ -21,7 +21,7 @@ CREATE TABLE users (
 	role varchar(50) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
-
+SELECT * FROM users u WHERE u.user_id = 6;
 SELECT * FROM users;
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
@@ -39,6 +39,7 @@ CREATE TABLE offices (
         hourly_cost int
 );
 
+SELECT * FROM offices;
 INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)
 VALUES (1, '769 East Boulevard Wexford PA 16005', '778-996-4345', '10:00 am', '05:00 pm', 120);
 INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)
@@ -54,6 +55,7 @@ CREATE TABLE doctors (
         CONSTRAINT doctor FOREIGN KEY (doctor_id) REFERENCES users (user_id)
 );
 
+SELECT * FROM doctors WHERE office_id = 1;
 select * from doctors;
 insert into doctors (doctor_id, first_name, last_name, date_of_birth, office_id)
 values (5,'Doc', 'Scalpel', '04-26-1972', 1);
@@ -87,7 +89,9 @@ CREATE TABLE appointments (
         CONSTRAINT fk_appointment_offices FOREIGN KEY (office_id) REFERENCES offices (office_id),
         CONSTRAINT fk_appointment_doctors FOREIGN KEY (doctor_id) REFERENCES users (user_id)
         );
-        
+SELECT of.office_id, of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name, d.last_name FROM offices of
+JOIN doctors d ON of.office_id = d.office_id
+WHERE first_name ILIKE 'S%';        
 SELECT o.office_address, p.first_name AS patient_first_name, p.last_name AS patient_last_name, d.first_name AS doctor_first_name, d.last_name AS doctor_last_name, a.start_time, a.end_time, a.appointment_date
 FROM appointments a JOIN patients p ON (p.patient_id = a.patient_id) 
 JOIN doctors d ON (d.doctor_id = a.doctor_id)

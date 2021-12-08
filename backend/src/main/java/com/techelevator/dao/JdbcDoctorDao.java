@@ -32,11 +32,6 @@ public class JdbcDoctorDao implements DoctorDAO{
     }
 
     @Override
-    public Doctor getDoctorByUserId(Long userId) {
-        return null;
-    }
-
-    @Override
     public Doctor getDoctorByDoctorId(Long doctorId) {
         String sql = "SELECT * FROM doctors WHERE doctor_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);

@@ -8,8 +8,6 @@ public interface DoctorDAO {
 
     List<Doctor> findAllDoctors();
 
-    Doctor getDoctorByUserId(Long userId);
-
     Doctor getDoctorByDoctorId(Long doctorId);
 
     List<Doctor> getAllDoctorsAtOffice(Long officeId);
