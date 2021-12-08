@@ -4,10 +4,12 @@ import com.techelevator.model.Office;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.util.List;
 
+@Component
 public class JdbcOfficeDAO implements OfficeDAO {
     //TODO: method to insert office into office database table
     //TODO: method to update office database table
