@@ -1,7 +1,8 @@
 <template>
   <div id="app">
        <v-container class="text-right">
-      <v-btn id="home-logout" color="blue" :to="{name: 'logout'}">Logout</v-btn>
+      <v-btn id="home-login" :to="{name: 'patient-home'}">Home</v-btn>
+      <v-btn id="home-logout" :to="{name: 'logout'}">Logout</v-btn>
     </v-container> 
     <v-app id="inspire">
       <v-card :loading="loading" 
