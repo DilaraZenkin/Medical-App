@@ -12,19 +12,21 @@
                         <v-form @submit.prevent="login">
                            <v-text-field
                               prepend-icon="person"
-                              placeholder="Username"
+                              label="Username"
                               v-model="user.username"
                               required
                               autofocus
+                              outlined
                            ></v-text-field>
                            <v-text-field
                               id="password"
                               prepend-icon="lock"
                               type="password"
                               class="form-control"
-                              placeholder="Password"
+                              label="Password"
                               v-model="user.password"
                               required
+                              outlined
                            ></v-text-field>
                            <v-card-actions>
                               <router-link :to="{ name: 'register' }">Need an account?</router-link>

@@ -52,7 +52,7 @@ public class JdbcPatientDao implements PatientDAO{
 
     @Override
     public Patient register(Patient patient) {
-        String sql = "INSERT INTO patient (patient_id, first_name, last_name, date_of_birth, address) " +
+        String sql = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address) " +
                      "VALUES (?, ?, ?, ?, ?) RETURNING patient_id;";
         jdbcTemplate.update(sql, patient.getPatientId(), patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress());
         return patient;

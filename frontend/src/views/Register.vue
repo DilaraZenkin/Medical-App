@@ -52,31 +52,63 @@
                             id="firstName"
                             class="personInfo"
                             label="First Name"
+                            prepend-icon="person_outline"
                             v-model="patient.firstName"
                             required
                             outlined
                             autofocus
                             ></v-text-field>
-                             <v-text-field
+                            <v-text-field
                             id="lastName"
                             class="personInfo"
                             label="Last Name"
+                            prepend-icon="person_outline"
                             v-model="patient.lasttName"
                             required
                             outlined
                             autofocus
                             ></v-text-field>
-                             <v-date-picker
+                             <!-- <v-date-picker
                             id="dateOfBirth"
                             class="personInfo"
                             v-model="patient.dateOfBirth"
                             required
-                            ></v-date-picker>
-                             <v-text-field
+                            ></v-date-picker> -->
+                            <v-menu
+                              v-model="dateOfBirthMenu"
+                              :close-on-content-click="false"
+                              :nudge-right="40"
+                              transition="scale-transition"
+                              offset-y 
+                              max-width="290px"
+                              min-width="290px"
+                            >
+                              <template v-slot:activator="{ on }">
+                                <v-text-field
+                                  label="Date Of Birth"
+                                  prepend-icon="event"
+                                  readonly
+                                  v-on="on"
+                                  id="dateOfBirth"
+                                  class="personInfo"
+                                  v-model="patient.dateOfBirth"
+                                  outlined
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                locale="en-in"
+                                v-model="patient.dateOfBirth"
+                                no-title
+                                @input="dateOfBirthMenu = false"
+                                :max="today"
+                              ></v-date-picker>
+                            </v-menu>
+                            <v-text-field
                             id="address"
                             class="personInfo"
                             label="Address"
-                            v-model="patient.address"
+                            prepend-icon="location_on"
+                            v-model="patient.patientAddress"
                             required
                             outlined
                             autofocus
@@ -118,7 +150,8 @@ export default {
         address: ''
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.'
+      registrationErrorMsg: 'There were problems registering this user.',
+      dateOfBirthMenu: false
     };
   },
   methods: {
@@ -154,6 +187,16 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
+  },
+  computed: {
+    today() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      return yyyy + '-' + mm + '-' + dd;
+    },
+ 
   },
   changeDoctorStatus() {
     this.user.isDoctor = false;
