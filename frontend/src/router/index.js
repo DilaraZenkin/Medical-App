@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
-import Register from '../views/Register.vue'
+import RegisterChoice from '../views/RegisterChoice.vue'
 import store from '../store/index'
 import DoctorList from '../views/DoctorList.vue'
 import DoctorHome from '../views/DoctorHome.vue'
@@ -53,7 +53,7 @@ const router = new Router({
     {
       path: "/register",
       name: "register",
-      component: Register,
+      component: RegisterChoice,
       meta: {
         requiresAuth: false
       }
