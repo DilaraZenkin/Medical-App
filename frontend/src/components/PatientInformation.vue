@@ -5,9 +5,10 @@
       <v-btn id="home-logout" :to="{name: 'logout'}">Logout</v-btn>
     </v-container>  
     <v-card v-if="showForm === false">
-        <v-card-title>{{patient.firstName}} {{patient.lastName}}</v-card-title>
-        <v-card-text>{{patient.dateOfBirth}}</v-card-text>
-        <v-card-text>{{patient.patientAddress}}</v-card-text>
+        <v-card-title>Patient: {{patient.firstName}} {{patient.lastName}}</v-card-title>
+        <v-card-text>Date of Birth: {{patient.dateOfBirth}}</v-card-text>
+        <v-card-text>Address: {{patient.patientAddress}}</v-card-text>
+        <v-card-text>Provider: {{doctor.firstName}} {{doctor.lastName}}</v-card-text>
         <a id="update-patient-form" href="#" v-if="showForm === false"
          v-on:click.prevent="showForm = true">Update Information?</a>    
     </v-card> 
@@ -69,6 +70,18 @@
                 required
                 outlined
                 ></v-text-field>
+                <v-text-field
+                id="doctorId"
+                prepend-icon="person_outline"
+                class="patientInfo"
+                label="Doctor Id"
+                v-model="updatedPatient.doctorId"
+                type="number"
+                min="5"
+                max="6"
+                required
+                outlined
+                ></v-text-field>
                 <v-btn color="green" type="submit">Submit</v-btn>
                 <v-btn color="red" type ="button"
                 @click.prevent="resetForm">Cancel</v-btn>
@@ -78,16 +91,21 @@
 
 <script>
 import PatientService from '../services/PatientService'
+import DoctorService from '../services/DoctorService'
 export default {
     name: 'patient-information',
     data: () => ({
         showForm: false,
         patient: {},
+        doctor: {},
         updatedPatient: {}
     }),
     created() {
         PatientService.getLoggedInPatient(this.$store.state.user.id).then(response => {
             this.patient = response.data;
+        }),
+        DoctorService.getSpecificDoctor(this.patient.doctorId).then(response => {
+            this.doctor = response.data;
         })
     },
     methods: {
