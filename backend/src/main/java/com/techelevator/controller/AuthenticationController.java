@@ -54,12 +54,20 @@ public class AuthenticationController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+<<<<<<< HEAD
     public Integer register(@Valid @RequestBody RegisterUserDTO newUser) {
+=======
+    public int register(@Valid @RequestBody RegisterUserDTO newUser) {
+>>>>>>> cb646d27976c522ebd759ebff9bc2d5c1fcd1a9e
         try {
             User user = userDao.findByUsername(newUser.getUsername());
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
+<<<<<<< HEAD
             return userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole(), newUser.isDoctor());
+=======
+            return userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+>>>>>>> cb646d27976c522ebd759ebff9bc2d5c1fcd1a9e
         }
     }
 

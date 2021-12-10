@@ -1,12 +1,14 @@
 package com.techelevator.model;
 
+import java.time.LocalTime;
+
 public class OfficeDTO {
     //TODO: add fields here so you can call create method in OfficeController
     //TODO: at minimum need these fields: address, phonenumber, officehours, cost
     private Long officeId;
     private String officePhoneNumber;
-    private String officeOpen;
-    private String officeClose;
+    private LocalTime officeOpen;
+    private LocalTime officeClose;
     private long hourlyCost;
     private String officeAddress;
 
@@ -34,19 +36,19 @@ public class OfficeDTO {
         this.officePhoneNumber = officePhoneNumber;
     }
 
-    public String getOfficeOpen() {
+    public LocalTime getOfficeOpen() {
         return officeOpen;
     }
 
-    public void setOfficeOpen(String officeOpen) {
+    public void setOfficeOpen(LocalTime officeOpen) {
         this.officeOpen = officeOpen;
     }
 
-    public String getOfficeClose() {
+    public LocalTime getOfficeClose() {
         return officeClose;
     }
 
-    public void setOfficeClose(String officeClose) {
+    public void setOfficeClose(LocalTime officeClose) {
         this.officeClose = officeClose;
     }
 

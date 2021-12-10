@@ -8,11 +8,9 @@ public interface DoctorDAO {
 
     List<Doctor> findAllDoctors();
 
-    Doctor getDoctorByUserId(Long userId);
-
     Doctor getDoctorByDoctorId(Long doctorId);
 
     List<Doctor> getAllDoctorsAtOffice(Long officeId);
 
-    boolean register (Long userId, Long doctorId);
+    Doctor register (Doctor doctor);
 }

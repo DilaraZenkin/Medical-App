@@ -7,10 +7,9 @@
                <v-flex xs12 sm8 md4>
                   <v-card>
                      <v-toolbar dark color="primary">
-                        <v-toolbar-title>Create Account</v-toolbar-title>
+                        <v-toolbar-title>Create New Patient Account</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
-<<<<<<< HEAD
                         <v-form @submit.prevent="register">
                            <v-text-field
                               prepend-icon="person"
@@ -51,76 +50,41 @@
                             ></v-checkbox> -->
                             <v-text-field
                             id="firstName"
-                            class="personInfo"
+                            prepend-icon="person"
+                            class="patientInfo"
                             label="First Name"
-                            prepend-icon="person_outline"
                             v-model="patient.firstName"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
-                            <v-text-field
+                             <v-text-field
                             id="lastName"
-                            class="personInfo"
+                            prepend-icon="person"
+                            class="patientInfo"
                             label="Last Name"
-                            prepend-icon="person_outline"
-                            v-model="patient.lasttName"
+                            v-model="patient.lastName"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
-                             <!-- <v-date-picker
+                             <v-date-picker
                             id="dateOfBirth"
-                            class="personInfo"
+                            class="patientInfo"
                             v-model="patient.dateOfBirth"
                             required
-                            ></v-date-picker> -->
-                            <v-menu
-                              v-model="dateOfBirthMenu"
-                              :close-on-content-click="false"
-                              :nudge-right="40"
-                              transition="scale-transition"
-                              offset-y 
-                              max-width="290px"
-                              min-width="290px"
-                            >
-                              <template v-slot:activator="{ on }">
-                                <v-text-field
-                                  label="Date Of Birth"
-                                  prepend-icon="event"
-                                  readonly
-                                  v-on="on"
-                                  id="dateOfBirth"
-                                  class="personInfo"
-                                  v-model="patient.dateOfBirth"
-                                  outlined
-                                ></v-text-field>
-                              </template>
-                              <v-date-picker
-                                locale="en-in"
-                                v-model="patient.dateOfBirth"
-                                no-title
-                                @input="dateOfBirthMenu = false"
-                                :max="today"
-                              ></v-date-picker>
-                            </v-menu>
-                            <v-text-field
+                            ></v-date-picker>
+                             <v-text-field
                             id="address"
-                            class="personInfo"
+                            prepend-icon="map"
+                            class="patientInfo"
                             label="Address"
-                            prepend-icon="location_on"
                             v-model="patient.patientAddress"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
-=======
-                        <v-form>
->>>>>>> cb646d27976c522ebd759ebff9bc2d5c1fcd1a9e
                            <v-card-actions>
-                              <v-btn color="primary" :to="{name: 'patient-register'}">Patient Account</v-btn>
+                              <router-link :to="{ name: 'login' }">Have an account?</router-link>
                               <v-spacer></v-spacer>
-                              <v-btn color="primary" :to="{name: 'doctor-register'}">Doctor Account</v-btn>
+                              <v-btn color="primary" type="submit">Create Account</v-btn>
                           </v-card-actions>
                         </v-form>
                      </v-card-text>
@@ -136,26 +100,24 @@ import authService from '../services/AuthService';
 import PatientService from '../services/PatientService'
 
 export default {
-  name: 'register',
+  name: 'patient-register',
   data() {
     return {
       user: {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'user',
-        isDoctor: true,
+        role: 'user'
       },
       patient: {
         patientId: '',
         firstName: '',
         lastName: '',
         dateOfBirth: '',
-        address: ''
+        patientAddress: ''
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
-      dateOfBirthMenu: false
+      registrationErrorMsg: 'There were problems registering this user.'
     };
   },
   methods: {
@@ -191,16 +153,6 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
-  },
-  computed: {
-    today() {
-      var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-      var yyyy = today.getFullYear();
-      return yyyy + '-' + mm + '-' + dd;
-    },
- 
   },
   changeDoctorStatus() {
     this.user.isDoctor = false;
