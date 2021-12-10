@@ -1,11 +1,18 @@
 <template>
-  <doctor-information />
+   <div>
+     <v-container class="text-right">
+      <v-btn id="home-logout" :to="{name: 'logout'}">Logout</v-btn>
+    </v-container>
+    <v-btn id="appointment-list" :to="{name: 'appointment-list'}">Appointments</v-btn>
+    <v-btn id="update-doctor-availability" :to="{name: 'doctor-availability'}">Set Availability</v-btn>
+    <v-btn id="office-information" :to="{name: 'office-information'}">View Office Information</v-btn>
+  </div> 
 </template>
 
 <script>
-import DoctorInformation from '../components/DoctorInformation.vue'
 export default {
-  components: { DoctorInformation },
+  components: {  
+    },
 
 }
 </script>

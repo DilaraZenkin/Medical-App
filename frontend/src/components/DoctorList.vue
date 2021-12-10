@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-       <v-container class="text-right">
+    <v-container class="text-right">
       <v-btn id="home-login" :to="{name: 'patient-home'}">Home</v-btn>
       <v-btn id="home-logout" :to="{name: 'logout'}">Logout</v-btn>
     </v-container> 
