@@ -6,7 +6,7 @@ export default {
         return axios.get(`/patients`);
     },
 
-    addPatient() {
-        return axios.post(`/patients/register`);
+    addPatient(patient) {
+        return axios.post(`/patients/register`, patient);
     }
 }

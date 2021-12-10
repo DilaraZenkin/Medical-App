@@ -34,11 +34,6 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
-    public Patient getPatientByUserId(Long userId) {
-        return null;
-    }
-
-    @Override
     public Patient getPatientByPatientId(Long patientId) {
         String sql = "SELECT * FROM patients WHERE patient_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
@@ -52,8 +47,8 @@ public class JdbcPatientDao implements PatientDAO{
 
     @Override
     public Patient register(Patient patient) {
-        String sql = "INSERT INTO patient (patient_id, first_name, last_name, date_of_birth, address) " +
-                     "VALUES (?, ?, ?, ?, ?) RETURNING patient_id;";
+        String sql = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address) " +
+                     "VALUES (?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, patient.getPatientId(), patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress());
         return patient;
     }

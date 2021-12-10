@@ -1,49 +1,26 @@
 package com.techelevator.model;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Office {
-
-    private long officeId;
-    private String officeAddress;
+public class OfficeDTO {
+    //TODO: add fields here so you can call create method in OfficeController
+    //TODO: at minimum need these fields: address, phonenumber, officehours, cost
+    private Long officeId;
     private String officePhoneNumber;
     private LocalTime officeOpen;
     private LocalTime officeClose;
     private long hourlyCost;
+    private String officeAddress;
 
-    public Office() {
-
+    public Long getOfficeId() {
+        return getOfficeId();
     }
 
-    public Office(OfficeDTO dto, long officeId) {
-        this.officeId = officeId;
-        this.officeAddress = dto.getAddress();
-        this.officePhoneNumber = dto.getOfficePhoneNumber();
-        this.officeOpen = dto.getOfficeOpen();
-        this.officeClose = dto.getOfficeClose();
-        this.hourlyCost = dto.getHourlyCost();
-    }
-
-    public Office(Long officeId, String officeAddress, String officePhoneNumber, LocalTime officeOpen, LocalTime officeClose, long hourlyCost) {
-        this.officeId = officeId;
-        this.officeAddress = officeAddress;
-        this.officePhoneNumber = officePhoneNumber;
-        this.officeOpen = officeOpen;
-        this.officeClose = officeClose;
-        this.hourlyCost = hourlyCost;
-    }
-
-    public long getOfficeId() {
-        return officeId;
-    }
-
-    public void setOfficeId(long officeId) {
+    public void setOfficeId(Long officeId) {
         this.officeId = officeId;
     }
 
-    public String getOfficeAddress() {
+    public String getAddress() {
         return officeAddress;
     }
 
@@ -75,6 +52,7 @@ public class Office {
         this.officeClose = officeClose;
     }
 
+
     public long getHourlyCost() {
         return hourlyCost;
     }
@@ -82,4 +60,5 @@ public class Office {
     public void setHourlyCost(long hourlyCost) {
         this.hourlyCost = hourlyCost;
     }
+
 }

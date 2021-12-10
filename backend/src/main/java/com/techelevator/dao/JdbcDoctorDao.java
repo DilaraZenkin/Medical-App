@@ -21,7 +21,7 @@ public class JdbcDoctorDao implements DoctorDAO{
     @Override
     public List<Doctor> findAllDoctors() {
         List<Doctor> doctors = new ArrayList<>();
-        String sql = "select * from doctors";
+        String sql = "SELECT * FROM doctors";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
@@ -29,11 +29,6 @@ public class JdbcDoctorDao implements DoctorDAO{
             doctors.add(doctor);
         }
         return doctors;
-    }
-
-    @Override
-    public Doctor getDoctorByUserId(Long userId) {
-        return null;
     }
 
     @Override
@@ -61,8 +56,11 @@ public class JdbcDoctorDao implements DoctorDAO{
     }
 
     @Override
-    public boolean register(Long userId, Long doctorId) {
-        return false;
+    public Doctor register(Doctor doctor) {
+        String sql = "INSERT INTO doctors (doctor_id, first_name, last_name, date_of_birth, office_id) " +
+                "VALUES (?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, doctor.getDoctorId(), doctor.getFirstName(), doctor.getLastName(), doctor.getDateOfBirth(), doctor.getOfficeId());
+        return doctor;
     }
 
     private Doctor mapRowToDoctor(SqlRowSet rs) {

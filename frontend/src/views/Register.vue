@@ -10,81 +10,11 @@
                         <v-toolbar-title>Create Account</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
-                        <v-form @submit.prevent="register">
-                           <v-text-field
-                              prepend-icon="person"
-                              id="username"
-                              class="form-control"
-                              label="Username"
-                              v-model="user.username"
-                              required
-                              outlined
-                              autofocus
-                           ></v-text-field>
-                           <v-text-field
-                              id="password"
-                              prepend-icon="lock"
-                              type="password"
-                              class="form-control"
-                              label="Password"
-                              v-model="user.password"
-                              required
-                              outlined
-                           ></v-text-field>
-                           <v-text-field
-                              id="confirmPassword"
-                              prepend-icon="enhanced_encryption"
-                              type="password"
-                              class="form-control"
-                              label="Confirm Password"
-                              v-model="user.confirmPassword"
-                              required
-                              outlined
-                           ></v-text-field>
-                            <!--<v-checkbox
-                            prepend-icon="people"
-                            id="is-doctor"
-                            class="form-control"
-                            v-model="user.isDoctor"
-                            label="Are you a doctor?"
-                            ></v-checkbox> -->
-                            <v-text-field
-                            id="firstName"
-                            class="personInfo"
-                            label="First Name"
-                            v-model="patient.firstName"
-                            required
-                            outlined
-                            autofocus
-                            ></v-text-field>
-                             <v-text-field
-                            id="lastName"
-                            class="personInfo"
-                            label="Last Name"
-                            v-model="patient.lasttName"
-                            required
-                            outlined
-                            autofocus
-                            ></v-text-field>
-                             <v-date-picker
-                            id="dateOfBirth"
-                            class="personInfo"
-                            v-model="patient.dateOfBirth"
-                            required
-                            ></v-date-picker>
-                             <v-text-field
-                            id="address"
-                            class="personInfo"
-                            label="Address"
-                            v-model="patient.address"
-                            required
-                            outlined
-                            autofocus
-                            ></v-text-field>
+                        <v-form>
                            <v-card-actions>
-                              <router-link :to="{ name: 'login' }">Have an account?</router-link>
+                              <v-btn color="primary" :to="{name: 'patient-register'}">Patient Account</v-btn>
                               <v-spacer></v-spacer>
-                              <v-btn color="primary" type="submit">Create Account</v-btn>
+                              <v-btn color="primary" :to="{name: 'doctor-register'}">Doctor Account</v-btn>
                           </v-card-actions>
                         </v-form>
                      </v-card-text>
