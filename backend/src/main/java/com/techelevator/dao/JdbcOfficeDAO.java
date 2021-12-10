@@ -77,6 +77,21 @@ public class JdbcOfficeDAO implements OfficeDAO {
         return office;
     }
 
+    @Override
+    public List<Office> officeInfoByDoctorFirstName(String firstNameSearch) {
+        return null;
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorLastName(String lastNameSearch) {
+        return null;
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorFullName(String firstNameSearch, String lastNameSearch) {
+        return null;
+    }
+
 
     private Office mapRowToOffice(SqlRowSet rs) {
         Office office = new Office();
@@ -89,19 +104,5 @@ public class JdbcOfficeDAO implements OfficeDAO {
         // office.setActivated(true);
         return office;
     }
-
-    @Override
-    public List<Office> officeInfoByDoctorFirstName() {
-        return null;
-    }
-
-    @Override
-    public List<Office> officeInfoByDoctorLastName() {
-        return null;
-    }
-
-    @Override
-    public List<Office> officeInfoByDoctorFullName() {
-        return null;
-    }
+    
 }
