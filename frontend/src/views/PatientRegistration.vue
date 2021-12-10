@@ -41,16 +41,9 @@
                               required
                               outlined
                            ></v-text-field>
-                            <!--<v-checkbox
-                            prepend-icon="people"
-                            id="is-doctor"
-                            class="form-control"
-                            v-model="user.isDoctor"
-                            label="Are you a doctor?"
-                            ></v-checkbox> -->
                             <v-text-field
                             id="firstName"
-                            prepend-icon="person"
+                            prepend-icon="person_outline"
                             class="patientInfo"
                             label="First Name"
                             v-model="patient.firstName"
@@ -59,22 +52,45 @@
                             ></v-text-field>
                              <v-text-field
                             id="lastName"
-                            prepend-icon="person"
+                            prepend-icon="person_outline"
                             class="patientInfo"
                             label="Last Name"
                             v-model="patient.lastName"
                             required
                             outlined
                             ></v-text-field>
-                             <v-date-picker
-                            id="dateOfBirth"
-                            class="patientInfo"
-                            v-model="patient.dateOfBirth"
-                            required
-                            ></v-date-picker>
+                            <v-menu
+                              v-model="dateOfBirthMenu"
+                              :close-on-content-click="false"
+                              :nudge-right="40"
+                              transition="scale-transition"
+                              offset-y 
+                              max-width="290px"
+                              min-width="290px"
+                            >
+                              <template v-slot:activator="{ on }">
+                                <v-text-field
+                                  label="Date Of Birth"
+                                  prepend-icon="event"
+                                  readonly
+                                  v-on="on"
+                                  id="dateOfBirth"
+                                  class="patientInfo"
+                                  v-model="patient.dateOfBirth"
+                                  outlined
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                locale="en-in"
+                                v-model="patient.dateOfBirth"
+                                no-title
+                                @input="dateOfBirthMenu = false"
+                                :max="today"
+                              ></v-date-picker>
+                            </v-menu>
                              <v-text-field
                             id="address"
-                            prepend-icon="map"
+                            prepend-icon="location_on"
                             class="patientInfo"
                             label="Address"
                             v-model="patient.patientAddress"

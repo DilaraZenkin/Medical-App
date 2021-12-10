@@ -92,6 +92,10 @@ public class JdbcOfficeDAO implements OfficeDAO {
         return null;
     }
 
+    public String getOfficeAddressByDoctorId(Long doctorId) {
+        String sql = "SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, doctorId);
+    }
 
     private Office mapRowToOffice(SqlRowSet rs) {
         Office office = new Office();
