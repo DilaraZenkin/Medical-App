@@ -5,8 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import Patient from '../views/Patient.vue'
+import Doctor from '../views/Doctor.vue'
 import store from '../store/index'
-import DoctorList from '../views/DoctorList.vue'
 import DoctorHome from '../views/DoctorHome.vue'
 import PatientHome from '../views/PatientHome.vue'
 import PatientList from '../views/PatientList.vue'
@@ -59,9 +59,9 @@ const router = new Router({
       }
     },
     {
-      path: "/doctors",
-      name: "doctor-list",
-      component: DoctorList,
+      path: "/doctor",
+      name: "doctor",
+      component: Doctor,
       meta: {
         requiresAuth: false
       }
