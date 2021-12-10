@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -63,63 +62,6 @@ public class JdbcOfficeDAO implements OfficeDAO {
     }
 
     @Override
-    public List<Office> officeInfoByDoctorFirstName(String firstNameSearch) {
-        List <Office> officeInfo = new ArrayList<>();
-        String sql = "SELECT of.office_id, of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name, d.last_name FROM offices of" +
-                "JOIN doctors d ON of.office_id = d.office_id " +
-                "WHERE first_name ILIKE ?";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + firstNameSearch + "%");
-        while (results.next()) {
-            Office officeResult = mapRowToOffice(results);
-            officeInfo.add(officeResult);
-        }
-        return officeInfo;
-    }
-
-    @Override
-    public List<Office> officeInfoByDoctorLastName(String lastNameSearch) {
-        List <Office> officeInfo = new ArrayList<>();
-        String sql = "SELECT of.office_id, of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name, d.last_name FROM offices of" +
-                "JOIN doctors d ON of.office_id = d.office_id " +
-                "WHERE first_name ILIKE ?";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + lastNameSearch + "%");
-        while (results.next()) {
-            Office officeResult = mapRowToOffice(results);
-            officeInfo.add(officeResult);
-        }
-        return officeInfo;
-    }
-
-    @Override
-    public List<Office> officeInfoByDoctorFullName(String firstNameSearch, String lastNameSearch) {
-        List <Office> officeInfo = new ArrayList<>();
-        String sql = "SELECT of.office_id, of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name, d.last_name FROM offices of" +
-                "JOIN doctors d ON of.office_id = d.office_id " +
-                "WHERE first_name ILIKE ?";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + firstNameSearch + "%", "%" + lastNameSearch + "%");
-        while (results.next()) {
-            Office officeResult = mapRowToOffice(results);
-            officeInfo.add(officeResult);
-        }
-        return officeInfo;
-    }
-
-    public Office officeInfoByDoctorId(long doctorId) {
-        String sql = "SELECT of.office_id, of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name, d.last_name FROM offices of" +
-                "JOIN doctors d ON of.office_id = d.office_id " +
-                "WHERE doctor_id = ? ";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);
-        if (results.next()) return mapRowToOffice(results);
-        else {
-            throw new RuntimeException("officeId " + doctorId+ " was not found.");
-
-        }
-    }
-
-    @Override
     public Office addNewOffice(Office office) {
         String sql = "INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?);";
@@ -127,13 +69,26 @@ public class JdbcOfficeDAO implements OfficeDAO {
         return office;
     }
 
-
     @Override
-    public boolean updateOffice(Office office) {
+    public Office updateOffice(Office office) {
 
         String sql = "UPDATE offices SET office_address=?, office_phone_number=?, office_open=?, office_close=? WHERE office_id=?";
         jdbcTemplate.update(sql, office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getOfficeId());
-        return true;
+        return office;
+    }
+    @Override
+    public List<Office> officeInfoByDoctorFirstName(String firstNameSearch) {
+        return null;
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorLastName(String lastNameSearch) {
+        return null;
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorFullName(String firstNameSearch, String lastNameSearch) {
+        return null;
     }
 
 
