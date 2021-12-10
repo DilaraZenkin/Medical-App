@@ -16,9 +16,6 @@ public interface UserDao {
 
     int findIdByUsername(String username);
 
-<<<<<<< HEAD
-    int create(String username, String password, String role, boolean isDoctor);
-=======
     int create(String username, String password, String role);
->>>>>>> cb646d27976c522ebd759ebff9bc2d5c1fcd1a9e
+
 }
