@@ -77,6 +77,11 @@ public class JdbcOfficeDAO implements OfficeDAO {
         return office;
     }
 
+    @Override
+    public String getOfficeAddressByDoctorId(Long doctorId) {
+        String sql = "SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, doctorId);
+    }
 
     private Office mapRowToOffice(SqlRowSet rs) {
         Office office = new Office();
@@ -89,6 +94,7 @@ public class JdbcOfficeDAO implements OfficeDAO {
         // office.setActivated(true);
         return office;
     }
+
 
     @Override
     public List<Office> officeInfoByDoctorFirstName() {

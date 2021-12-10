@@ -13,7 +13,7 @@ public class JdbcDoctorAvailabilityDao implements DoctorAvailabilityDao {
     }
 
     @Override
-    public DoctorAvailability getDoctorAvailability(long doctorAvailabilityId) {
+    public DoctorAvailability getDoctorAvailability(Long doctorAvailabilityId) {
 
         DoctorAvailability availability = null;
         String sql = "SELECT doctor_availability_id, office_doctor_id, day_of_week, start_time, end_time, availability " +
@@ -26,15 +26,19 @@ public class JdbcDoctorAvailabilityDao implements DoctorAvailabilityDao {
         return availability;
     }
 
+    @Override
+    public DoctorAvailability getAvailabilityByDoctorId(Long doctorId) {
+        return null;
+    }
 
     private DoctorAvailability mapRowToDoctorAvailability(SqlRowSet results) {
         DoctorAvailability availability = new DoctorAvailability();
         availability.setDoctorAvailabilityId(results.getLong("doctor_availability_id"));
-        availability.setDoctorOfficeId(results.getLong("office_doctor_id"));
-        availability.setDayOfWeek(results.getString("day_of_week"));
-        availability.setStartTime(results.getString("start_time"));
-        availability.setEndTime(results.getString("end_time"));
-        availability.setAvailability(results.getString("availability"));
+        availability.setDoctorId(results.getLong("doctor_id"));
+        availability.setDayOfWeek(results.getDate("day_of_week").toLocalDate());
+        availability.setStartTime(results.getTime("start_time").toLocalTime());
+        availability.setEndTime(results.getTime("end_time").toLocalTime());
+        availability.setAvailable(results.getBoolean("availability"));
 
         return availability;
     }
