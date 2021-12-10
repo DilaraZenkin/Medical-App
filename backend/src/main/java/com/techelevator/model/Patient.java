@@ -8,16 +8,18 @@ public class Patient {
     private String lastName;
     private LocalDate dateOfBirth;
     private String patientAddress;
+    private Long doctorId;
 
     public Patient() {
     }
 
-    public Patient(Long patientId, String firstName, String lastName, LocalDate dateOfBirth, String patientAddress) {
+    public Patient(Long patientId, String firstName, String lastName, LocalDate dateOfBirth, String patientAddress, Long doctorId) {
         this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.patientAddress = patientAddress;
+        this.doctorId = doctorId;
     }
 
     public Long getPatientId() {
@@ -58,6 +60,14 @@ public class Patient {
 
     public void setPatientAddress(String patientAddress) {
         this.patientAddress = patientAddress;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 }
 
