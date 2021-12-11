@@ -46,6 +46,19 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
+    public List<Patient> getPatientListByDoctorId(Long doctorId) {
+        List<Patient> patients = new ArrayList<>();
+        String sql = "SELECT * FROM patients WHERE doctor_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);
+        while(results.next()) {
+            Patient patient = mapRowToPatient(results);
+            patients.add(patient);
+        }
+        return patients;
+    }
+
+    @Override
     public Patient register(Patient patient) {
         String sql = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address) " +
                      "VALUES (?, ?, ?, ?, ?);";

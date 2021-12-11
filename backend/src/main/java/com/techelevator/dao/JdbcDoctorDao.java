@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Doctor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -53,6 +54,17 @@ public class JdbcDoctorDao implements DoctorDAO{
             doctors.add(doctor);
         }
         return doctors;
+    }
+
+    @Override
+    public Doctor doctorNameByPatientId(Long patientId) {
+        String sql = "SELECT d.doctor_id, d.first_name, d.last_name, d.date_of_birth, d.office_id FROM doctors d INNER JOIN patients USING (doctor_id) WHERE patient_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
+        if (results.next()) {
+            return mapRowToDoctor(results);
+        } else {
+            throw new RuntimeException("Could not find your Doctor");
+        }
     }
 
     @Override

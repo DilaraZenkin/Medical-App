@@ -13,3 +13,10 @@ SELECT o.office_address, p.first_name AS patient_first_name, p.last_name AS pati
 FROM appointments a JOIN patients p ON (p.patient_id = a.patient_id) 
 JOIN doctors d ON (d.doctor_id = a.doctor_id)
 JOIN offices o ON (o.office_id = a.office_id);  
+
+UPDATE patients SET first_name = 'Test2',
+last_name = 'Patient2',
+date_of_birth = '1999-01-01',
+address = '555 West East Rd. Somewhere PA, 11223',
+doctor_id = 6
+WHERE patient_id = 7;

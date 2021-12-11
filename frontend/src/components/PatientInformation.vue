@@ -104,7 +104,7 @@ export default {
         PatientService.getLoggedInPatient(this.$store.state.user.id).then(response => {
             this.patient = response.data;
         }),
-        DoctorService.getSpecificDoctor(this.patient.doctorId).then(response => {
+        DoctorService.getSpecificDoctor(this.$store.state.user.id).then(response => {
             this.doctor = response.data;
         })
     },

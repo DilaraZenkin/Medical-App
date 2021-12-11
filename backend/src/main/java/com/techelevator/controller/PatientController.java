@@ -29,6 +29,11 @@ public class PatientController {
         return patientDao.getPatientByPatientId(patientId);
     }
 
+    @RequestMapping(path = "/patients/doctor/{doctorId}", method = RequestMethod.GET)
+    public List<Patient> getAllPatientsByDoctorId(@PathVariable Long doctorId) {
+        return patientDao.getPatientListByDoctorId(doctorId);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping( path = "/patients/register", method = RequestMethod.POST)
     public Patient addPatient(@RequestBody Patient patient) {

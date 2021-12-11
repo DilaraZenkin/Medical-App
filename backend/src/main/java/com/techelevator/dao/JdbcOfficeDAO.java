@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,7 +35,6 @@ public class JdbcOfficeDAO implements OfficeDAO {
         if (results.next()) return mapRowToOffice(results);
         else {
             throw new RuntimeException("officeId " + officeId + " was not found.");
-
         }
     }
 
@@ -81,6 +81,32 @@ public class JdbcOfficeDAO implements OfficeDAO {
     public String getOfficeAddressByDoctorId(Long doctorId) {
         String sql = "SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id = ?";
         return jdbcTemplate.queryForObject(sql, String.class, doctorId);
+    }
+
+    @Override
+    public List<Office> findAllOffices() {
+        List<Office> offices = new ArrayList<>();
+        String sql = "select * from offices";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Office office = mapRowToOffice(results);
+            offices.add(office);
+        }
+        return offices;
+    }
+
+    @Override
+    public Office getOfficeByDoctorId(Long doctorId) {
+        String sql = "SELECT o.office_id, o.office_address, o.office_phone_number, o.office_open, \n" +
+                "o.office_close, o.hourly_cost FROM offices o JOIN doctors USING (office_id) WHERE doctor_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);
+        if (results.next()) {
+            return mapRowToOffice(results);
+        }
+        else {
+            throw new RuntimeException("Could not retrieve office information.");
+        }
     }
 
     private Office mapRowToOffice(SqlRowSet rs) {

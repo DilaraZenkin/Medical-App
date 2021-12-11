@@ -30,13 +30,18 @@ public class DoctorController {
         return doctorDao.findAllDoctors();
     }
 
-    @RequestMapping(path = "/doctor/{doctorId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/doctors/{doctorId}", method = RequestMethod.GET)
     public Doctor getDoctorByDoctorId(@PathVariable Long doctorId) {
         return doctorDao.getDoctorByDoctorId(doctorId);
     }
 
-    @RequestMapping(path = "/doctors/{officeId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/doctors/office/{officeId}", method = RequestMethod.GET)
     public List<Doctor> findAllDoctorsAtOffice(@PathVariable Long officeId) {
         return doctorDao.getAllDoctorsAtOffice(officeId);
+    }
+
+    @RequestMapping(path = "/doctors/patient/{patientId}", method = RequestMethod.GET)
+    public Doctor getDoctorNameByPatientId(@PathVariable Long patientId) {
+        return doctorDao.doctorNameByPatientId(patientId);
     }
 }
