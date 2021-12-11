@@ -49,7 +49,6 @@
                             v-model="doctor.firstName"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
                              <v-text-field
                             id="lastName"
@@ -59,7 +58,6 @@
                             v-model="doctor.lastName"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
                             <v-menu
                               v-model="dateOfBirthMenu"
@@ -101,7 +99,6 @@
                             max="2"
                             required
                             outlined
-                            autofocus
                             ></v-text-field>
                            <v-card-actions>
                               <router-link :to="{ name: 'login' }">Have an account?</router-link>

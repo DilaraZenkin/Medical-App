@@ -6,10 +6,7 @@ export default {
         return axios.get(`/doctors`);
     },
 
-
-    addDoctor(doctor) {
-        return axios.post(`doctors/register`, doctor);
+    getSpecificDoctor(doctorId) {
+        return axios.get(`/doctors/specific`, doctorId)
     }
-
-
-    }
+}

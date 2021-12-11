@@ -11,4 +11,6 @@ public interface PatientDAO {
     Patient getPatientByPatientId(Long patientId);
 
     Patient register (Patient patient);
+
+    Patient updatePatientInformation (Patient patient);
 }
