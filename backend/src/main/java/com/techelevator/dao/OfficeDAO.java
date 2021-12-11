@@ -15,5 +15,6 @@ public interface OfficeDAO {
     List<Office> officeInfoByDoctorFullName(String firstNameSearch, String lastNameSearch);
     Office addNewOffice(Office office);
     String getOfficeAddressByDoctorId(Long doctorId);
+    List<Office> getAllOffices();
 }
 

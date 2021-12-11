@@ -127,3 +127,5 @@ WHERE doctor_id=5;
 
 SELECT * FROM doctors;
 
+SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id=5;
+

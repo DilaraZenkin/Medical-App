@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Doctor;
 import com.techelevator.model.Office;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -72,8 +74,8 @@ public class JdbcOfficeDAO implements OfficeDAO {
     @Override
     public Office updateOffice(Office office) {
 
-        String sql = "UPDATE offices SET office_address=?, office_phone_number=?, office_open=?, office_close=? WHERE office_id=?";
-        jdbcTemplate.update(sql, office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getOfficeId());
+        String sql = "UPDATE offices SET office_address=?, office_phone_number=?, office_open=?, office_close=?, hourly_cost=? WHERE office_id=?";
+        jdbcTemplate.update(sql, office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getOfficeId(), office.getHourlyCost());
         return office;
     }
 
@@ -95,6 +97,18 @@ public class JdbcOfficeDAO implements OfficeDAO {
     public String getOfficeAddressByDoctorId(Long doctorId) {
         String sql = "SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id = ?";
         return jdbcTemplate.queryForObject(sql, String.class, doctorId);
+    }
+
+    public List<Office> getAllOffices() {
+        List<Office> offices = new ArrayList<>();
+        String sql = "SELECT * FROM offices";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Office office = mapRowToOffice(results);
+            offices.add(office);
+        }
+        return offices;
     }
 
     private Office mapRowToOffice(SqlRowSet rs) {
