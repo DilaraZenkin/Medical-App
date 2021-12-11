@@ -34,5 +34,10 @@ public class PatientController {
     public Patient addPatient(@RequestBody Patient patient) {
         return patientDao.register(patient);
     }
+
+    @RequestMapping(path = "/patients/update", method = RequestMethod.PUT)
+    public Patient updatePatientInformation(@RequestBody Patient patient) {
+        return patientDao.updatePatientInformation(patient);
+    }
 }
 
