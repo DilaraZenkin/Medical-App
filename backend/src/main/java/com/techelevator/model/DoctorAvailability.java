@@ -1,54 +1,74 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class DoctorAvailability {
 
-    private long doctorAvailabilityId;
-    private long doctorOfficeId;
-    private String dayOfWeek;
-    private String startTime;
-    private String endTime;
-    private String availability;
+    private Long doctorAvailabilityId;
+    private Long doctorId;
+    private LocalDate dayOfWeek;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private boolean isAvailable;
 
-    public long getDoctorAvailabilityId() {
+    public DoctorAvailability() {
+    }
+
+    public DoctorAvailability(Long doctorAvailabilityId, Long doctorId, LocalDate dayOfWeek, LocalTime startTime, LocalTime endTime, boolean isAvailable) {
+        this.doctorAvailabilityId = doctorAvailabilityId;
+        this.doctorId = doctorId;
+        this.dayOfWeek = dayOfWeek;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isAvailable = isAvailable;
+    }
+
+    public Long getDoctorAvailabilityId() {
         return doctorAvailabilityId;
     }
-    public void setDoctorAvailabilityId(long doctorAvailabilityId) {
+
+    public void setDoctorAvailabilityId(Long doctorAvailabilityId) {
         this.doctorAvailabilityId = doctorAvailabilityId;
     }
 
-    public long getDoctorOfficeId() {
-        return doctorOfficeId;
-    }
-    public void setDoctorOfficeId(long doctorOfficeId) {
-        this.doctorOfficeId = doctorOfficeId;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public String getDayOfWeek() {
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public LocalDate getDayOfWeek() {
         return dayOfWeek;
     }
-    public void setDayOfWeek(String dayOfWeek) {
+
+    public void setDayOfWeek(LocalDate dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public String getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
-    public void setStartTime(String startTime) {
+
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
-    public void setEndTime(String endTime) {
+
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 
-    public String getAvailability() {
-        return availability;
+    public boolean isAvailable() {
+        return isAvailable;
     }
-    public void setAvailability(String availability) {
-        this.availability = availability;
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }

@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
-import RegisterChoice from '../views/RegisterChoice.vue'
+import Register from '../views/Register.vue'
 import store from '../store/index'
-import DoctorList from '../components/DoctorList.vue'
+import DoctorList from '../views/DoctorList.vue'
 import DoctorHome from '../views/DoctorHome.vue'
 import PatientHome from '../views/PatientHome.vue'
 import PatientRegistration from '../views/PatientRegistration.vue'
@@ -53,7 +53,7 @@ const router = new Router({
     {
       path: "/register",
       name: "register",
-      component: RegisterChoice,
+      component: Register,
       meta: {
         requiresAuth: false
       }
@@ -78,13 +78,12 @@ const router = new Router({
       path: "/doctors",
       name: "doctor-list",
       component: DoctorList,
-
       meta: {
         requiresAuth: false
       }
     },
     {
-      path: "/doctors/home",
+      path: "/doctor/:doctorId",
       name: "doctor-home",
       component: DoctorHome,
       meta: {
@@ -92,7 +91,7 @@ const router = new Router({
       }
     },
     {
-      path: "/patients/home",
+      path: "/patient/:patientId",
       name: "patient-home",
       component: PatientHome,
       meta: {

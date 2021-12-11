@@ -41,17 +41,10 @@
                               required
                               outlined
                            ></v-text-field>
-                            <!--<v-checkbox
-                            prepend-icon="people"
-                            id="is-doctor"
-                            class="form-control"
-                            v-model="user.isDoctor"
-                            label="Are you a doctor?"
-                            ></v-checkbox> -->
                             <v-text-field
                             id="firstName"
-                            prepend-icon="person"
-                            class="personInfo"
+                            prepend-icon="person_outline"
+                            class="doctorInfo"
                             label="First Name"
                             v-model="doctor.firstName"
                             required
@@ -60,29 +53,52 @@
                             ></v-text-field>
                              <v-text-field
                             id="lastName"
-                            prepend-icon="person"
-                            class="personInfo"
+                            prepend-icon="person_outline"
+                            class="doctorInfo"
                             label="Last Name"
                             v-model="doctor.lastName"
                             required
                             outlined
                             autofocus
                             ></v-text-field>
-                             <v-date-picker
-                            id="dateOfBirth"
-                            prepend-icon="calander"
-                            class="personInfo"
-                            v-model="doctor.dateOfBirth"
-                            required
-                            ></v-date-picker>
+                            <v-menu
+                              v-model="dateOfBirthMenu"
+                              :close-on-content-click="false"
+                              :nudge-right="40"
+                              transition="scale-transition"
+                              offset-y 
+                              max-width="290px"
+                              min-width="290px"
+                            >
+                              <template v-slot:activator="{ on }">
+                                <v-text-field
+                                  label="Date Of Birth"
+                                  prepend-icon="event"
+                                  readonly
+                                  v-on="on"
+                                  id="dateOfBirth"
+                                  class="doctorInfo"
+                                  v-model="doctor.dateOfBirth"
+                                  outlined
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                locale="en-in"
+                                v-model="doctor.dateOfBirth"
+                                no-title
+                                @input="dateOfBirthMenu = false"
+                                :max="today"
+                              ></v-date-picker>
+                            </v-menu>
                              <v-text-field
                             id="address"
-                            prepend-icon="map"
-                            class="personInfo"
-                            label="Address"
+                            prepend-icon="location_on"
+                            class="doctorInfo"
+                            label="Office Id"
                             v-model="doctor.officeId"
                             type="number"
-                            min="0"
+                            min="1"
+                            max="2"
                             required
                             outlined
                             autofocus
@@ -113,7 +129,7 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'user'
+        role: 'admin'
       },
       doctor: {
         doctorId: '',

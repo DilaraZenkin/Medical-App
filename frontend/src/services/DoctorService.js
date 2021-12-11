@@ -11,4 +11,5 @@ export default {
         return axios.post(`doctors/register`, doctor);
     }
 
-}
+
+    }

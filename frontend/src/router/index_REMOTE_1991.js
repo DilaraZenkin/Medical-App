@@ -78,7 +78,6 @@ const router = new Router({
       path: "/doctors",
       name: "doctor-list",
       component: DoctorList,
-
       meta: {
         requiresAuth: false
       }

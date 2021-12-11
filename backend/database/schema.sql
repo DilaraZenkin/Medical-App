@@ -43,6 +43,7 @@ CREATE TABLE offices (
 <<<<<<< HEAD
 =======
 
+SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id = 5;
 SELECT * FROM offices;
 >>>>>>> cb646d27976c522ebd759ebff9bc2d5c1fcd1a9e
 INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)
@@ -112,6 +113,16 @@ INSERT INTO appointments (appointment_id, office_id, patient_id, doctor_id, star
 VALUES (1, 1, 3, 5, '10:00 am', '10:30 am', '10-12-2021');
 INSERT INTO appointments (appointment_id, office_id, patient_id, doctor_id, start_time, end_time, appointment_date)
 VALUES (2, 2, 4, 6, '12:00 pm', '12:30 pm', '11-12-2021');
+
+CREATE TABLE doctor_availabilities (
+        doctor_availability_id serial PRIMARY KEY,
+        doctor_id int,
+        day_of_week DATE,
+        start_time time,
+        end_time time,
+        availability boolean,
+        CONSTRAINT fk_doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors (doctor_id)
+);
 
 COMMIT TRANSACTION;
 >>>>>>> cb646d27976c522ebd759ebff9bc2d5c1fcd1a9e

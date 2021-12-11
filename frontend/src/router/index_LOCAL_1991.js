@@ -3,13 +3,15 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
-import RegisterChoice from '../views/RegisterChoice.vue'
+import Register from '../views/Register.vue'
+import Patient from '../views/Patient.vue'
+import Doctor from '../views/Doctor.vue'
 import store from '../store/index'
-import DoctorList from '../components/DoctorList.vue'
 import DoctorHome from '../views/DoctorHome.vue'
 import PatientHome from '../views/PatientHome.vue'
 import PatientRegistration from '../views/PatientRegistration.vue'
 import DoctorRegistration from '../views/DoctorRegistration.vue'
+import DoctorList from '../views/DoctorList.vue'
 
 Vue.use(Router)
 
@@ -53,10 +55,16 @@ const router = new Router({
     {
       path: "/register",
       name: "register",
-      component: RegisterChoice,
+      component: Register,
       meta: {
         requiresAuth: false
       }
+    },
+    {
+
+      path: "/doctor",
+      name: "doctor",
+      component: Doctor,
     },
     {
       path: "/register/doctor",
@@ -84,7 +92,7 @@ const router = new Router({
       }
     },
     {
-      path: "/doctors/home",
+      path: "/doctor/:doctorId",
       name: "doctor-home",
       component: DoctorHome,
       meta: {
@@ -92,7 +100,15 @@ const router = new Router({
       }
     },
     {
-      path: "/patients/home",
+      path: "/patient",
+      name: "patient",
+      component: Patient,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/patient/:patientId",
       name: "patient-home",
       component: PatientHome,
       meta: {

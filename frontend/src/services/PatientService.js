@@ -8,5 +8,9 @@ export default {
 
     addPatient(patient) {
         return axios.post(`/patients/register`, patient);
+    },
+
+    getLoggedInPatient(patientId) {
+        return axios.get(`/patients/${patientId}`);
     }
 }
