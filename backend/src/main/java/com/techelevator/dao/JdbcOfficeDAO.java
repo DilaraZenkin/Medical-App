@@ -78,12 +78,6 @@ public class JdbcOfficeDAO implements OfficeDAO {
     }
 
     @Override
-    public String getOfficeAddressByDoctorId(Long doctorId) {
-        String sql = "SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id = ?";
-        return jdbcTemplate.queryForObject(sql, String.class, doctorId);
-    }
-
-    @Override
     public List<Office> findAllOffices() {
         List<Office> offices = new ArrayList<>();
         String sql = "select * from offices";

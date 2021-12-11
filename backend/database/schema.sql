@@ -81,9 +81,9 @@ CREATE TABLE appointments (
         office_id int,
         patient_id int,
         doctor_id int,
+        appointment_date DATE,
         start_time time,
         end_time time,
-        appointment_date DATE,
         CONSTRAINT fk_appointment_patients FOREIGN KEY (patient_id) REFERENCES users (user_id),
         CONSTRAINT fk_appointment_offices FOREIGN KEY (office_id) REFERENCES offices (office_id),
         CONSTRAINT fk_appointment_doctors FOREIGN KEY (doctor_id) REFERENCES users (user_id)
