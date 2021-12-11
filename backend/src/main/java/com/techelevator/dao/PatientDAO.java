@@ -10,6 +10,8 @@ public interface PatientDAO {
 
     Patient getPatientByPatientId(Long patientId);
 
+    List<Patient> getPatientListByDoctorId(Long doctorId);
+
     Patient register (Patient patient);
 
     Patient updatePatientInformation (Patient patient);
