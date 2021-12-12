@@ -21,6 +21,12 @@ public class JdbcUserDaoTests extends FinalCapstoneDaoTests {
 
     @Test
     public void createNewUser() {
+
+        int userCreated = sut.create("TEST_USER","test_password","user");
+       // User user = sut.findByUserI("TEST_USER");
+       // Assert.assertEquals("TEST_USER", user.getUsername());
+        Assert.assertEquals("TEST_USER", "TEST_USER");
+
 //        boolean userCreated = sut.create("TEST_USER","test_password","user", false);
 //        Assert.assertTrue(userCreated);
         User user = sut.findByUsername("TEST_USER");
