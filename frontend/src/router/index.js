@@ -11,6 +11,8 @@ import PatientHome from '../views/PatientHome.vue'
 import PatientRegistration from '../views/PatientRegistration.vue'
 import DoctorRegistration from '../views/DoctorRegistration.vue'
 import PatientInformation from '../components/PatientInformation.vue'
+import PatientAppointment from '../components/PatientAppointment.vue'
+import Locations from '../components/Locations.vue'
 
 Vue.use(Router)
 
@@ -76,12 +78,12 @@ const router = new Router({
       }
     },
     {
-      path: "/doctors",
+      path: "/patient/doctors",
       name: "doctor-list",
       component: DoctorList,
 
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -93,7 +95,7 @@ const router = new Router({
       }
     },
     {
-      path: "/patients/home",
+      path: "/patient",
       name: "patient-home",
       component: PatientHome,
       meta: {
@@ -101,13 +103,29 @@ const router = new Router({
       }
     },
     {
-      path: "/patients/information",
+      path: "/patient/information",
       name: "patient-information",
       component: PatientInformation,
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: "/patient/appointments",
+      name: "patient-appointments",
+      component: PatientAppointment,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/patient/locations",
+      name: "locations",
+      component: Locations,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
 

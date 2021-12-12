@@ -5,7 +5,7 @@
             <v-layout justify-center align-center>
                <v-flex xs12 sm8 md4>
                   <v-card>
-                     <v-toolbar dark color="primary">
+                     <v-toolbar dark color="#1A5276">
                         <v-toolbar-title>Login User</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
@@ -31,7 +31,7 @@
                            <v-card-actions>
                               <router-link :to="{ name: 'register' }">Need an account?</router-link>
                               <v-spacer></v-spacer>
-                              <v-btn color="primary" type="submit">Login</v-btn>
+                              <v-btn color="#1A5276" dark type="submit">Login</v-btn>
                           </v-card-actions>
                         </v-form>
                      </v-card-text>
@@ -69,7 +69,7 @@ export default {
             if (response.data.user.authorities[0].name == "ROLE_ADMIN") {
               this.$router.push("/doctors/home");
             } else {
-              this.$router.push("/patients/home");
+              this.$router.push("/patient/information");
             }
           }
         })
