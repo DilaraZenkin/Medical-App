@@ -51,7 +51,8 @@ export default {
         address: ''
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.'
+      registrationErrorMsg: 'There were problems registering this user.',
+      dateOfBirthMenu: false
     };
   },
   methods: {
@@ -87,6 +88,16 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
+  },
+  computed: {
+    today() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      return yyyy + '-' + mm + '-' + dd;
+    },
+ 
   },
   changeDoctorStatus() {
     this.user.isDoctor = false;
