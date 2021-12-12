@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Office;
+import com.techelevator.model.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -21,6 +22,19 @@ public class JdbcOfficeDAO implements OfficeDAO {
     public JdbcOfficeDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    @Override
+    public List<Office> findAllOffices() {
+        List<Office> offices = new ArrayList<>();
+        String sql = "select * from offices";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Office office = mapRowToOffice(results);
+            offices.add(office);
+        }
+        return offices;
+    }
+
 
     @Override
     public int findIdByOfficeAddress(String address) {
