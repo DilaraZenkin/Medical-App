@@ -8,5 +8,9 @@ export default {
 
     getSpecificDoctor(doctorId) {
         return axios.get(`/doctors/specific`, doctorId)
+    },
+
+    getDoctorByPatient(patientId) {
+        return axios.get(`/doctors/patient/${patientId}`)
     }
 }

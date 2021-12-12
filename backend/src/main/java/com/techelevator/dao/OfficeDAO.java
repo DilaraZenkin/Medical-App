@@ -12,6 +12,8 @@ public interface OfficeDAO {
     Office addNewOffice(Office office);
     Office updateOffice (Office office);
     String getOfficeAddressByDoctorId(Long doctorId);
+    List<Office> findAllOffices();
+    Office getOfficeByDoctorId(Long doctorId);
     List<Office> officeInfoByDoctorFirstName();
     List<Office> officeInfoByDoctorLastName();
     List<Office> officeInfoByDoctorFullName();

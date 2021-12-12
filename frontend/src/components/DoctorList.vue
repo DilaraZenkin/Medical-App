@@ -51,9 +51,9 @@
                 </v-chip-group>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="#1A5276" dark @click="reserve">
+               <v-btn color="#1A5276" dark @click="reserve">
                   Book Appointment
-                </v-btn>
+                </v-btn> 
               </v-card-actions>
             </v-card>
           </v-flex>
