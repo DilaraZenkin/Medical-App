@@ -2,7 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.AppointmentDao;
 import com.techelevator.model.Appointment;
-import com.techelevator.model.TestAppointment;
+import com.techelevator.model.AppointmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class AppointmentController {
     }
 
     @RequestMapping(path = "/appointments/{appointmentId}", method = RequestMethod.GET)
-    public Appointment getSpecificAppointment(@PathVariable Long appointmentId) {
+    public AppointmentDTO getSpecificAppointment(@PathVariable Long appointmentId) {
         return appointmentDao.getAppointmentByAppointmentId(appointmentId);
     }
 
@@ -61,7 +61,7 @@ public class AppointmentController {
 
 
     @RequestMapping(path = "/appointments/test/{appointmentId}", method = RequestMethod.GET)
-    public TestAppointment testFormat(@PathVariable Long appointmentId) {
+    public AppointmentDTO testFormat(@PathVariable Long appointmentId) {
         return appointmentDao.formatTest(appointmentId);
     }
 

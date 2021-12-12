@@ -3,8 +3,9 @@ package com.techelevator.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class TestAppointment {
+public class AppointmentDTO {
 
+    private Long appointmentId;
     private String patientFirstName;
     private String patientLastName;
     private String officeAddress;
@@ -13,10 +14,11 @@ public class TestAppointment {
     private String doctorFirstName;
     private String doctorLastName;
 
-    public TestAppointment() {
+    public AppointmentDTO() {
     }
 
-    public TestAppointment(String patientFirstName, String patientLastName, String officeAddress, LocalDate appointmentDate, LocalTime startTime, String doctorFirstName, String doctorLastName) {
+    public AppointmentDTO(Long appointmentId, String patientFirstName, String patientLastName, String officeAddress, LocalDate appointmentDate, LocalTime startTime, String doctorFirstName, String doctorLastName) {
+        this.appointmentId = appointmentId;
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.officeAddress = officeAddress;
@@ -24,6 +26,14 @@ public class TestAppointment {
         this.startTime = startTime;
         this.doctorFirstName = doctorFirstName;
         this.doctorLastName = doctorLastName;
+    }
+
+    public Long getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Long appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public String getPatientFirstName() {

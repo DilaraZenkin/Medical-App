@@ -1,7 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Appointment;
-import com.techelevator.model.TestAppointment;
+import com.techelevator.model.AppointmentDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -19,11 +19,11 @@ public class JdbcAppointmentDao implements AppointmentDao{
     }
 
     @Override
-    public Appointment getAppointmentByAppointmentId(Long appointmentId) {
+    public AppointmentDTO getAppointmentByAppointmentId(Long appointmentId) {
         String sql = "SELECT * FROM appointments WHERE appointment_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, appointmentId);
         if (results.next()) {
-            return mapRowToAppointment(results);
+            return mapRowToAppointmentDTO(results);
         } else {
             throw new RuntimeException("Appointment with the Id of " + appointmentId + " was not found.");
         }
@@ -106,12 +106,12 @@ public class JdbcAppointmentDao implements AppointmentDao{
     }
 
     @Override
-    public TestAppointment formatTest(Long appointmentId) {
+    public AppointmentDTO formatTest(Long appointmentId) {
         String sql = "SELECT p.first_name AS patient_first, p.last_name AS patient_last, o.office_address, a.appointment_date, a.start_time, d.first_name AS doctor_first, d.last_name AS doctor_last FROM appointments a\n" +
                 "JOIN patients p USING (patient_id) JOIN offices o USING (office_id) JOIN doctors d ON d.doctor_id = a.doctor_id WHERE a.appointment_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, appointmentId);
         if (results.next()) {
-            return mapRowToTestAppointment(results);
+            return mapRowToAppointmentDTO(results);
         } else {
             throw new RuntimeException("Appointment with the Id of " + appointmentId + " was not found.");
         }
@@ -129,8 +129,8 @@ public class JdbcAppointmentDao implements AppointmentDao{
         return appointment;
     }
 
-    private TestAppointment mapRowToTestAppointment(SqlRowSet rs) {
-        TestAppointment test = new TestAppointment();
+    private AppointmentDTO mapRowToAppointmentDTO(SqlRowSet rs) {
+        AppointmentDTO test = new AppointmentDTO();
 
         test.setPatientFirstName(rs.getString("patient_first"));
         test.setPatientLastName(rs.getString("patient_last"));

@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS patients;
 DROP TABLE IF EXISTS doctor_availabilities;
 DROP TABLE IF EXISTS doctors;
 DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS offices;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_user_id;
@@ -33,6 +34,7 @@ INSERT INTO users (username,password_hash,role) VALUES ('dr2','$2a$08$UkVvwpULis
 
 CREATE TABLE offices (
         office_id serial PRIMARY KEY,
+        office_name varchar (60),
         office_address varchar (500),
         office_phone_number varchar (15),
         office_open time,
@@ -40,10 +42,10 @@ CREATE TABLE offices (
         hourly_cost int
 );
 
-INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)
-VALUES (1, '769 East Boulevard Wexford PA 16005', '778-996-4345', '10:00 am', '05:00 pm', 120);
-INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)
-VALUES (2, '768 East Boulevard Wexford PA 16005', '778-996-4354', '09:00 am', '04:00 pm', 100);
+INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)
+VALUES (1, 'St. George Hospital', '769 East Boulevard Wexford PA 16005', '778-996-4345', '10:00 am', '05:00 pm', 120);
+INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)
+VALUES (2, 'Mayo Clinic', '768 East Boulevard Wexford PA 16005', '778-996-4354', '09:00 am', '04:00 pm', 100);
 
 CREATE TABLE doctors (
         doctor_id int PRIMARY KEY,
@@ -103,5 +105,25 @@ CREATE TABLE doctor_availabilities (
         availability boolean,
         CONSTRAINT fk_doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors (doctor_id)
 );
+
+CREATE TABLE reviews (
+        review_id serial PRIMARY KEY,
+        title varchar(50),
+        score int, 
+        patient_id int, 
+        doctor_id int, 
+        office_id int, 
+        review_body varchar(1000),
+        response varchar(1000),
+        CONSTRAINT patient FOREIGN KEY (patient_id) REFERENCES users (user_id),
+        CONSTRAINT doctor FOREIGN KEY (doctor_id) REFERENCES users (user_id),
+        CONSTRAINT office FOREIGN KEY (office_id) REFERENCES offices (office_id),
+        CONSTRAINT score CHECK (score BETWEEN 1 AND 5)
+);
+
+INSERT INTO reviews (review_id, title, score, patient_id, doctor_id, office_id, review_body, response)
+VALUES (1, 'Test', 4, 3, 5, 1, 'It was a good visit', 'Thank you');
+INSERT INTO reviews (review_id, title, score, patient_id, doctor_id, office_id, review_body, response)
+VALUES (2, 'Test', 2, 4, 6, 2, 'It was a bad visit', 'We are sorry');
 
 COMMIT TRANSACTION;

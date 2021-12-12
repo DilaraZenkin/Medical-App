@@ -27,12 +27,9 @@ public class OfficeController {
         return officeDao.getOfficeById((long) id);
     }
 
-    @RequestMapping(path = "/offices/(id)", method = RequestMethod.PUT)
-    public Office updateOffice(@Valid @RequestBody OfficeDTO officeDTO,
-                               @PathVariable long officeId) {
-        Office officeToUpdate = new Office(officeDTO, officeId);
-        officeDao.updateOffice(officeToUpdate);
-        return officeDao.getOfficeById(officeId);
+    @RequestMapping(path = "/offices/update/", method = RequestMethod.PUT)
+    public Office updateOffice(@RequestBody Office office) {
+        return officeDao.updateOffice(office);
     }
 
     @RequestMapping(path = "/offices/create", method = RequestMethod.POST)

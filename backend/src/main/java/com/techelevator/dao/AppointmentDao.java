@@ -1,13 +1,13 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Appointment;
-import com.techelevator.model.TestAppointment;
+import com.techelevator.model.AppointmentDTO;
 
 import java.util.List;
 
 public interface AppointmentDao {
 
-    Appointment getAppointmentByAppointmentId(Long appointmentId);
+    AppointmentDTO getAppointmentByAppointmentId(Long appointmentId);
 
     List<Appointment> getAppointmentListByPatientId(Long patientId);
 
@@ -23,5 +23,5 @@ public interface AppointmentDao {
 
     Appointment updateAppointment(Appointment appointment);
 
-    TestAppointment formatTest(Long appointmentId);
+    AppointmentDTO formatTest(Long appointmentId);
 }
