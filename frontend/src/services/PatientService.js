@@ -12,5 +12,9 @@ export default {
 
     getLoggedInPatient(patientId) {
         return axios.get(`/patients/${patientId}`);
+    },
+
+    updatePatientInformation(patient) {
+        return axios.put(`/patients/update`,patient)
     }
 }

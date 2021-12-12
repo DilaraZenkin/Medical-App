@@ -65,4 +65,8 @@ public class OfficeController {
         return officeDao.getOfficeAddressByDoctorId(doctorId);
     }
 
+    @RequestMapping(path = "/offices/specific/{doctorId}", method = RequestMethod.GET)
+    public Office getOfficeByDoctorId(@PathVariable Long doctorId) {
+        return officeDao.getOfficeByDoctorId(doctorId);
+    }
 }
