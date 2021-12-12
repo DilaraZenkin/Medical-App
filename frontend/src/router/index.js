@@ -10,7 +10,8 @@ import DoctorHome from '../views/DoctorHome.vue'
 import PatientHome from '../views/PatientHome.vue'
 import PatientRegistration from '../views/PatientRegistration.vue'
 import DoctorRegistration from '../views/DoctorRegistration.vue'
-
+import PatientInformation from '../components/PatientInformation.vue'
+import OfficeforEachDoctor from '../components/OfficeforEachDoctor'
 Vue.use(Router)
 
 /**
@@ -97,6 +98,26 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/patients/information",
+      name: "patient-information",
+      component: PatientInformation,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
+      {
+        path: "/doctors/office",
+        name: "doctor-office",
+        component: OfficeforEachDoctor,
+        meta: {
+          requiresAuth: true
+
+      }
+    
+      
     }
   ]
 })

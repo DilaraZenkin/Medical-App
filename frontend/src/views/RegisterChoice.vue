@@ -16,6 +16,9 @@
                               <v-spacer></v-spacer>
                               <v-btn color="primary" :to="{name: 'doctor-register'}">Doctor Account</v-btn>
                           </v-card-actions>
+                          <v-layout justify-center>
+                            <router-link :to="{ name: 'login' }">Have an account?</router-link>
+                          </v-layout>
                         </v-form>
                      </v-card-text>
                   </v-card>
