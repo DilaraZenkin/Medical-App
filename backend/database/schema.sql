@@ -49,17 +49,17 @@ VALUES (2, 'Mayo Clinic', '768 East Boulevard Wexford PA 16005', '778-996-4354',
 
 CREATE TABLE doctors (
         doctor_id int PRIMARY KEY,
-        first_name varchar(50) NOT NULL,
-        last_name varchar(100) NOT NULL,
+        doctor_first varchar(50) NOT NULL,
+        doctor_last varchar(100) NOT NULL,
         date_of_birth DATE,
         office_id int,
         CONSTRAINT fk_doctors FOREIGN KEY (office_id) REFERENCES offices (office_id),
         CONSTRAINT doctor FOREIGN KEY (doctor_id) REFERENCES users (user_id)
 );
 
-insert into doctors (doctor_id, first_name, last_name, date_of_birth, office_id)
+insert into doctors (doctor_id, doctor_first, doctor_last, date_of_birth, office_id)
 values (5,'Doc', 'Scalpel', '04-26-1972', 1);
-insert into doctors (doctor_id, first_name, last_name, date_of_birth, office_id)
+insert into doctors (doctor_id, doctor_first, doctor_last, date_of_birth, office_id)
 values (6,'Horatio', 'Crunch', '07-04-1958', 2);
 
 CREATE TABLE patients (
