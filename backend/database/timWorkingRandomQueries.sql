@@ -12,9 +12,6 @@ WHERE first_name ILIKE 'S%';
 SELECT o.office_address, p.first_name AS patient_first_name, p.last_name AS patient_last_name, d.first_name AS doctor_first_name, d.last_name AS doctor_last_name, a.start_time, a.end_time, a.appointment_date
 FROM appointments a JOIN patients p ON (p.patient_id = a.patient_id) 
 JOIN doctors d ON (d.doctor_id = a.doctor_id)
-<<<<<<< HEAD
-JOIN offices o ON (o.office_id = a.office_id);  
-=======
 JOIN offices o ON (o.office_id = a.office_id);  
 
 UPDATE patients SET first_name = 'Test2',
@@ -23,4 +20,3 @@ date_of_birth = '1999-01-01',
 address = '555 West East Rd. Somewhere PA, 11223',
 doctor_id = 6
 WHERE patient_id = 7;
->>>>>>> b7a2ada8d8cd68651d8140daf4bc51c6d969d874
