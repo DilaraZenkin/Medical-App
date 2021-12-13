@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Office;
+import com.techelevator.model.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -21,6 +22,8 @@ public class JdbcOfficeDAO implements OfficeDAO {
     public JdbcOfficeDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
 
     @Override
     public int findIdByOfficeAddress(String address) {
@@ -112,7 +115,6 @@ public class JdbcOfficeDAO implements OfficeDAO {
         office.setOfficeOpen(rs.getTime("office_open").toLocalTime());
         office.setOfficeClose(rs.getTime("office_close").toLocalTime());
         office.setHourlyCost(rs.getLong("hourly_cost"));
-        // office.setActivated(true);
         return office;
     }
 
