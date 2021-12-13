@@ -11,13 +11,13 @@ export default {
     },
 
     getSpecificOffice(doctorId) {
-        return axios.get(`/offices/${doctorId}`)
+        return axios.get(`/offices/specific/${doctorId}`)
     },
 
 
     addOffice(office) {
 
-        return axios.post(`/offices/register`, office);
+        return axios.post(`/offices/create`, office);
 
     }
 

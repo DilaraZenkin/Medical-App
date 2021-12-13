@@ -1,22 +1,14 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.OfficeDAO;
-import com.techelevator.model.Doctor;
 import com.techelevator.model.Office;
-
-
-
 import com.techelevator.model.OfficeDTO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
-import java.util.List;
-
 
 @RestController
 @CrossOrigin
@@ -29,20 +21,8 @@ public class OfficeController {
         this.officeDao = officeDao;
 
     }
-    @RequestMapping(path = "/offices", method = RequestMethod.GET)
-    public List<Office> getAllOffices() {
-        return officeDao.getAllOffices();
-    }
 
-    @RequestMapping(path = "/offices/{doctorId}", method = RequestMethod.GET)
-
-    public Office get(@PathVariable long doctorId) {
-        return officeDao.getOfficeById((long) doctorId);
-    }
-
-
-    @RequestMapping(path = "/office/{id}", method = RequestMethod.GET)
-
+    @RequestMapping(path = "/offices/{id}", method = RequestMethod.GET)
     public Office get(@PathVariable int id) {
         return officeDao.getOfficeById((long) id);
     }
