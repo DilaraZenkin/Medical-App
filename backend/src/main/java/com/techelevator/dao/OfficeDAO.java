@@ -11,7 +11,6 @@ public interface OfficeDAO {
     long create(String officeAddress, String officePhonenumber, String officeOpen, String officeClose, long hourlyCost);
     Office addNewOffice(Office office);
     Office updateOffice (Office office);
-    String getOfficeAddressByDoctorId(Long doctorId);
     List<Office> findAllOffices();
     Office getOfficeByDoctorId(Long doctorId);
     List<Office> officeInfoByDoctorFirstName();

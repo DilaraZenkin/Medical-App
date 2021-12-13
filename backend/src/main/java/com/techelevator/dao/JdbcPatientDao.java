@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Patient;
+import com.techelevator.model.PatientDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
@@ -35,11 +36,12 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
-    public Patient getPatientByPatientId(Long patientId) {
-        String sql = "SELECT * FROM patients WHERE patient_id = ?;";
+    public PatientDTO getPatientByPatientId(Long patientId) {
+        String sql = "SELECT patient_id, first_name, last_name, p.date_of_birth, address, doctor_first, doctor_last\n" +
+                "FROM patients p FULL OUTER JOIN doctors d USING (doctor_id) WHERE p.patient_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
         if (results.next()) {
-            return mapRowToPatient(results);
+            return mapRowToPatientDTO(results);
         } else {
             throw new RuntimeException("PatientId " + patientId + " was not found.");
         }
@@ -69,13 +71,13 @@ public class JdbcPatientDao implements PatientDAO{
     }
 
     @Override
-    public Patient updatePatientInformation(Patient patient) {
-        String sql = "UPDATE patients SET first_name = ?,\n" +
-                     "last_name = ?, date_of_birth = ?,\n" +
-                     "address = ?, doctor_id = ?\n" +
+    public PatientDTO updatePatientInformation(PatientDTO patient) {
+        String sql = "UPDATE patients SET first_name = ?, last_name = ?, date_of_birth = ?,\n" +
+                     "address = ?, doctor_id = (SELECT doctor_id FROM doctors WHERE doctor_last ILIKE ?) \n" +
                      "WHERE patient_id = ?;";
-        jdbcTemplate.update(sql, patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress(), patient.getDoctorId(), patient.getPatientId());
-        return patient;
+        jdbcTemplate.update(sql, patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress(),
+                "'%" + patient.getDoctorLastName() + "%'", patient.getPatientId());
+        return getPatientByPatientId(patient.getPatientId());
     }
 
     public Patient mapRowToPatient(SqlRowSet rs) {
@@ -87,5 +89,17 @@ public class JdbcPatientDao implements PatientDAO{
         patient.setPatientAddress(rs.getString("address"));
         patient.setDoctorId(rs.getLong("doctor_id"));
         return patient;
+    }
+
+    public PatientDTO mapRowToPatientDTO(SqlRowSet rs) {
+        PatientDTO patientDTO = new PatientDTO();
+        patientDTO.setPatientId(rs.getLong("patient_id"));
+        patientDTO.setFirstName(rs.getString("first_name"));
+        patientDTO.setLastName(rs.getString("last_name"));
+        patientDTO.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
+        patientDTO.setPatientAddress(rs.getString("address"));
+        patientDTO.setDoctorFirstName(rs.getString("doctor_first"));
+        patientDTO.setDoctorLastName(rs.getString("doctor_last"));
+        return patientDTO;
     }
 }

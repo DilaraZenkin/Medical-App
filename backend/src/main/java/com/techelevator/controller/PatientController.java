@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.PatientDAO;
 import com.techelevator.model.Patient;
+import com.techelevator.model.PatientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class PatientController {
     }
 
     @RequestMapping(path = "/patients/{patientId}", method = RequestMethod.GET)
-    public Patient getPatientByPatientId(@PathVariable Long patientId) {
+    public PatientDTO getPatientByPatientId(@PathVariable Long patientId) {
         return patientDao.getPatientByPatientId(patientId);
     }
 
@@ -41,7 +42,7 @@ public class PatientController {
     }
 
     @RequestMapping(path = "/patients/update", method = RequestMethod.PUT)
-    public Patient updatePatientInformation(@RequestBody Patient patient) {
+    public PatientDTO updatePatientInformation(@RequestBody PatientDTO patient) {
         return patientDao.updatePatientInformation(patient);
     }
 }

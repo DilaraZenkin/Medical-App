@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Patient;
+import com.techelevator.model.PatientDTO;
 
 import java.util.List;
 
@@ -8,11 +9,11 @@ public interface PatientDAO {
 
     List<Patient> findAllPatients();
 
-    Patient getPatientByPatientId(Long patientId);
+    PatientDTO getPatientByPatientId(Long patientId);
 
     List<Patient> getPatientListByDoctorId(Long doctorId);
 
     Patient register (Patient patient);
 
-    Patient updatePatientInformation (Patient patient);
+    PatientDTO updatePatientInformation (PatientDTO patient);
 }

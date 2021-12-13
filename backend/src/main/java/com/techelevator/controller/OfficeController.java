@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -26,12 +27,9 @@ public class OfficeController {
         return officeDao.getOfficeById((long) id);
     }
 
-    @RequestMapping(path = "/offices/(id)", method = RequestMethod.PUT)
-    public Office updateOffice(@Valid @RequestBody OfficeDTO officeDTO,
-                               @PathVariable long officeId) {
-        Office officeToUpdate = new Office(officeDTO, officeId);
-        officeDao.updateOffice(officeToUpdate);
-        return officeDao.getOfficeById(officeId);
+    @RequestMapping(path = "/offices/update/", method = RequestMethod.PUT)
+    public Office updateOffice(@RequestBody Office office) {
+        return officeDao.updateOffice(office);
     }
 
     @RequestMapping(path = "/offices/create", method = RequestMethod.POST)
@@ -39,13 +37,13 @@ public class OfficeController {
         return officeDao.addNewOffice(office);
     }
 
-    @RequestMapping(path = "/offices/address/{doctorId}", method = RequestMethod.GET)
-    public String getOfficeAddressByDoctorId(@PathVariable Long doctorId) {
-        return officeDao.getOfficeAddressByDoctorId(doctorId);
-    }
-
     @RequestMapping(path = "/offices/specific/{doctorId}", method = RequestMethod.GET)
     public Office getOfficeByDoctorId(@PathVariable Long doctorId) {
         return officeDao.getOfficeByDoctorId(doctorId);
+    }
+
+    @RequestMapping(path = "/offices", method = RequestMethod.GET)
+    public List<Office> findAllOffices() {
+        return officeDao.findAllOffices();
     }
 }
