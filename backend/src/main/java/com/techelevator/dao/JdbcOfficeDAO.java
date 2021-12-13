@@ -22,18 +22,7 @@ public class JdbcOfficeDAO implements OfficeDAO {
     public JdbcOfficeDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    @Override
-    public List<Office> findAllOffices() {
-        List<Office> offices = new ArrayList<>();
-        String sql = "select * from offices";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
-            Office office = mapRowToOffice(results);
-            offices.add(office);
-        }
-        return offices;
-    }
 
 
     @Override
@@ -126,7 +115,6 @@ public class JdbcOfficeDAO implements OfficeDAO {
         office.setOfficeOpen(rs.getTime("office_open").toLocalTime());
         office.setOfficeClose(rs.getTime("office_close").toLocalTime());
         office.setHourlyCost(rs.getLong("hourly_cost"));
-        // office.setActivated(true);
         return office;
     }
 
