@@ -73,10 +73,10 @@ public class JdbcPatientDao implements PatientDAO{
     @Override
     public PatientDTO updatePatientInformation(PatientDTO patient) {
         String sql = "UPDATE patients SET first_name = ?, last_name = ?, date_of_birth = ?,\n" +
-                     "address = ?, doctor_id = (SELECT doctor_id FROM doctors WHERE doctor_last ILIKE ?) \n" +
+                     "address = ?, doctor_id = (SELECT doctor_id FROM doctors WHERE doctor_first ILIKE ?) \n" +
                      "WHERE patient_id = ?;";
         jdbcTemplate.update(sql, patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress(),
-                "'%" + patient.getDoctorLastName() + "%'", patient.getPatientId());
+                "%" + patient.getDoctorFirstName() + "%", patient.getPatientId());
         return getPatientByPatientId(patient.getPatientId());
     }
 
