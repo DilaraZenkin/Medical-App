@@ -54,7 +54,7 @@
 export default {
   name: "App",
   data: () => ({
-    links: ["Dashboard", "Messages", "Profile", "Updates"],
+    links: ["Dashboard", "Messages", "Profile",  "Updates"],
   }),
   computed: {
     menuItems() {
@@ -73,9 +73,27 @@ export default {
             },
             { id: "doctor-list", title: "Doctors", icon: "medication" },
             { id: "locations", title: "Locations", icon: "business_center" },
+
+
           ];
         } else {
-          return [];
+          return [
+              {
+              id: "doctor-appointments",
+              title: "Appointments",
+              icon: "tour",
+            },
+            {
+              id: "patient-information",
+              title: "Set Availability",
+              icon: "person",
+            },
+                        {
+              id: "doctor-office",
+              title: "View Office Information",
+              icon: "business_center",
+            },
+          ];
         }
       }
 

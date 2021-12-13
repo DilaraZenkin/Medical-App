@@ -13,7 +13,8 @@ import DoctorRegistration from '../views/DoctorRegistration.vue'
 import PatientInformation from '../components/PatientInformation.vue'
 import PatientAppointment from '../components/PatientAppointment.vue'
 import Locations from '../components/Locations.vue'
-
+import OfficeforEachDoctor from '../components/OfficeforEachDoctor.vue'
+import DoctorAppointment from '../components/DoctorAppointment.vue'
 Vue.use(Router)
 
 /**
@@ -103,18 +104,13 @@ const router = new Router({
       }
     },
     {
-<<<<<<< HEAD
-      path: "/patients/information",
-=======
       path: "/patient/information",
->>>>>>> b7a2ada8d8cd68651d8140daf4bc51c6d969d874
       name: "patient-information",
       component: PatientInformation,
       meta: {
         requiresAuth: true
       }
     },
-<<<<<<< HEAD
 
       {
         path: "/doctors/office",
@@ -126,8 +122,7 @@ const router = new Router({
       }
     
       
-    }
-=======
+    }, 
     {
       path: "/patient/appointments",
       name: "patient-appointments",
@@ -144,7 +139,14 @@ const router = new Router({
         requiresAuth: true
       }
     },
->>>>>>> b7a2ada8d8cd68651d8140daf4bc51c6d969d874
+    {
+      path: "/doctor/appointments",
+      name: "doctor-appointments",
+      component: DoctorAppointment,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
 

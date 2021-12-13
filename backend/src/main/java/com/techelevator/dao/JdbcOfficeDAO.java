@@ -99,6 +99,11 @@ public class JdbcOfficeDAO implements OfficeDAO {
     }
 
     @Override
+    public List<Office> getAllOffices() {
+        return null;
+    }
+
+    @Override
     public List<Office> findAllOffices() {
         List<Office> offices = new ArrayList<>();
         String sql = "select * from offices";
@@ -122,6 +127,21 @@ public class JdbcOfficeDAO implements OfficeDAO {
         else {
             throw new RuntimeException("Could not retrieve office information.");
         }
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorFirstName() {
+        return null;
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorLastName() {
+        return null;
+    }
+
+    @Override
+    public List<Office> officeInfoByDoctorFullName() {
+        return null;
     }
 
     private Office mapRowToOffice(SqlRowSet rs) {
