@@ -12,7 +12,5 @@ public interface DoctorDAO {
 
     List<Doctor> getAllDoctorsAtOffice(Long officeId);
 
-    Doctor doctorNameByPatientId(Long patientId);
-
     Doctor register (Doctor doctor);
 }
