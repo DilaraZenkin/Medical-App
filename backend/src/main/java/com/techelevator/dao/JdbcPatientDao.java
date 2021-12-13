@@ -76,7 +76,7 @@ public class JdbcPatientDao implements PatientDAO{
                      "address = ?, doctor_id = (SELECT doctor_id FROM doctors WHERE doctor_last ILIKE ?) \n" +
                      "WHERE patient_id = ?;";
         jdbcTemplate.update(sql, patient.getFirstName(), patient.getLastName(), patient.getDateOfBirth(), patient.getPatientAddress(),
-                "'%" + patient.getDoctorLastName() + "%'", patient.getPatientId());
+                "%" + patient.getDoctorLastName() + "%", patient.getPatientId());
         return getPatientByPatientId(patient.getPatientId());
     }
 
