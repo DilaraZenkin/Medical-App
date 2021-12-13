@@ -9,7 +9,7 @@
                 <v-toolbar-title>Patient Information</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form @submit.prevent="login">
+                <v-form @submit.prevent="updatePatient">
                   <v-text-field
                     id="firstname"
                     :disabled="!enable"
@@ -77,7 +77,7 @@
                     prepend-icon="person"
                     class="form-control"
                     label="Doctor"
-                    v-model="patient.lastName"
+                    v-model="patient.doctorLastName"
                     required
                     outlined
                   ></v-text-field>
@@ -101,13 +101,11 @@
 
 <script>
 import PatientService from "../services/PatientService";
-import DoctorService from "../services/DoctorService";
 export default {
   name: "patient-information",
   data: () => ({
     enable: false,
     patient: {},
-    doctor: {},
     updatedPatient: {},
   }),
   created() {
@@ -115,19 +113,16 @@ export default {
       (response) => {
         this.patient = response.data;
       }
-    ),
-      DoctorService.getSpecificDoctor(this.patient.doctorId).then(
-        (response) => {
-          this.doctor = response.data;
-        }
-      );
+    );
   },
   methods: {
     resetForm() {
       this.showForm = false;
       this.updatedPatient = {};
     },
-    updatePatient() {},
+    updatePatient() {
+        PatientService.updatePatientInformation(this.updatedPatient);
+    },
   },
 };
 </script>
