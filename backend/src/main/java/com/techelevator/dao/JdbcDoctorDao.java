@@ -58,7 +58,7 @@ public class JdbcDoctorDao implements DoctorDAO{
 
     @Override
     public Doctor doctorNameByPatientId(Long patientId) {
-        String sql = "SELECT d.doctor_id, d.first_name, d.last_name, d.date_of_birth, d.office_id FROM doctors d INNER JOIN patients USING (doctor_id) WHERE patient_id = ?;";
+        String sql = "SELECT doctor_id, doctor_first, doctor_last, d.date_of_birth, office_id FROM doctors d INNER JOIN patients USING (doctor_id) WHERE patient_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
         if (results.next()) {
             return mapRowToDoctor(results);
@@ -69,7 +69,7 @@ public class JdbcDoctorDao implements DoctorDAO{
 
     @Override
     public Doctor register(Doctor doctor) {
-        String sql = "INSERT INTO doctors (doctor_id, first_name, last_name, date_of_birth, office_id) " +
+        String sql = "INSERT INTO doctors (doctor_id, doctor_first, doctor_last, date_of_birth, office_id) " +
                 "VALUES (?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, doctor.getDoctorId(), doctor.getFirstName(), doctor.getLastName(), doctor.getDateOfBirth(), doctor.getOfficeId());
         return doctor;
@@ -78,8 +78,8 @@ public class JdbcDoctorDao implements DoctorDAO{
     private Doctor mapRowToDoctor(SqlRowSet rs) {
         Doctor doctor = new Doctor();
         doctor.setDoctorId(rs.getLong("doctor_id"));
-        doctor.setFirstName(rs.getString("first_name"));
-        doctor.setLastName(rs.getString("last_name"));
+        doctor.setFirstName(rs.getString("doctor_first"));
+        doctor.setLastName(rs.getString("doctor_last"));
         doctor.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
         doctor.setOfficeId(rs.getLong("office_id"));
         return doctor;

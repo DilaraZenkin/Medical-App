@@ -7,6 +7,7 @@ import java.util.List;
 public class Office {
 
     private long officeId;
+    private String officeName;
     private String officeAddress;
     private String officePhoneNumber;
     private LocalTime officeOpen;
@@ -26,8 +27,9 @@ public class Office {
         this.hourlyCost = dto.getHourlyCost();
     }
 
-    public Office(Long officeId, String officeAddress, String officePhoneNumber, LocalTime officeOpen, LocalTime officeClose, long hourlyCost) {
+    public Office(Long officeId, String officeName, String officeAddress, String officePhoneNumber, LocalTime officeOpen, LocalTime officeClose, long hourlyCost) {
         this.officeId = officeId;
+        this.officeName = officeName;
         this.officeAddress = officeAddress;
         this.officePhoneNumber = officePhoneNumber;
         this.officeOpen = officeOpen;
@@ -41,6 +43,14 @@ public class Office {
 
     public void setOfficeId(long officeId) {
         this.officeId = officeId;
+    }
+
+    public String getOfficeName() {
+        return officeName;
+    }
+
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName;
     }
 
     public String getOfficeAddress() {

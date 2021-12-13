@@ -10,12 +10,6 @@ public interface OfficeDAO {
     int findIdByOfficeAddress(String officeAddress);
     long create(String officeAddress, String officePhonenumber, String officeOpen, String officeClose, long hourlyCost);
     Office updateOffice (Office office);
-    List<Office> officeInfoByDoctorFirstName(String firstNameSearch);
-    List<Office> officeInfoByDoctorLastName(String lastNameSearch);
-    List<Office> officeInfoByDoctorFullName(String firstNameSearch, String lastNameSearch);
-    Office addNewOffice(Office office);
-    String getOfficeAddressByDoctorId(Long doctorId);
-    List<Office> getAllOffices();
     List<Office> findAllOffices();
     Office getOfficeByDoctorId(Long doctorId);
     List<Office> officeInfoByDoctorFirstName();

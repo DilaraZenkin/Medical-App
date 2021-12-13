@@ -64,8 +64,8 @@ public class JdbcOfficeDAO implements OfficeDAO {
 
     @Override
     public Office addNewOffice(Office office) {
-        String sql = "INSERT INTO offices (office_id, office_address, office_phone_number, office_open, office_close, hourly_cost)\n" +
-                "VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, office.getOfficeId(), office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getHourlyCost());
         return office;
     }
@@ -73,12 +73,18 @@ public class JdbcOfficeDAO implements OfficeDAO {
     @Override
     public Office updateOffice(Office office) {
 
+<<<<<<< HEAD
         String sql = "UPDATE offices SET office_address=?, office_phone_number=?, office_open=?, office_close=?, hourly_cost=? WHERE office_id=?";
         jdbcTemplate.update(sql, office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getOfficeId(), office.getHourlyCost());
+=======
+        String sql = "UPDATE offices SET office_name = ?, office_address=?, office_phone_number=?, office_open=?, office_close=?, hourly_cost=? WHERE office_id=?";
+        jdbcTemplate.update(sql, office.getOfficeName(), office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getHourlyCost(), office.getOfficeId());
+>>>>>>> 8cedf16cacd2d126d0163231f3f770aa0ef57cd7
         return office;
     }
 
     @Override
+<<<<<<< HEAD
     public List<Office> officeInfoByDoctorFirstName(String firstNameSearch) {
         return null;
     }
@@ -104,6 +110,8 @@ public class JdbcOfficeDAO implements OfficeDAO {
     }
 
     @Override
+=======
+>>>>>>> 8cedf16cacd2d126d0163231f3f770aa0ef57cd7
     public List<Office> findAllOffices() {
         List<Office> offices = new ArrayList<>();
         String sql = "select * from offices";
@@ -118,7 +126,7 @@ public class JdbcOfficeDAO implements OfficeDAO {
 
     @Override
     public Office getOfficeByDoctorId(Long doctorId) {
-        String sql = "SELECT o.office_id, o.office_address, o.office_phone_number, o.office_open, \n" +
+        String sql = "SELECT o.office_id, o.office_name, o.office_address, o.office_phone_number, o.office_open, \n" +
                 "o.office_close, o.hourly_cost FROM offices o JOIN doctors USING (office_id) WHERE doctor_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);
         if (results.next()) {
@@ -129,6 +137,23 @@ public class JdbcOfficeDAO implements OfficeDAO {
         }
     }
 
+<<<<<<< HEAD
+=======
+    private Office mapRowToOffice(SqlRowSet rs) {
+        Office office = new Office();
+        office.setOfficeId(rs.getLong("office_id"));
+        office.setOfficeName(rs.getString("office_name"));
+        office.setOfficeAddress(rs.getString("office_address"));
+        office.setOfficePhoneNumber(rs.getString("office_phone_number"));
+        office.setOfficeOpen(rs.getTime("office_open").toLocalTime());
+        office.setOfficeClose(rs.getTime("office_close").toLocalTime());
+        office.setHourlyCost(rs.getLong("hourly_cost"));
+        // office.setActivated(true);
+        return office;
+    }
+
+
+>>>>>>> 8cedf16cacd2d126d0163231f3f770aa0ef57cd7
     @Override
     public List<Office> officeInfoByDoctorFirstName() {
         return null;
