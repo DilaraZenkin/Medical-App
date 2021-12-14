@@ -13,6 +13,7 @@ import DoctorRegistration from '../views/DoctorRegistration.vue'
 import PatientInformation from '../components/PatientInformation.vue'
 import PatientAppointment from '../components/PatientAppointment.vue'
 import Locations from '../components/Locations.vue'
+import BookAppointment from '../views/BookAppointment.vue'
 
 Vue.use(Router)
 
@@ -122,6 +123,14 @@ const router = new Router({
       path: "/patient/locations",
       name: "locations",
       component: Locations,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/patient/new-appointment",
+      name: "new-appointment",
+      component: BookAppointment,
       meta: {
         requiresAuth: true
       }
