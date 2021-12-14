@@ -5,7 +5,7 @@
     </v-container>
     <v-btn id="appointment-list" :to="{name: 'appointment-list'}">Appointments</v-btn>
     <v-btn id="update-doctor-availability" :to="{name: 'doctor-availability'}">Set Availability</v-btn>
-    <v-btn id="office-information" :to="{name: 'office-information'}">View Office Information</v-btn>
+    <v-btn id="office-information" :to="{name: 'doctor-office'}">View Office Information</v-btn>
   </div> 
 </template>
 
