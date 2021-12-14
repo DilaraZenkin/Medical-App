@@ -11,7 +11,7 @@ export default {
     },
 
     getSpecificOffice(doctorId) {
-        return axios.get(`/offices/specific/${doctorId}`)
+        return axios.get(`/offices/specific`, doctorId)
     },
 
 

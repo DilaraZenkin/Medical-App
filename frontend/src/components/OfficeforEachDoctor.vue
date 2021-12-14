@@ -60,10 +60,10 @@ export default {
    data: () => ({
     loading: false,
     selection: 1,
-    offices: []
+    office: {}
   }),
   created() {
-    officeService.getSpecificOffice().then(response => {
+    officeService.getSpecificOffice(this.$store.state.user.id).then(response => {
       this.office = response.data;
       this.isLoading = false;
     });

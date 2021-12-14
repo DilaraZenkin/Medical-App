@@ -82,7 +82,7 @@ export default {
               icon: "tour",
             },
             {
-              id: "patient-information",
+              id: "doctor-availability",
               title: "Set Availability",
               icon: "person",
             },
@@ -90,7 +90,7 @@ export default {
               id: "doctor-office",
               title: "View Office Information",
               icon: "business_center",
-            },
+            }
           ];
         }
       }

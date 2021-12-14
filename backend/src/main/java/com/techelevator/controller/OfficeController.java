@@ -37,8 +37,8 @@ public class OfficeController {
         return officeDao.addNewOffice(office);
     }
 
-    @RequestMapping(path = "/offices/specific/{doctorId}", method = RequestMethod.GET)
-    public Office getOfficeByDoctorId(@PathVariable Long doctorId) {
+    @RequestMapping(path = "/offices/specific/", method = RequestMethod.GET)
+    public Office getOfficeByDoctorId(@RequestBody Long doctorId) {
         return officeDao.getOfficeByDoctorId(doctorId);
     }
 
