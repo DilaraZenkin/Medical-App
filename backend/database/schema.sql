@@ -102,9 +102,16 @@ CREATE TABLE doctor_availabilities (
         day_of_week DATE,
         start_time time,
         end_time time,
-        availability boolean,
+        available boolean,
         CONSTRAINT fk_doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors (doctor_id)
 );
+
+INSERT INTO doctor_availabilities (doctor_availability_id, doctor_id, day_of_week, start_time, end_time, available)
+VALUES (1, 5, '2021-12-13', '08:00', '15:00', true);
+INSERT INTO doctor_availabilities (doctor_availability_id, doctor_id, day_of_week, start_time, end_time, available)
+VALUES (2, 5, '2021-12-17', '08:00', '15:00', true);
+INSERT INTO doctor_availabilities (doctor_availability_id, doctor_id, day_of_week, start_time, end_time, available)
+VALUES (3, 5, '2021-12-17', '09:00', '09:30', false);
 
 CREATE TABLE reviews (
         review_id serial PRIMARY KEY,

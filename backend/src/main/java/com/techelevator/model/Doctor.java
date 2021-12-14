@@ -9,16 +9,18 @@ public class Doctor {
     private String lastName;
     private LocalDate dateOfBirth;
     private Long officeId;
+    private String officeAddress;
 
     public Doctor() {
     }
 
-    public Doctor(Long doctorId, String firstName, String lastName, LocalDate dateOfBirth, Long officeId) {
+    public Doctor(Long doctorId, String firstName, String lastName, LocalDate dateOfBirth, Long officeId, String officeAddress) {
         this.doctorId = doctorId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.officeId = officeId;
+        this.officeAddress = officeAddress;
     }
 
     public Long getDoctorId() {
@@ -59,5 +61,13 @@ public class Doctor {
 
     public void setOfficeId(Long officeId) {
         this.officeId = officeId;
+    }
+
+    public String getOfficeAddress() {
+        return officeAddress;
+    }
+
+    public void setOfficeAddress(String officeAddress) {
+        this.officeAddress = officeAddress;
     }
 }
