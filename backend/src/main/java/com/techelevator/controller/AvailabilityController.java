@@ -20,6 +20,16 @@ public class AvailabilityController {
 
     @RequestMapping(path = "/availabilities/{doctorId}", method = RequestMethod.GET)
     public List<DoctorAvailability> allDoctorAvailabilities(@PathVariable Long doctorId) {
-        return 
+        return availabilityDao.getAvailabilityForDoctor(doctorId);
+    }
+
+    @RequestMapping(path = "/availabilities/add", method = RequestMethod.POST)
+    public boolean addAvailability(@RequestBody DoctorAvailability availability) {
+        return availabilityDao.setAvailableHours(availability);
+    }
+
+    @RequestMapping(path = "/availabilities/update", method = RequestMethod.PUT)
+    public boolean updateAvailabilityStatus(@RequestBody DoctorAvailability availability) {
+        return availabilityDao.updateAvailability(availability);
     }
 }
