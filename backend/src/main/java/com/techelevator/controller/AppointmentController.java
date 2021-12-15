@@ -40,7 +40,7 @@ public class AppointmentController {
     }
 
     @RequestMapping(path = "/appointments/doctor/{doctorId}", method = RequestMethod.GET)
-    public List<Appointment> getDoctorFullAppointmentList(@PathVariable Long doctorId) {
+    public List<AppointmentDTO> getDoctorFullAppointmentList(@PathVariable Long doctorId) {
         return appointmentDao.getAllAppointmentsByDoctorId(doctorId);
     }
 

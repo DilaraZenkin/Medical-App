@@ -2,6 +2,8 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Appointment;
 import com.techelevator.model.AppointmentDTO;
+import com.techelevator.model.Doctor;
+import com.techelevator.model.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -66,12 +68,14 @@ public class JdbcAppointmentDao implements AppointmentDao{
     }
 
     @Override
-    public List<Appointment> getAllAppointmentsByDoctorId(Long doctorId) {
-        List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE doctor_id = ?;";
+    public List<AppointmentDTO> getAllAppointmentsByDoctorId(Long doctorId) {
+        List<AppointmentDTO> appointments = new ArrayList<>();
+        String sql = "SELECT appointment_id, appointment_date, start_time, p.patient_id, first_name, last_name, d.doctor_id, doctor_last, office_address \n" +
+                "FROM appointments a JOIN patients p ON a.doctor_id = p.doctor_id JOIN doctors d ON a.doctor_id = d.doctor_id \n" +
+                "JOIN offices o ON a.office_id = o.office_id WHERE a.doctor_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);
         while (results.next()) {
-            Appointment appointment = mapRowToAppointment(results);
+            AppointmentDTO appointment = mapRowToAppointmentDTO(results);
             appointments.add(appointment);
         }
         return appointments;
@@ -133,19 +137,20 @@ public class JdbcAppointmentDao implements AppointmentDao{
 
     private AppointmentDTO mapRowToAppointmentDTO(SqlRowSet rs) {
         AppointmentDTO test = new AppointmentDTO();
+        Patient patient = new Patient();
+        Doctor doctor = new Doctor();
 
-        //test.setPatientFirstName(rs.getString("patient_first"));
-        //test.setPatientLastName(rs.getString("patient_last"));
-        //test.setOfficeAddress(rs.getString("office_address"));
         test.setAppointmentId(rs.getLong("appointment_id"));
-        test.setOfficeId(rs.getLong("office_id"));
-        test.setPatientId(rs.getLong("patient_id"));
-        test.setDoctorId(rs.getLong("doctor_id"));
         test.setAppointmentDate(rs.getDate("appointment_date").toLocalDate());
         test.setStartTime(rs.getTime("start_time").toLocalTime());
-        test.setEndTime(rs.getTime("end_time").toLocalTime());
-        //test.setDoctorFirstName(rs.getString("doctor_first"));
-        //test.setDoctorLastName(rs.getString("doctor_last"));
+        patient.setPatientId(rs.getLong("patient_id"));
+        patient.setFirstName(rs.getString("first_name"));
+        patient.setLastName(rs.getString("last_name"));
+        test.setPatient(patient);
+        doctor.setDoctorId(rs.getLong("doctor_id"));
+        doctor.setLastName(rs.getString("doctor_last"));
+        test.setDoctor(doctor);
+        test.setAddress(rs.getString("office_address"));
         return test;
     }
 }

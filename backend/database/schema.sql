@@ -74,9 +74,9 @@ CREATE TABLE patients (
 );
 
 INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address, doctor_id)
-VALUES (3, 'Frank', 'Sinatra', '12-12-1915', '556 East Boulevard Westport PA 15339', 6);
+VALUES (3, 'Frank', 'Sinatra', '12-12-1915', '556 East Boulevard Westport PA 15339', 5);
 INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address, doctor_id)
-VALUES (4, 'George', 'Castanza', '07-04-1968', '998 West Road Wexford PA 16884', 5);
+VALUES (4, 'George', 'Castanza', '07-04-1968', '998 West Road Wexford PA 16884', 6);
 
 CREATE TABLE appointments (
         appointment_id serial PRIMARY KEY,
@@ -97,7 +97,7 @@ INSERT INTO appointments (appointment_id, office_id, patient_id, doctor_id, star
 VALUES (2, 2, 4, 6, '12:00 pm', '12:30 pm', '11-12-2021');
 
 CREATE TABLE doctor_availabilities (
-        doctor_availability_id serial PRIMARY KEY,
+        availability_id serial PRIMARY KEY,
         doctor_id int,
         day_of_week DATE,
         start_time time,
@@ -106,11 +106,11 @@ CREATE TABLE doctor_availabilities (
         CONSTRAINT fk_doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors (doctor_id)
 );
 
-INSERT INTO doctor_availabilities (doctor_availability_id, doctor_id, day_of_week, start_time, end_time, available)
+INSERT INTO doctor_availabilities (availability_id, doctor_id, day_of_week, start_time, end_time, available)
 VALUES (1, 5, '2021-12-13', '08:00', '15:00', true);
-INSERT INTO doctor_availabilities (doctor_availability_id, doctor_id, day_of_week, start_time, end_time, available)
+INSERT INTO doctor_availabilities (availability_id, doctor_id, day_of_week, start_time, end_time, available)
 VALUES (2, 5, '2021-12-17', '08:00', '15:00', true);
-INSERT INTO doctor_availabilities (doctor_availability_id, doctor_id, day_of_week, start_time, end_time, available)
+INSERT INTO doctor_availabilities (availability_id, doctor_id, day_of_week, start_time, end_time, available)
 VALUES (3, 5, '2021-12-17', '09:00', '09:30', false);
 
 CREATE TABLE reviews (

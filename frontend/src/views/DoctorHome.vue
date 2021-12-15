@@ -1,12 +1,9 @@
 <template>
-   <div>
-     <v-container class="text-right">
-      <v-btn id="home-logout" :to="{name: 'logout'}">Logout</v-btn>
-    </v-container>
-    <v-btn id="appointment-list" :to="{name: 'appointment-list'}">Appointments</v-btn>
-    <v-btn id="update-doctor-availability" :to="{name: 'doctor-availability'}">Set Availability</v-btn>
-    <v-btn id="office-information" :to="{name: 'office-information'}">View Office Information</v-btn>
-  </div> 
+   <v-layout justify-center align-center>
+     <v-card-text>
+    <p class="text-h6 text--primary">Doctor's Home Page</p>
+     </v-card-text>
+  </v-layout>
 </template>
 
 <script>
