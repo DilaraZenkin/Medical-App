@@ -17,9 +17,9 @@
                 ></v-progress-linear>
               </template>
               <v-toolbar dark color="#1A5276">
-              <v-card-title
-                >{{ doctor.firstName }} {{ doctor.lastName }}</v-card-title
-              >
+                <v-card-title
+                  >{{ doctor.firstName }} {{ doctor.lastName }}</v-card-title
+                >
               </v-toolbar>
               <v-card-text>
                 <v-row align="center" class="mx-0">
@@ -40,22 +40,36 @@
               <v-card-title>Availability</v-card-title>
               <v-card-text>
                 <v-chip-group
-                  v-model="selection"
+                  v-model="doctor.time"
                   active-class="deep-purple accent-4 white--text"
                   column
                 >
-                  <v-chip>5:30PM</v-chip>
-                  <v-chip>7:30PM</v-chip>
+                  <v-chip>5:00PM</v-chip>
+                  <v-chip>6:00PM</v-chip>
+                  <v-chip>7:00PM</v-chip>
                   <v-chip>8:00PM</v-chip>
-                  <v-chip>9:00PM</v-chip>
                 </v-chip-group>
               </v-card-text>
               <v-card-actions>
-               <v-btn color="#1A5276" dark @click="reserve">
+                <v-btn color="#1A5276" dark @click="reserve(doctor)">
                   Book Appointment
-                </v-btn> 
+                </v-btn>
               </v-card-actions>
             </v-card>
+            <v-snackbar color="#1A5276" v-model="snackbar">
+              {{ text }}
+
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="red"
+                  text
+                  v-bind="attrs"
+                  @click="snackbar = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
           </v-flex>
         </v-layout>
       </v-container>
@@ -64,12 +78,14 @@
 </template>
 <script>
 import doctorService from "../services/DoctorService";
+import appointmentService from "../services/AppointmentService";
 export default {
   name: "doctor-list",
   data: () => ({
     loading: false,
-    selection: 1,
     doctors: [],
+    snackbar: false,
+    text: `Appointment booked successfully`,
   }),
   created() {
     doctorService.getDoctors().then((response) => {
@@ -78,9 +94,25 @@ export default {
     });
   },
   methods: {
-    reserve() {
+    reserve(doctor) {
+      console.log(doctor);
+      if (doctor.time === 0) {
+        doctor.startTime = "05:00:00";
+        doctor.endTime = "06:00:00";
+      }
+      doctor.dayOfAppointment = "2021-10-10";
+      doctor.patientId = this.$store.state.user.id;
       this.loading = true;
-      setTimeout(() => (this.loading = false), 2000);
+      appointmentService.createAppointment(doctor).then((response) => {
+        console.log(response);
+        this.snackbar = true;
+        this.loading = false;
+      });
+
+      // call appointment service
+      // endpoint: POST: http://localhost:8080/appointments/add
+      // this.loading = true;
+      // setTimeout(() => (this.loading = false), 2000);
     },
   },
 };

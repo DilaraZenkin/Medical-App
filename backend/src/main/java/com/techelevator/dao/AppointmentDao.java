@@ -19,7 +19,7 @@ public interface AppointmentDao {
 
     List<Appointment> getUpcomingAppointmentsForDoctor(Long doctorId);
 
-    Appointment addNewAppointment(Appointment appointment);
+    AppointmentDTO addNewAppointment(Appointment appointment);
 
     Appointment updateAppointment(Appointment appointment);
 

@@ -49,7 +49,7 @@ public class AppointmentController {
         return appointmentDao.getUpcomingAppointmentsForDoctor(doctorId);
     }
     @RequestMapping(path = "/appointments/add", method = RequestMethod.POST)
-    public Appointment addNewAppointment(@RequestBody Appointment appointment) {
+    public AppointmentDTO addNewAppointment(@RequestBody Appointment appointment) {
         return appointmentDao.addNewAppointment(appointment);
     }
 

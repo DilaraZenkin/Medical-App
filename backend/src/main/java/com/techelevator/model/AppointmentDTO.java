@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 public class AppointmentDTO {
 
+
     private Long appointmentId;
     private LocalDate appointmentDate;
     private LocalTime startTime;
