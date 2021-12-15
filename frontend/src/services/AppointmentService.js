@@ -5,6 +5,6 @@ export default {
         return axios.get(`/appointments/patient/${patientId}`);
     },
     getDoctorFullAppointmentList(doctorId) {
-        return axios.get(`/appointment/doctor/${doctorId}`);
+        return axios.get(`/appointments/doctor/${doctorId}`);
     }
 }

@@ -11,8 +11,7 @@
                 <v-toolbar-title>Doctor Appointment</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <div>Upcoming Appointments</div>
-                <p class="text-h4 text--primary">{{appointment.dayOfAppointment}}</p>
+                <p class="text-h6 text--primary">{{appointment.dayOfAppointment}}</p>
                 <p>{{appointment.appointmentDate}}</p>
                 <div class="text--primary">
                 From: {{appointment.startTime}}

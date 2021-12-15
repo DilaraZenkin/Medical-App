@@ -20,3 +20,8 @@ date_of_birth = '1999-01-01',
 address = '555 West East Rd. Somewhere PA, 11223',
 doctor_id = 6
 WHERE patient_id = 7;
+
+select * from doctor_availabilities;
+
+SELECT da.*, patient_id, first_name, last_name, d.doctor_id, doctor_last FROM doctor_availabilities da JOIN patients p ON p.doctor_id = da.doctor_id 
+JOIN doctors d ON da.doctor_id = d.doctor_id;
