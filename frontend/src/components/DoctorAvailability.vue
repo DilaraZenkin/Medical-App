@@ -1,12 +1,22 @@
 <template>
   <v-app id="inspire">
     <v-content class="main">
+    <div class="text-center">
+      <v-btn
+        rounded
+        color="primary"
+        dark
+        :to="{name: 'new-availability'}"
+      >Add Availability
+      </v-btn>
+    </div>
       <v-container fluid>
         <v-layout justify-center align-center>
           <v-flex xs>
             <v-card
              v-bind:key="availability.id"
-            v-for="availability in availabilities">
+            v-for="availability in availabilities"
+            v-show="!updateForm">
               <v-card-text>
                 <div>Date: </div>
                 <p class="text-h6 text--primary">{{availability.dayOfWeek}}</p>
@@ -19,20 +29,8 @@
                 <v-card-text>
                   Available: {{availability.available == true ? 'Yes' : 'No'}}
                 </v-card-text>  
-                   <v-btn class="update-availability-btn" @:click="updateForm = true; populateCurrent()">Change Availability</v-btn>
-              </v-card-text>
-              <div class="update-availability" v-show="updateForm">
+                   <v-btn class="update-availability-btn" @:click="updateForm = !updateForm; populateCurrent()">Change Availability</v-btn>
                 <v-form>
-                  <!-- <v-chip-group
-                      v-model="selection"
-                      active-class="deep-purple accent-4 white--text"
-                      column
-                    >
-                      <v-chip>5:30PM</v-chip>
-                      <v-chip>7:30PM</v-chip>
-                      <v-chip>8:00PM</v-chip>
-                      <v-chip>9:00PM</v-chip>
-                    </v-chip-group> -->
                   <v-chip-group
                     id="start"
                     prepend-icon=""
@@ -51,6 +49,7 @@
                       <v-chip>10:30AM</v-chip>
                       <v-chip>11:00AM</v-chip>
                     </v-chip-group>
+                    <v-spacer />
                     <v-chip-group
                     id="end"
                     prepend-icon=""
@@ -79,25 +78,13 @@
                     <v-btn type="submit" @submit.prevent="updateAvailability()">Update Availability</v-btn>
                     <v-btn type="reset" @:reset.prevent="cancelUpdate()">Cancel Update</v-btn>
                 </v-form>
-              </div>  
+              </v-card-text>
             </v-card>  
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
     <div id="app">
-  <v-app id="inspire">
-    <div class="text-center">
-      <v-btn
-        rounded
-        color="primary"
-        dark
-        :to="{name: 'doctor-list'}"
-      >
-        Add Availability
-      </v-btn>
-    </div>
-  </v-app>
 </div>
   </v-app>
 </template>
@@ -133,15 +120,17 @@ export default {
       this.showForm = false;
     },
     updateAvailability() {
-      AvailabilityService.updateAvailability(this.updatedAvailability);
+      AvailabilityService.updateAvailability(this.updatedAvailability).then(response => {
+        this.availabilities.avability = response.data;
+      });
     },
     populateCurrent() {
-      this.updatedAvailability.availabilityId = this.avability.availabilityId;
+      this.updatedAvailability.availabilityId = this.availabilities.avability.availabilityId;
       this.updatedAvailability.doctorId = this.$store.state.user.id;
-      this.updatedAvailability.dayOfWeek = this.avability.dayOfWeek;
-      this.updatedAvailability.startTime = this.avability.startTime;
-      this.updatedAvailability.endTime = this.avability.endTime;
-      this.updatedAvailability.available = this.avability.available;
+      this.updatedAvailability.dayOfWeek = this.availabilities.avability.dayOfWeek;
+      this.updatedAvailability.startTime = this.availabilities.avability.startTime;
+      this.updatedAvailability.endTime = this.availabilities.avability.endTime;
+      this.updatedAvailability.available = this.availabilities.avability.available;
     },
     cancelUpdate() {
       this.updateForm = false;
