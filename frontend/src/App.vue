@@ -75,7 +75,23 @@ export default {
             { id: "locations", title: "Locations", icon: "business_center" },
           ];
         } else {
-          return [];
+          return [
+                  {
+              id: "doctor-appointments",
+              title: "Appointments",
+              icon: "tour",
+            },
+            {
+              id: "doctor-availability",
+              title: "Set Availability",
+              icon: "person",
+            },
+                        {
+              id: "doctor-office",
+              title: "View Office Information",
+              icon: "business_center",
+            },
+          ];
         }
       }
 

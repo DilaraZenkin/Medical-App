@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class DoctorAvailability {
 
-    private Long doctorAvailabilityId;
+    private Long availabilityId;
     private Doctor doctor;
     private LocalDate dayOfWeek;
     private LocalTime startTime;
@@ -15,8 +15,8 @@ public class DoctorAvailability {
     public DoctorAvailability() {
     }
 
-    public DoctorAvailability(Long doctorAvailabilityId, Doctor doctor, LocalDate dayOfWeek, LocalTime startTime, LocalTime endTime, boolean isAvailable) {
-        this.doctorAvailabilityId = doctorAvailabilityId;
+    public DoctorAvailability(Long availabilityId, Doctor doctor, LocalDate dayOfWeek, LocalTime startTime, LocalTime endTime, boolean isAvailable) {
+        this.availabilityId = availabilityId;
         this.doctor = doctor;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
@@ -24,12 +24,12 @@ public class DoctorAvailability {
         this.isAvailable = isAvailable;
     }
 
-    public Long getDoctorAvailabilityId() {
-        return doctorAvailabilityId;
+    public Long getAvailabilityId() {
+        return availabilityId;
     }
 
-    public void setDoctorAvailabilityId(Long doctorAvailabilityId) {
-        this.doctorAvailabilityId = doctorAvailabilityId;
+    public void setAvailabilityId(Long availabilityId) {
+        this.availabilityId = availabilityId;
     }
 
     public Doctor getDoctor() {
