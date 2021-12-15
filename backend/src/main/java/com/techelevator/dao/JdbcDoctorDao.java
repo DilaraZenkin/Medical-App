@@ -22,7 +22,7 @@ public class JdbcDoctorDao implements DoctorDAO{
     @Override
     public List<Doctor> findAllDoctors() {
         List<Doctor> doctors = new ArrayList<>();
-        String sql = "SELECT * FROM doctors";
+        String sql = "select d.*, office_address from doctors d JOIN offices USING (office_id);";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
@@ -34,7 +34,7 @@ public class JdbcDoctorDao implements DoctorDAO{
 
     @Override
     public Doctor getDoctorByDoctorId(Long doctorId) {
-        String sql = "SELECT * FROM doctors WHERE doctor_id = ?;";
+        String sql = "SELECT d.*, office_address FROM doctors d JOIN offices USING (office_id) WHERE doctor_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, doctorId);
         if (results.next()) {
             return mapRowToDoctor(results);
@@ -46,7 +46,7 @@ public class JdbcDoctorDao implements DoctorDAO{
     @Override
     public List<Doctor> getAllDoctorsAtOffice(Long officeId) {
         List<Doctor> doctors = new ArrayList<>();
-        String sql = "select * from doctors WHERE office_id = ?;";
+        String sql = "SELECT d.*, office_address FROM doctors d JOIN offices USING (office_id) WHERE office_id = ?;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, officeId);
         while(results.next()) {
@@ -54,17 +54,6 @@ public class JdbcDoctorDao implements DoctorDAO{
             doctors.add(doctor);
         }
         return doctors;
-    }
-
-    @Override
-    public Doctor doctorNameByPatientId(Long patientId) {
-        String sql = "SELECT doctor_id, doctor_first, doctor_last, d.date_of_birth, office_id FROM doctors d INNER JOIN patients USING (doctor_id) WHERE patient_id = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patientId);
-        if (results.next()) {
-            return mapRowToDoctor(results);
-        } else {
-            throw new RuntimeException("Could not find your Doctor");
-        }
     }
 
     @Override
@@ -82,6 +71,7 @@ public class JdbcDoctorDao implements DoctorDAO{
         doctor.setLastName(rs.getString("doctor_last"));
         doctor.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
         doctor.setOfficeId(rs.getLong("office_id"));
+        doctor.setOfficeAddress(rs.getString("office_address"));
         return doctor;
     }
 }

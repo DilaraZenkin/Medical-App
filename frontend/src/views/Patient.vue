@@ -43,7 +43,7 @@
           </v-chip-group>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="deep-purple lighten-2" text @click="reserve">
+          <v-btn color="deep-purple lighten-2" :to="{ name: 'new-appointment' }">
             Book Appointment
           </v-btn>
         </v-card-actions>

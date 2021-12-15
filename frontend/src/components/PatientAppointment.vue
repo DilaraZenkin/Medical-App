@@ -4,24 +4,48 @@
       <v-container fluid>
         <v-layout justify-center align-center>
           <v-flex xs>
-            <v-card>
+            <v-card
+             v-bind:key="appointment.id"
+            v-for="appointment in appointments">
               <v-toolbar dark color="#1A5276">
                 <v-toolbar-title>Patient Appointment</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                Appointment details go here...
+                <div>Upcoming Appointments</div>
+                <p class="text-h4 text--primary">{{appointment.dayOfAppointment}}</p>
+                <p>{{appointment.appointmentDate}}</p>
+                <div class="text--primary">
+                From: {{appointment.startTime}}
+                </div>
+                <div class="text--primary">
+                 To: {{appointment.endTime}}
+                  
+                </div>
               </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
+    <div id="app">
+  <v-app id="inspire">
+    <div class="text-center">
+      <v-btn
+        rounded
+        color="primary"
+        dark
+        :to="{name: 'doctor-list'}"
+      >
+        Create New Appointment
+      </v-btn>
+    </div>
+  </v-app>
+</div>
   </v-app>
 </template>
 
 <script>
-import PatientService from "../services/PatientService";
-import DoctorService from "../services/DoctorService";
+import appointmentService from "../services/AppointmentService";
 export default {
   name: "patient-appointment",
   data: () => ({
@@ -29,16 +53,12 @@ export default {
     patient: {},
     doctor: {},
     updatedPatient: {},
+    appointments: []
   }),
   created() {
-    PatientService.getLoggedInPatient(this.$store.state.user.id).then(
-      (response) => {
-        this.patient = response.data;
-      }
-    ),
-      DoctorService.getSpecificDoctor(this.patient.doctorId).then(
+      appointmentService.getPatientsFullAppointmentList(this.$store.state.user.id).then(
         (response) => {
-          this.doctor = response.data;
+          this.appointments = response.data;
         }
       );
   },

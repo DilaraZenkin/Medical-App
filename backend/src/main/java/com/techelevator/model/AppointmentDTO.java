@@ -11,19 +11,21 @@ public class AppointmentDTO {
     private String officeAddress;
     private LocalDate appointmentDate;
     private LocalTime startTime;
+    private Long doctorId;
     private String doctorFirstName;
     private String doctorLastName;
 
     public AppointmentDTO() {
     }
 
-    public AppointmentDTO(Long appointmentId, String patientFirstName, String patientLastName, String officeAddress, LocalDate appointmentDate, LocalTime startTime, String doctorFirstName, String doctorLastName) {
+    public AppointmentDTO(Long appointmentId, String patientFirstName, String patientLastName, String officeAddress, LocalDate appointmentDate, LocalTime startTime, Long doctorId, String doctorFirstName, String doctorLastName) {
         this.appointmentId = appointmentId;
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.officeAddress = officeAddress;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
+        this.doctorId = doctorId;
         this.doctorFirstName = doctorFirstName;
         this.doctorLastName = doctorLastName;
     }
@@ -74,6 +76,14 @@ public class AppointmentDTO {
 
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public String getDoctorFirstName() {

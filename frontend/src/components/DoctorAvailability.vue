@@ -5,19 +5,16 @@
         <v-layout justify-center align-center>
           <v-flex xs>
             <v-card
-             v-bind:key="appointment.id"
-            v-for="appointment in appointments">
-              <v-toolbar dark color="#1A5276">
-                <v-toolbar-title>Doctor Appointment</v-toolbar-title>
-              </v-toolbar>
+             v-bind:key="availability.id"
+            v-for="availability in availabilities">
               <v-card-text>
-                <p class="text-h6 text--primary">{{appointment.dayOfAppointment}}</p>
-                <p>{{appointment.appointmentDate}}</p>
+                <div>Date: </div>
+                <p class="text-h6 text--primary">{{availability.dayOfWeek}}</p>
                 <div class="text--primary">
-                From: {{appointment.startTime}}
+                From: {{availability.startTime}}
                 </div>
                 <div class="text--primary">
-                 To: {{appointment.endTime}}
+                 To: {{availability.endTime}}
                   
                 </div>
               </v-card-text>
@@ -35,7 +32,7 @@
         dark
         :to="{name: 'doctor-list'}"
       >
-        Change Appointment
+        Add Availability
       </v-btn>
     </div>
   </v-app>
@@ -44,20 +41,19 @@
 </template>
 
 <script>
-import appointmentService from "../services/AppointmentService";
+import AvailabilityService from '../services/AvailabilityService'
 export default {
-  name: "doctor-appointment",
+  name: "doctor-availability",
   data: () => ({
     enable: false,
     patient: {},
     doctor: {},
-    updatedAppointment: {},
-    appointments: []
+    availabilities: []
   }),
   created() {
-      appointmentService.getDoctorFullAppointmentList(this.$store.state.user.id).then(
+      AvailabilityService.getAvailability(this.$store.state.user.id).then(
         (response) => {
-          this.appointments = response.data;
+          this.availabilities = response.data;
         }
       );
   },
@@ -65,7 +61,7 @@ export default {
     resetForm() {
       this.showForm = false;
     },
-    updateAppointment() {},
+    updatePatient() {},
   },
 };
 </script>

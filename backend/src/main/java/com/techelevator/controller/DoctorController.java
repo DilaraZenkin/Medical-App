@@ -40,8 +40,4 @@ public class DoctorController {
         return doctorDao.getAllDoctorsAtOffice(officeId);
     }
 
-    @RequestMapping(path = "/doctors/patient/{patientId}", method = RequestMethod.GET)
-    public Doctor getDoctorNameByPatientId(@PathVariable Long patientId) {
-        return doctorDao.doctorNameByPatientId(patientId);
-    }
 }

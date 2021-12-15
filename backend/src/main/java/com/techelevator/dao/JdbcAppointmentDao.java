@@ -137,6 +137,7 @@ public class JdbcAppointmentDao implements AppointmentDao{
         test.setOfficeAddress(rs.getString("office_address"));
         test.setAppointmentDate(rs.getDate("appointment_date").toLocalDate());
         test.setStartTime(rs.getTime("start_time").toLocalTime());
+        test.setDoctorId(rs.getLong("doctor_id"));
         test.setDoctorFirstName(rs.getString("doctor_first"));
         test.setDoctorLastName(rs.getString("doctor_last"));
         return test;

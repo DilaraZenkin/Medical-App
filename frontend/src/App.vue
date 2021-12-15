@@ -78,13 +78,13 @@ export default {
           ];
         } else {
           return [
-              {
+                  {
               id: "doctor-appointments",
               title: "Appointments",
               icon: "tour",
             },
             {
-              id: "patient-information",
+              id: "doctor-availability",
               title: "Set Availability",
               icon: "person",
             },
