@@ -90,7 +90,7 @@ export default {
               id: "doctor-office",
               title: "View Office Information",
               icon: "business_center",
-            }
+            },
           ];
         }
       }

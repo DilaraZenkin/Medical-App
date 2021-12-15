@@ -1,76 +1,75 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
-      <v-card :loading="loading" 
-      class="mx-auto my-16" 
-      v-bind:key="doctor.id"
-      width="80%" v-for="doctor in doctors">
-        <template slot="progress">
-          <v-progress-linear
-            color="deep-purple"
-            height="10"
-            indeterminate
-          ></v-progress-linear>
-        </template>
-        <v-card-title>{{doctor.firstName}} {{doctor.lastName}}</v-card-title>
-        <v-card-text>
-          <v-row align="center" class="mx-0">
-            <v-rating
-              :value="4.5"
-              color="amber"
-              dense
-              half-increments
-              readonly
-              size="14"
-            ></v-rating>
-            <div class="grey--text ms-4">4.5 (413)</div>
-          </v-row>
-          <div class="my-4 text-subtitle-1">{{doctor.dateOfBirth}}</div>
-          <div>Address Details</div>
-        </v-card-text>
-        <v-divider class="mx-4"></v-divider>
-        <v-card-title>Availability</v-card-title>
-        <v-card-text>
-          <v-chip-group
-            v-model="selection"
-            active-class="deep-purple accent-4 white--text"
-            column
-          >
-            <v-chip>5:30PM</v-chip>
-            <v-chip>7:30PM</v-chip>
-            <v-chip>8:00PM</v-chip>
-            <v-chip>9:00PM</v-chip>
-          </v-chip-group>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="deep-purple lighten-2" text @click="reserve">
-            Book Appointment
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-app>
-  </div>
+  <v-app id="inspire">
+    <v-content class="main">
+      <v-container fluid>
+        <v-layout justify-center align-center>
+          <v-flex xs>
+            <v-card
+             v-bind:key="appointment.id"
+            v-for="appointment in appointments">
+              <v-toolbar dark color="#1A5276">
+                <v-toolbar-title>Doctor Appointment</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <div>Upcoming Appointments</div>
+                <p class="text-h4 text--primary">{{appointment.dayOfAppointment}}</p>
+                <p>{{appointment.appointmentDate}}</p>
+                <div class="text--primary">
+                From: {{appointment.startTime}}
+                </div>
+                <div class="text--primary">
+                 To: {{appointment.endTime}}
+                  
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+    <div id="app">
+  <v-app id="inspire">
+    <div class="text-center">
+      <v-btn
+        rounded
+        color="primary"
+        dark
+        :to="{name: 'doctor-list'}"
+      >
+        Change Appointment
+      </v-btn>
+    </div>
+  </v-app>
+</div>
+  </v-app>
 </template>
+
 <script>
-import doctorService from '../services/DoctorService'
+import appointmentService from "../services/AppointmentService";
 export default {
   name: "doctor-appointment",
   data: () => ({
-    loading: false,
-    selection: 1,
-    doctors: []
+    enable: false,
+    patient: {},
+    doctor: {},
+    updatedAppointment: {},
+    appointments: []
   }),
   created() {
-    doctorService.getDoctors().then(response => {
-      this.doctors = response.data;
-      this.isLoading = false;
-    });
+      appointmentService.getDoctorFullAppointmentList(this.$store.state.user.id).then(
+        (response) => {
+          this.appointments = response.data;
+        }
+      );
   },
   methods: {
-    reserve() {
-      this.loading = true;
-      setTimeout(() => (this.loading = false), 2000);
+    resetForm() {
+      this.showForm = false;
     },
+    updateAppointment() {},
   },
 };
 </script>
+
+<style>
+</style>

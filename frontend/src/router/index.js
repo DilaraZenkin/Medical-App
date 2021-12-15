@@ -16,6 +16,7 @@ import Locations from '../components/Locations.vue'
 import BookAppointment from '../views/BookAppointment.vue'
 import OfficeforEachDoctor from '../components/OfficeforEachDoctor.vue'
 import DoctorAppointment from '../components/DoctorAppointment.vue'
+import DoctorAvailability from '../components/DoctorAvailability.vue'
 
 Vue.use(Router)
 
@@ -153,6 +154,14 @@ const router = new Router({
         requiresAuth: true
     }
   }, 
+  {
+    path: "/doctors/availability",
+    name: "doctor-availability",
+    component: DoctorAvailability,
+    meta: {
+      requiresAuth: true
+    }
+  },
   ]
 })
 
