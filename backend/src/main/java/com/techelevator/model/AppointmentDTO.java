@@ -6,11 +6,15 @@ import java.time.LocalTime;
 public class AppointmentDTO {
 
     private Long appointmentId;
+    private Long officeId;
+    private Long patientId;
+    private Long doctorId;
     private String patientFirstName;
     private String patientLastName;
     private String officeAddress;
     private LocalDate appointmentDate;
     private LocalTime startTime;
+    private LocalTime endTime;
     private String doctorFirstName;
     private String doctorLastName;
 
@@ -90,5 +94,37 @@ public class AppointmentDTO {
 
     public void setDoctorLastName(String doctorLastName) {
         this.doctorLastName = doctorLastName;
+    }
+
+    public Long getOfficeId() {
+        return officeId;
+    }
+
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setOfficeId(Long officeId) {
+        this.officeId = officeId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }

@@ -90,11 +90,13 @@ public class JdbcAppointmentDao implements AppointmentDao{
     }
 
     @Override
-    public Appointment addNewAppointment(Appointment appointment) {
-        String sql = "INSERT INTO appointments (appointment_id, office_id, patient_id, doctor_id, appointment_date, start_time, end_time)\n" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, appointment.getAppointmentId(), appointment.getOfficeId(), appointment.getPatientId(), appointment.getDoctorId(), appointment.getDayOfAppointment(), appointment.getStartTime(), appointment.getEndTime());
-        return appointment;
+    public AppointmentDTO addNewAppointment(Appointment appointment) {
+
+        String sql = "INSERT INTO appointments (office_id, patient_id, doctor_id, appointment_date, start_time, end_time)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?) returning appointment_id;";
+
+        Long appointmentId = jdbcTemplate.queryForObject(sql, Long.class, appointment.getOfficeId(), appointment.getPatientId(), appointment.getDoctorId(), appointment.getDayOfAppointment(), appointment.getStartTime(), appointment.getEndTime());
+        return getAppointmentByAppointmentId(appointmentId);
     }
 
     @Override
@@ -132,13 +134,18 @@ public class JdbcAppointmentDao implements AppointmentDao{
     private AppointmentDTO mapRowToAppointmentDTO(SqlRowSet rs) {
         AppointmentDTO test = new AppointmentDTO();
 
-        test.setPatientFirstName(rs.getString("patient_first"));
-        test.setPatientLastName(rs.getString("patient_last"));
-        test.setOfficeAddress(rs.getString("office_address"));
+        //test.setPatientFirstName(rs.getString("patient_first"));
+        //test.setPatientLastName(rs.getString("patient_last"));
+        //test.setOfficeAddress(rs.getString("office_address"));
+        test.setAppointmentId(rs.getLong("appointment_id"));
+        test.setOfficeId(rs.getLong("office_id"));
+        test.setPatientId(rs.getLong("patient_id"));
+        test.setDoctorId(rs.getLong("doctor_id"));
         test.setAppointmentDate(rs.getDate("appointment_date").toLocalDate());
         test.setStartTime(rs.getTime("start_time").toLocalTime());
-        test.setDoctorFirstName(rs.getString("doctor_first"));
-        test.setDoctorLastName(rs.getString("doctor_last"));
+        test.setEndTime(rs.getTime("end_time").toLocalTime());
+        //test.setDoctorFirstName(rs.getString("doctor_first"));
+        //test.setDoctorLastName(rs.getString("doctor_last"));
         return test;
     }
 }
