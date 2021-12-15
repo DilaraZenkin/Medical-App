@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Doctor;
 import com.techelevator.model.Office;
 import com.techelevator.model.Review;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +17,22 @@ public class JdbcReviewDao implements ReviewDAO{
 
     public JdbcReviewDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Review> findAllReviews() {
+        List<Review> reviews = new ArrayList<>();
+        String sql = "select r.review_id, r.title, r.score, r.patient_id, p.first_name, p.last_name, d.doctor_last,  r.doctor_id, r.office_id, r.review_body, r.response, of.office_address, of.office_name from reviews r " +
+                "JOIN patients p ON (r.patient_id = p.patient_id) " +
+                "JOIN doctors d ON (d.doctor_id = r.doctor_id) " +
+                "JOIN offices of ON (of.office_id = r.office_id)";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Review review = mapRowToReview(results);
+            reviews.add(review);
+        }
+        return reviews;
     }
 
     @Override
@@ -96,6 +113,7 @@ public class JdbcReviewDao implements ReviewDAO{
         review.setDoctorLast(rs.getString("doctor_last"));
         review.setOfficeId(rs.getLong("office_id"));
         review.setOfficeAddress(rs.getString("office_address"));
+        review.setOfficeName(rs.getString("office_name"));
         review.setReviewBody(rs.getString("review_body"));
         review.setResponse(rs.getString("response"));
         return review;

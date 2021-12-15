@@ -7,6 +7,7 @@ public class Review {
     private String title;
     private int score;
     private long patientId;
+    private String officeName;
     private String patientFirst;
     private String patientLast;
     private long doctorId;
@@ -19,7 +20,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(long reviewId, String title, int score, long patientId, String patientFirst, String patientLast, long doctorId, String doctorLast, long officeId, String officeAddress, String reviewBody, String response) {
+    public Review(long reviewId, String title, int score, long patientId, String officeName, String patientFirst, String patientLast, long doctorId, String doctorLast, long officeId, String officeAddress, String reviewBody, String response) {
         this.reviewId = reviewId;
         this.title = title;
         this.score = score;
@@ -32,6 +33,15 @@ public class Review {
         this.officeAddress = officeAddress;
         this.reviewBody = reviewBody;
         this.response = response;
+        this.officeName = officeName;
+    }
+
+    public String getOfficeName() {
+        return officeName;
+    }
+
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName;
     }
 
     public long getReviewId() {

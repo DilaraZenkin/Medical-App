@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.ReviewDAO;
+import com.techelevator.model.Doctor;
 import com.techelevator.model.Office;
 import com.techelevator.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class ReviewController {
 
     public ReviewController(ReviewDAO reviewDao) {
         this.reviewDao = reviewDao;
+    }
+
+    @RequestMapping(path = "/allreviews", method = RequestMethod.GET)
+    public List<Review> findAllReviews() {
+        return reviewDao.findAllReviews();
     }
 
     @RequestMapping(path = "/reviews/{id}", method = RequestMethod.GET)

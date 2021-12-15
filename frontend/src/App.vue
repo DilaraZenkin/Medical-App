@@ -73,7 +73,7 @@ export default {
             },
             { id: "doctor-list", title: "Doctors", icon: "medication" },
             { id: "locations", title: "Locations", icon: "business_center" },
-
+            { id: "patient-review", title: "Reviews", icon: "business_center" },
 
           ];
         } else {
