@@ -6,5 +6,9 @@ export default {
     },
     createAppointment(doctor) {
         return axios.post(`/appointments/add`, doctor)
+    },
+    
+    getDoctorFullAppointmentList(doctorId) {
+        return axios.get(`/appointments/doctor/${doctorId}`);
     }
 }
