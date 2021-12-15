@@ -6,28 +6,22 @@ import java.time.LocalTime;
 public class AppointmentDTO {
 
     private Long appointmentId;
-    private String patientFirstName;
-    private String patientLastName;
-    private String officeAddress;
     private LocalDate appointmentDate;
     private LocalTime startTime;
-    private Long doctorId;
-    private String doctorFirstName;
-    private String doctorLastName;
+    private Patient patient;
+    private Doctor doctor;
+    private String address;
 
     public AppointmentDTO() {
     }
 
-    public AppointmentDTO(Long appointmentId, String patientFirstName, String patientLastName, String officeAddress, LocalDate appointmentDate, LocalTime startTime, Long doctorId, String doctorFirstName, String doctorLastName) {
+    public AppointmentDTO(Long appointmentId, LocalDate appointmentDate, LocalTime startTime, Patient patient, Doctor doctor, String address) {
         this.appointmentId = appointmentId;
-        this.patientFirstName = patientFirstName;
-        this.patientLastName = patientLastName;
-        this.officeAddress = officeAddress;
         this.appointmentDate = appointmentDate;
         this.startTime = startTime;
-        this.doctorId = doctorId;
-        this.doctorFirstName = doctorFirstName;
-        this.doctorLastName = doctorLastName;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.address = address;
     }
 
     public Long getAppointmentId() {
@@ -36,30 +30,6 @@ public class AppointmentDTO {
 
     public void setAppointmentId(Long appointmentId) {
         this.appointmentId = appointmentId;
-    }
-
-    public String getPatientFirstName() {
-        return patientFirstName;
-    }
-
-    public void setPatientFirstName(String patientFirstName) {
-        this.patientFirstName = patientFirstName;
-    }
-
-    public String getPatientLastName() {
-        return patientLastName;
-    }
-
-    public void setPatientLastName(String patientLastName) {
-        this.patientLastName = patientLastName;
-    }
-
-    public String getOfficeAddress() {
-        return officeAddress;
-    }
-
-    public void setOfficeAddress(String officeAddress) {
-        this.officeAddress = officeAddress;
     }
 
     public LocalDate getAppointmentDate() {
@@ -78,27 +48,27 @@ public class AppointmentDTO {
         this.startTime = startTime;
     }
 
-    public Long getDoctorId() {
-        return doctorId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setDoctorId(Long doctorId) {
-        this.doctorId = doctorId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public String getDoctorFirstName() {
-        return doctorFirstName;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorFirstName(String doctorFirstName) {
-        this.doctorFirstName = doctorFirstName;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    public String getDoctorLastName() {
-        return doctorLastName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDoctorLastName(String doctorLastName) {
-        this.doctorLastName = doctorLastName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

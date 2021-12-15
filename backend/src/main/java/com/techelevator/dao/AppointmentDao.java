@@ -15,7 +15,7 @@ public interface AppointmentDao {
 
     List<Appointment> getUpcomingPatientAppointments(Long patientId);
 
-    List<Appointment> getAllAppointmentsByDoctorId(Long doctorId);
+    List<AppointmentDTO> getAllAppointmentsByDoctorId(Long doctorId);
 
     List<Appointment> getUpcomingAppointmentsForDoctor(Long doctorId);
 

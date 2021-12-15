@@ -74,9 +74,9 @@ CREATE TABLE patients (
 );
 
 INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address, doctor_id)
-VALUES (3, 'Frank', 'Sinatra', '12-12-1915', '556 East Boulevard Westport PA 15339', 6);
+VALUES (3, 'Frank', 'Sinatra', '12-12-1915', '556 East Boulevard Westport PA 15339', 5);
 INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, address, doctor_id)
-VALUES (4, 'George', 'Castanza', '07-04-1968', '998 West Road Wexford PA 16884', 5);
+VALUES (4, 'George', 'Castanza', '07-04-1968', '998 West Road Wexford PA 16884', 6);
 
 CREATE TABLE appointments (
         appointment_id serial PRIMARY KEY,
