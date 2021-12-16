@@ -4,9 +4,9 @@
       <v-content class="main">
          <v-container fluid>
             <v-layout justify-center align-center>
-               <v-flex xs12 sm8 md4>
+               <v-flex xs12 sm8 md8>
                   <v-card>
-                     <v-toolbar dark color="primary">
+                     <v-toolbar dark color="#1A5276">
                         <v-toolbar-title>Create Account</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
