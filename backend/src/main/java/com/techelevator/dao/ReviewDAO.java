@@ -1,11 +1,14 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Doctor;
 import com.techelevator.model.Office;
 import com.techelevator.model.Review;
 
 import java.util.List;
 
 public interface ReviewDAO {
+
+    List<Review> findAllReviews();
     Review getReviewById(Long reviewId);
 
     List<Review> getReviewByOfficeId(Long officeId);

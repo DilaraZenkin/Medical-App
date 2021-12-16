@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Doctor;
 import com.techelevator.model.Office;
 import com.techelevator.model.Patient;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -77,10 +78,14 @@ public class JdbcOfficeDAO implements OfficeDAO {
 
         String sql = "UPDATE offices SET office_name = ?, office_address=?, office_phone_number=?, office_open=?, office_close=?, hourly_cost=? WHERE office_id=?";
         jdbcTemplate.update(sql, office.getOfficeName(), office.getOfficeAddress(), office.getOfficePhoneNumber(), office.getOfficeOpen(), office.getOfficeClose(), office.getHourlyCost(), office.getOfficeId());
+
         return office;
     }
 
+
+
     @Override
+
     public List<Office> findAllOffices() {
         List<Office> offices = new ArrayList<>();
         String sql = "select * from offices";
@@ -106,6 +111,7 @@ public class JdbcOfficeDAO implements OfficeDAO {
         }
     }
 
+
     private Office mapRowToOffice(SqlRowSet rs) {
         Office office = new Office();
         office.setOfficeId(rs.getLong("office_id"));
@@ -117,6 +123,7 @@ public class JdbcOfficeDAO implements OfficeDAO {
         office.setHourlyCost(rs.getLong("hourly_cost"));
         return office;
     }
+
 
 
     @Override
@@ -133,4 +140,7 @@ public class JdbcOfficeDAO implements OfficeDAO {
     public List<Office> officeInfoByDoctorFullName() {
         return null;
     }
+
+
+    
 }
