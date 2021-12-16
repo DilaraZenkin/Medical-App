@@ -8,17 +8,13 @@
              v-bind:key="appointment.id"
             v-for="appointment in appointments">
               <v-toolbar dark color="#1A5276">
-                <v-toolbar-title>Doctor Appointment</v-toolbar-title>
+                <v-toolbar-title>{{ appointment.patient.firstName }} {{ appointment.patient.lastName }}</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <p class="text-h6 text--primary">{{appointment.dayOfAppointment}}</p>
-                <p>{{appointment.appointmentDate}}</p>
+                <p class="text-h6 text--primary">{{appointment.appointmentDate}}</p>
+                <p></p>
                 <div class="text--primary">
-                From: {{appointment.startTime}}
-                </div>
-                <div class="text--primary">
-                 To: {{appointment.endTime}}
-                  
+                Appointment Time: {{appointment.startTime}}
                 </div>
               </v-card-text>
             </v-card>
@@ -58,6 +54,8 @@ export default {
       appointmentService.getDoctorFullAppointmentList(this.$store.state.user.id).then(
         (response) => {
           this.appointments = response.data;
+          this.patient = response.data;
+          this.doctor = response.data;
         }
       );
   },

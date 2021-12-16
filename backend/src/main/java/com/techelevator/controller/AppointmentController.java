@@ -40,7 +40,7 @@ public class AppointmentController {
     }
 
     @RequestMapping(path = "/appointments/doctor/{doctorId}", method = RequestMethod.GET)
-    public List<Appointment> getDoctorFullAppointmentList(@PathVariable Long doctorId) {
+    public List<AppointmentDTO> getDoctorFullAppointmentList(@PathVariable Long doctorId) {
         return appointmentDao.getAllAppointmentsByDoctorId(doctorId);
     }
 
@@ -49,7 +49,7 @@ public class AppointmentController {
         return appointmentDao.getUpcomingAppointmentsForDoctor(doctorId);
     }
     @RequestMapping(path = "/appointments/add", method = RequestMethod.POST)
-    public Appointment addNewAppointment(@RequestBody Appointment appointment) {
+    public AppointmentDTO addNewAppointment(@RequestBody Appointment appointment) {
         return appointmentDao.addNewAppointment(appointment);
     }
 
