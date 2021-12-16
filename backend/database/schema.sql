@@ -1,21 +1,18 @@
 BEGIN TRANSACTION;
-
 DROP TABLE IF EXISTS patients;
 DROP TABLE IF EXISTS doctor_availabilities;
 DROP TABLE IF EXISTS doctors;
 DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS offices;
+DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_user_id;
-
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
-
-
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL,
@@ -23,7 +20,9 @@ CREATE TABLE users (
 	role varchar(50) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
+
 SELECT * FROM users u WHERE u.user_id = 6;
+
 SELECT * FROM users;
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
@@ -140,3 +139,12 @@ INSERT INTO reviews (review_id, title, score, patient_id, doctor_id, office_id, 
 VALUES (2, 'Test', 2, 4, 6, 2, 'It was a bad visit', 'We are sorry');
 
 COMMIT TRANSACTION;
+
+SELECT of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name AS Doctor_Name, d.last_name AS Doctor_Lastname FROM offices of
+JOIN doctors d ON of.office_id = d.office_id
+WHERE doctor_id=5;
+
+SELECT * FROM doctors;
+
+SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id=5;
+
