@@ -20,8 +20,16 @@ date_of_birth = '1999-01-01',
 address = '555 West East Rd. Somewhere PA, 11223',
 doctor_id = 6
 WHERE patient_id = 7;
-
 select * from doctor_availabilities;
+
+
+
+
+
+
+
+
+
 
 select * from appointments;
 
