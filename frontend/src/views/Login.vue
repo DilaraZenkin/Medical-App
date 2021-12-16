@@ -3,7 +3,7 @@
       <v-content class="main">
          <v-container fluid>
             <v-layout justify-center align-center>
-               <v-flex xs12 sm8 md4>
+               <v-flex xs12 sm8 md14>
                   <v-card>
                      <v-toolbar dark color="#1A5276">
                         <v-toolbar-title>Login User</v-toolbar-title>
@@ -40,7 +40,27 @@
             </v-layout>
          </v-container>
       </v-content>
+         <div id="app">
+  <v-app id="inspire">
+    <v-container fluid>
+      <v-row align="center" justify="center">
+        <v-col cols="3">
+
+
+          <v-img
+            src="../logo/logo.png"
+            rounded="circle"
+            aspect-ratio="0.75"
+              max-height="250"
+            max-width="200"
+          ></v-img>
+             </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
+</div>
    </v-app>
+
 </template>
 
 <script>
@@ -87,5 +107,9 @@ export default {
 <style scoped>
   .main {
     padding-top: 8px !important;
+  }
+
+  #inspire {
+justify-items: center;
   }
 </style>
