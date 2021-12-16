@@ -66,4 +66,9 @@ public class AppointmentController {
         return appointmentDao.formatTest(appointmentId);
     }
 
+    @RequestMapping(path = "/appointments/delete/{appointmentId}", method = RequestMethod.DELETE)
+    public boolean deleteAppointment(@PathVariable Long appointmentId) {
+        return appointmentDao.deleteAppointment(appointmentId);
+    }
+
 }

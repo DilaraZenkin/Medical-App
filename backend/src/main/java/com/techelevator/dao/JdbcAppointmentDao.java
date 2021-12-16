@@ -127,6 +127,18 @@ public class JdbcAppointmentDao implements AppointmentDao{
         }
     }
 
+    @Override
+    public boolean deleteAppointment(Long appointmentId) {
+        String sql = "DELETE FROM appointments WHERE appointment_id = ?;";
+        try {
+            jdbcTemplate.update(sql, appointmentId);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
     private Appointment mapRowToAppointment(SqlRowSet rs) {
         Appointment appointment = new Appointment();
         appointment.setAppointmentId(rs.getLong("appointment_id"));

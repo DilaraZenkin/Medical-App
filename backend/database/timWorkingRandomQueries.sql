@@ -25,6 +25,8 @@ select * from doctor_availabilities;
 
 select * from appointments;
 
+DELETE FROM appointments WHERE appointment_id = 4;
+
 delete from appointments where appointment_id = 8;
 
 SELECT appointment_id, appointment_date, start_time, p.patient_id, first_name, last_name, d.doctor_id, doctor_last, office_address 
