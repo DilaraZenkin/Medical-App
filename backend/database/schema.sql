@@ -139,12 +139,3 @@ INSERT INTO reviews (review_id, title, score, patient_id, doctor_id, office_id, 
 VALUES (2, 'Test', 2, 4, 6, 2, 'It was a bad visit', 'We are sorry');
 
 COMMIT TRANSACTION;
-
-SELECT of.office_address, of.office_phone_number, of.office_open, of.office_close, of.hourly_cost, d.first_name AS Doctor_Name, d.last_name AS Doctor_Lastname FROM offices of
-JOIN doctors d ON of.office_id = d.office_id
-WHERE doctor_id=5;
-
-SELECT * FROM doctors;
-
-SELECT office_address FROM doctors JOIN offices USING (office_id) WHERE doctor_id=5;
-
