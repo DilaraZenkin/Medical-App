@@ -56,20 +56,41 @@
                 </v-btn>
               </v-card-actions>
             </v-card>
-            <v-snackbar color="#1A5276" v-model="snackbar">
-              {{ text }}
+            <v-dialog
+      v-model="dialog"
+      width="500"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="red lighten-2"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Click Me
+        </v-btn>
+      </template>
 
-              <template v-slot:action="{ attrs }">
-                <v-btn
-                  color="red"
-                  text
-                  v-bind="attrs"
-                  @click="snackbar = false"
-                >
-                  Close
-                </v-btn>
-              </template>
-            </v-snackbar>
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          Success
+        </v-card-title>
+        <v-card-text>
+          Your appointment is confirmed.
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="dialog = false"
+          >
+            Ok
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
           </v-flex>
         </v-layout>
       </v-container>
@@ -84,7 +105,7 @@ export default {
   data: () => ({
     loading: false,
     doctors: [],
-    snackbar: false,
+    dialog: false,
     text: `Appointment booked successfully`,
   }),
   created() {
@@ -99,13 +120,22 @@ export default {
       if (doctor.time === 0) {
         doctor.startTime = "05:00:00";
         doctor.endTime = "06:00:00";
+      }else if (doctor.time == 1){
+        doctor.startTime = "06:00:00";
+        doctor.endTime = "07:00:00";
+      }else if (doctor.time == 2){
+        doctor.startTime = "07:00:00";
+        doctor.endTime = "08:00:00";
+      } else if(doctor.time == 3){
+        doctor.startTime = "07:00:00";
+        doctor.endTime = "08:00:00";
       }
       doctor.dayOfAppointment = "2021-10-10";
       doctor.patientId = this.$store.state.user.id;
       this.loading = true;
       appointmentService.createAppointment(doctor).then((response) => {
         console.log(response);
-        this.snackbar = true;
+        this.dialog = true;
         this.loading = false;
       });
 

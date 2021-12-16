@@ -4,43 +4,39 @@
       <v-container fluid>
         <v-layout justify-center align-center>
           <v-flex xs>
+            <div class="text-center">
+              <v-btn rounded color="#1A5276" dark :to="{ name: 'doctor-list' }">
+                Create New Appointment
+              </v-btn>
+            </div>
+            <v-spacer></v-spacer>
+            <br>
             <v-card
-             v-bind:key="appointment.id"
-            v-for="appointment in appointments">
+              v-bind:key="appointment.id"
+              v-for="appointment in appointments"
+            >
               <v-toolbar dark color="#1A5276">
                 <v-toolbar-title>Patient Appointment</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <div>Upcoming Appointments</div>
-                <p class="text-h4 text--primary">{{appointment.dayOfAppointment}}</p>
-                <p>{{appointment.appointmentDate}}</p>
+                <p class="text-h4 text--primary">
+                  {{ appointment.dayOfAppointment }}
+                </p>
+                <p>{{ appointment.appointmentDate }}</p>
                 <div class="text--primary">
-                From: {{appointment.startTime}}
+                  From: {{ appointment.startTime }}
                 </div>
-                <div class="text--primary">
-                 To: {{appointment.endTime}}
-                  
-                </div>
+                <div class="text--primary">To: {{ appointment.endTime }}</div>
+                <v-btn rounded color="#1A5276" dark>
+                Cancel Appointment
+              </v-btn>
               </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
-    <div id="app">
-  <v-app id="inspire">
-    <div class="text-center">
-      <v-btn
-        rounded
-        color="primary"
-        dark
-        :to="{name: 'doctor-list'}"
-      >
-        Create New Appointment
-      </v-btn>
-    </div>
-  </v-app>
-</div>
   </v-app>
 </template>
 
@@ -53,14 +49,14 @@ export default {
     patient: {},
     doctor: {},
     updatedPatient: {},
-    appointments: []
+    appointments: [],
   }),
   created() {
-      appointmentService.getPatientsFullAppointmentList(this.$store.state.user.id).then(
-        (response) => {
-          this.appointments = response.data;
-        }
-      );
+    appointmentService
+      .getPatientsFullAppointmentList(this.$store.state.user.id)
+      .then((response) => {
+        this.appointments = response.data;
+      });
   },
   methods: {
     resetForm() {
