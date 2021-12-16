@@ -83,7 +83,7 @@
                     v-model="availability.available"
                 ></v-checkbox>
                 <v-btn color="primary" type="submit" @submit.prevent="updateAvailability()">Update Availability</v-btn>
-                <v-btn color="pink" type="reset" @:reset.prevent="cancelUpdate()">Cancel Update</v-btn>
+                <v-btn color="pink" type="reset" @:reset.prevent="cancelUpdate()" :to="{name: 'doctor-availability'}">Cancel Update</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -91,20 +91,6 @@
         </v-layout>
       </v-container>
     </v-content>
-    <div id="app">
-  <v-app id="inspire">
-    <div class="text-center">
-      <v-btn
-        rounded
-        color="primary"
-        dark
-        :to="{name: 'doctor-availability'}"
-      >
-        Availability List
-      </v-btn>
-    </div>
-  </v-app>
-</div>
   </v-app>
 </template>
 <script>
@@ -133,6 +119,7 @@ export default {
       this.availability = {}
     },
     addAvailability() {
+      this.availability.doctorId = this.$store.state.user.id;
         AvailabilityService.addAvailability(this.availability).then(response => {
             if (response.statue == 201) {
                 this.$router.push({name: 'doctor-availability'})

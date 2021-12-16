@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.AvailabilityDao;
 import com.techelevator.model.DoctorAvailability;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class AvailabilityController {
         return availabilityDao.getAvailabilityForDoctor(doctorId);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/availabilities/add", method = RequestMethod.POST)
     public boolean addAvailability(@RequestBody DoctorAvailability availability) {
         return availabilityDao.setAvailableHours(availability);

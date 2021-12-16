@@ -1,17 +1,18 @@
 <template>
-
-  <office-information />
-
+   <v-layout justify-center align-center>
+     <v-card-text>
+       <p class="text-h6 text--primary">Office Info</p>
+     </v-card-text>
+  </v-layout>
 </template>
-
 
 <script>
 
-import OfficeInformation from '../components/OfficeInformation.vue'
-
 export default {
 
-  components: { OfficeInformation },
+  components: {
+
+  },
 
 
 }

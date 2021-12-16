@@ -46,6 +46,12 @@ INSERT INTO offices (office_id, office_name, office_address, office_phone_number
 VALUES (1, 'St. George Hospital', '769 East Boulevard Wexford PA 16005', '778-996-4345', '10:00 am', '05:00 pm', 120);
 INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)
 VALUES (2, 'Mayo Clinic', '768 East Boulevard Wexford PA 16005', '778-996-4354', '09:00 am', '04:00 pm', 100);
+INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)
+VALUES (3, 'DWNMC West', '44775 Himalayan Concord Trafford PA 15789', '798-445-7649', '08:00 am', '09:00 pm', 200);
+INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)
+VALUES (4, 'Childrens Hospital', '73436 Martin Luther King Street Westmorland PA 19085', '724-336-9325', '09:00 am', '06:00 pm', 85);
+INSERT INTO offices (office_id, office_name, office_address, office_phone_number, office_open, office_close, hourly_cost)
+VALUES (5, 'Womens Free Clinic', '4695 Hemming Way Lexington PA 15585', '737-374-2585', '09:00 am', '05:00 pm', 155);
 
 CREATE TABLE doctors (
         doctor_id int PRIMARY KEY,

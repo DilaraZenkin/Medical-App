@@ -23,6 +23,10 @@ WHERE patient_id = 7;
 
 select * from doctor_availabilities;
 
+select * from appointments;
+
+delete from appointments where appointment_id = 8;
+
 SELECT appointment_id, appointment_date, start_time, p.patient_id, first_name, last_name, d.doctor_id, doctor_last, office_address 
 FROM appointments a JOIN patients p ON a.doctor_id = p.doctor_id JOIN doctors d ON a.doctor_id = d.doctor_id 
 JOIN offices o ON a.office_id = o.office_id WHERE doctor_id = ?;

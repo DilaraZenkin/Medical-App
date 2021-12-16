@@ -6,6 +6,7 @@ import com.techelevator.model.AppointmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,7 @@ public class AppointmentController {
         return appointmentDao.getUpcomingAppointmentsForDoctor(doctorId);
     }
     @RequestMapping(path = "/appointments/add", method = RequestMethod.POST)
-    public AppointmentDTO addNewAppointment(@RequestBody Appointment appointment) {
+    public boolean addNewAppointment(@Valid @RequestBody Appointment appointment) {
         return appointmentDao.addNewAppointment(appointment);
     }
 
