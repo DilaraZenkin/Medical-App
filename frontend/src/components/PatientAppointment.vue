@@ -10,7 +10,7 @@
               </v-btn>
             </div>
             <v-spacer></v-spacer>
-            <br>
+            <br />
             <v-card
               v-bind:key="appointment.id"
               v-for="appointment in appointments"
@@ -28,11 +28,24 @@
                   From: {{ appointment.startTime }}
                 </div>
                 <div class="text--primary">To: {{ appointment.endTime }}</div>
-                <v-btn rounded color="#1A5276" dark>
-                Cancel Appointment
-              </v-btn>
+                <v-btn rounded color="#1A5276" dark @click="cancel(appointment.appointmentId)">
+                  Cancel Appointment
+                </v-btn>
               </v-card-text>
             </v-card>
+            <v-dialog v-model="dialog" width="500">
+              <v-card>
+                <v-card-title class="text-h5 green lighten-2">
+                  Success
+                </v-card-title>
+                <v-card-text> Appintment cancelled. </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="green" text @click="refetchAppointments()"> Ok </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-flex>
         </v-layout>
       </v-container>
@@ -48,6 +61,7 @@ export default {
     enable: false,
     patient: {},
     doctor: {},
+    dialog: false,
     updatedPatient: {},
     appointments: [],
   }),
@@ -63,7 +77,21 @@ export default {
       this.showForm = false;
       this.updatedPatient = {};
     },
-    updatePatient() {},
+    cancel(appointmentId) {
+      appointmentService.cancelAppointment(appointmentId).then((response) => {
+        if(response){
+          this.dialog = true;
+        }
+      });
+    },
+    refetchAppointments() {
+      this.dialog = false;
+      appointmentService
+      .getPatientsFullAppointmentList(this.$store.state.user.id)
+      .then((response) => {
+        this.appointments = response.data;
+      });
+    }
   },
 };
 </script>

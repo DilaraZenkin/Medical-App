@@ -53,6 +53,10 @@ public class AppointmentController {
     public boolean addNewAppointment(@Valid @RequestBody Appointment appointment) {
         return appointmentDao.addNewAppointment(appointment);
     }
+    @RequestMapping(path = "/appointments/{appointmentId}", method = RequestMethod.DELETE)
+    public String cancelAppointment(@PathVariable Long appointmentId) {
+        return appointmentDao.cancelAppointment(appointmentId);
+    }
 
     @RequestMapping(path = "/appointments/edit/", method = RequestMethod.PUT)
     public Appointment updateAppointment(@RequestBody Appointment appointment) {
