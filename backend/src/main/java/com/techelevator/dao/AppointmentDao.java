@@ -19,11 +19,14 @@ public interface AppointmentDao {
 
     List<Appointment> getUpcomingAppointmentsForDoctor(Long doctorId);
 
-    AppointmentDTO addNewAppointment(Appointment appointment);
+    boolean addNewAppointment(Appointment appointment);
 
     Appointment updateAppointment(Appointment appointment);
 
     AppointmentDTO formatTest(Long appointmentId);
-
+    
     String cancelAppointment(Long appointmentId);
+
+
+
 }

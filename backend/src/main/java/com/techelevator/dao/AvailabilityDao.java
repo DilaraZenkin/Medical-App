@@ -13,4 +13,5 @@ public interface AvailabilityDao {
     boolean setAvailableHours(DoctorAvailability availability);
 
     boolean updateAvailability(DoctorAvailability availability);
+
 }

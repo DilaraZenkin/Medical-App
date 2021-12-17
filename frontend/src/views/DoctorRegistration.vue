@@ -1,5 +1,4 @@
 <template>
-
 <v-app id="inspire">
       <v-content class="main">
          <v-container fluid>

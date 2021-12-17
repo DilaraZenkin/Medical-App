@@ -94,13 +94,17 @@ public class JdbcAppointmentDao implements AppointmentDao{
     }
 
     @Override
-    public AppointmentDTO addNewAppointment(Appointment appointment) {
+    public boolean addNewAppointment(Appointment appointment) {
 
         String sql = "INSERT INTO appointments (office_id, patient_id, doctor_id, appointment_date, start_time, end_time)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?) returning appointment_id;";
-
-        Long appointmentId = jdbcTemplate.queryForObject(sql, Long.class, appointment.getOfficeId(), appointment.getPatientId(), appointment.getDoctorId(), appointment.getDayOfAppointment(), appointment.getStartTime(), appointment.getEndTime());
-        return getAppointmentByAppointmentId(appointmentId);
+        try {
+            Long appointmentId = jdbcTemplate.queryForObject(sql, Long.class, appointment.getOfficeId(), appointment.getPatientId(), appointment.getDoctorId(), appointment.getDayOfAppointment(), appointment.getStartTime(), appointment.getEndTime());
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -128,6 +132,7 @@ public class JdbcAppointmentDao implements AppointmentDao{
         String sql = "DELETE from appointments WHERE appointment_id = ?;";
         jdbcTemplate.update(sql, appointmentId);
         return "success";
+
     }
 
     private Appointment mapRowToAppointment(SqlRowSet rs) {
@@ -151,13 +156,13 @@ public class JdbcAppointmentDao implements AppointmentDao{
         test.setAppointmentDate(rs.getDate("appointment_date").toLocalDate());
         test.setStartTime(rs.getTime("start_time").toLocalTime());
         patient.setPatientId(rs.getLong("patient_id"));
-       // patient.setFirstName(rs.getString("first_name"));
-       // patient.setLastName(rs.getString("last_name"));
-       // test.setPatient(patient);
+        patient.setFirstName(rs.getString("first_name"));
+        patient.setLastName(rs.getString("last_name"));
+        test.setPatient(patient);
         doctor.setDoctorId(rs.getLong("doctor_id"));
-     //   doctor.setLastName(rs.getString("doctor_last"));
-     //  test.setDoctor(doctor);
-      //  test.setAddress(rs.getString("office_address"));
+        doctor.setLastName(rs.getString("doctor_last"));
+        test.setDoctor(doctor);
+        test.setAddress(rs.getString("office_address"));
         return test;
     }
 }
