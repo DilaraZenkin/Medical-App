@@ -116,17 +116,13 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
       {
         path: "/doctors/office",
         name: "doctor-office",
         component: OfficeforEachDoctor,
         meta: {
           requiresAuth: true
-
       }
-    
-      
     }, 
     {
       path: "/patient/appointments",
@@ -159,15 +155,7 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    },
-    {
-      path: "/doctors/office",
-      name: "doctor-office",
-      component: OfficeforEachDoctor,
-      meta: {
-        requiresAuth: true
-    }
-  }, 
+    }, 
   {
     path: "/doctors/availability",
     name: "doctor-availability",

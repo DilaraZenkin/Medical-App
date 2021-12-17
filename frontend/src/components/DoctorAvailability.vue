@@ -17,9 +17,9 @@
              v-bind:key="availability.id"
             v-for="availability in availabilities"
             v-show="!updateForm">
-              <v-card-text>
-                <div>Date: </div>
-                <p class="text-h6 text--primary">{{availability.dayOfWeek}}</p>
+                <v-toolbar dark color="#1A5276">
+                  <v-toolbar-title>Date: {{availability.dayOfWeek}}</v-toolbar-title>
+                </v-toolbar>
                 <div class="text--primary">
                 From: {{availability.startTime}}
                 </div>
@@ -29,7 +29,9 @@
                 <v-card-text>
                   Available: {{availability.available == true ? 'Yes' : 'No'}}
                 </v-card-text>  
-                   <v-btn class="update-availability-btn" @:click="updateForm = !updateForm; populateCurrent()">Change Availability</v-btn>
+                   <v-card-text>
+                  <v-toolbar-title>Update Availability</v-toolbar-title>
+                   </v-card-text>
                 <v-form>
                   <v-chip-group
                     id="start"
@@ -78,7 +80,6 @@
                     <v-btn type="submit" @submit.prevent="updateAvailability()">Update Availability</v-btn>
                     <v-btn type="reset" @:reset.prevent="cancelUpdate()">Cancel Update</v-btn>
                 </v-form>
-              </v-card-text>
             </v-card>  
           </v-flex>
         </v-layout>
@@ -99,14 +100,7 @@ export default {
     doctor: {},
     updateForm: false,
     availabilities: [],
-    updatedAvailability: {
-      availabilityId: '',
-      doctorId: '',
-      dayOfWeek: '',
-      startTime: '',
-      endTime: '',
-      available: '',
-    },
+    updatedAvailability: {},
   }),
   created() {
       AvailabilityService.getAvailability(this.$store.state.user.id).then(
