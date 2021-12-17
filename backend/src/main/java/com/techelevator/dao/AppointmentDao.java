@@ -24,4 +24,6 @@ public interface AppointmentDao {
     Appointment updateAppointment(Appointment appointment);
 
     AppointmentDTO formatTest(Long appointmentId);
+
+    String cancelAppointment(Long appointmentId);
 }
