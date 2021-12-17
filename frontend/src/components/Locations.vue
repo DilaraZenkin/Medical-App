@@ -11,7 +11,7 @@
                 <v-toolbar-title>{{office.officeName}}</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <div>Practice locations</div>
+                <div>{{ office.officeAddress }}</div>
                 <p class="text-h4 text--primary">{{office.address}}</p>
                 <p>Contact: {{office.officePhoneNumber}}</p>
                 <div class="text--primary">

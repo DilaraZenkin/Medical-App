@@ -34,7 +34,7 @@
                   <div class="grey--text ms-4">4.5 (413)</div>
                 </v-row>
                 <div class="my-4 text-subtitle-1">{{ doctor.dateOfBirth }}</div>
-                <div>Address Details</div>
+                <div>{{ doctor.officeAddress }}</div>
               </v-card-text>
               <v-divider class="mx-4"></v-divider>
               <v-card-title>Availability</v-card-title>
@@ -43,6 +43,8 @@
                   v-model="doctor.time"
                   active-class="deep-purple accent-4 white--text"
                   column
+                  default="12:00"
+                  required
                 >
                   <v-chip>5:00PM</v-chip>
                   <v-chip>6:00PM</v-chip>

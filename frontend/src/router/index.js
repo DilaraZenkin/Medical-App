@@ -17,6 +17,7 @@ import BookAppointment from '../views/BookAppointment.vue'
 import OfficeforEachDoctor from '../components/OfficeforEachDoctor.vue'
 import DoctorAppointment from '../components/DoctorAppointment.vue'
 import DoctorAvailability from '../components/DoctorAvailability.vue'
+import NewAvailability from '../components/NewAvailability.vue'
 import ReviewInformation from '../components/ReviewInformation.vue'
 
 Vue.use(Router)
@@ -115,17 +116,13 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
       {
         path: "/doctors/office",
         name: "doctor-office",
         component: OfficeforEachDoctor,
         meta: {
           requiresAuth: true
-
       }
-    
-      
     }, 
     {
       path: "/patient/appointments",
@@ -158,15 +155,7 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    },
-    {
-      path: "/doctors/office",
-      name: "doctor-office",
-      component: OfficeforEachDoctor,
-      meta: {
-        requiresAuth: true
-    }
-  }, 
+    }, 
   {
     path: "/doctors/availability",
     name: "doctor-availability",
@@ -176,6 +165,14 @@ const router = new Router({
     }
   },
   {
+    path: "/doctors/availability/add",
+    name: "new-availability",
+    component: NewAvailability,
+    meta: {
+      requiresAuth: true
+    }
+  },  
+  {
     path: "/patients/review",
     name: "patient-review",
     component: ReviewInformation,
@@ -183,7 +180,6 @@ const router = new Router({
       requiresAuth: true
     }
   },
-
   ]
 })
 

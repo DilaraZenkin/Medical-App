@@ -42,7 +42,7 @@
 <script>
 import appointmentService from "../services/AppointmentService";
 export default {
-  name: "doctor-appointment",
+  name: "doctor-appointments",
   data: () => ({
     enable: false,
     patient: {},
